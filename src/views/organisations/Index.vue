@@ -20,6 +20,7 @@
             </gov-grid-column>
             <gov-grid-column v-if="auth.isGlobalAdmin" width="one-third">
               <gov-button @click="onAddOrganisation" type="submit" success expand>Add organisation</gov-button>
+              <gov-button v-if="auth.isSuperAdmin" :to="{name: 'organisations-import'}" type="submit" success expand>Bulk import</gov-button>
             </gov-grid-column>
           </gov-grid-row>
 
@@ -114,20 +115,20 @@ export default {
     columns() {
       if (this.auth.isSuperAdmin) {
         return [
-          { heading: 'Organisation name', sort: 'name' },
-          { heading: 'Web address URL' },
-          { heading: 'Phone number' },
-          { heading: 'Email' },
-          { heading: 'Invite' }
+          { heading: "Organisation name", sort: "name" },
+          { heading: "Web address URL" },
+          { heading: "Phone number" },
+          { heading: "Email" },
+          { heading: "Invite" }
         ];
       }
 
       return [
-          { heading: 'Organisation name', sort: 'name' },
-          { heading: 'Web address URL' },
-          { heading: 'Phone number' },
-          { heading: 'Email' }
-        ];
+        { heading: "Organisation name", sort: "name" },
+        { heading: "Web address URL" },
+        { heading: "Phone number" },
+        { heading: "Email" }
+      ];
     }
   },
   methods: {
@@ -140,7 +141,10 @@ export default {
     },
     onInviteOrganisation(organisationId) {
       if (this.organisationInviteSelected(organisationId)) {
-        this.organisationInvites.splice(this.organisationInvites.indexOf(organisationId), 1);
+        this.organisationInvites.splice(
+          this.organisationInvites.indexOf(organisationId),
+          1
+        );
         return;
       }
 
@@ -151,9 +155,11 @@ export default {
     },
     onSelectAllInvites() {
       if (
-          this.organisationInvites.length === this.$refs.organisationsTable.resources
-            .filter(organisation => organisation.email !== null).length
-        ) {
+        this.organisationInvites.length ===
+        this.$refs.organisationsTable.resources.filter(
+          organisation => organisation.email !== null
+        ).length
+      ) {
         this.organisationInvites.splice(0, this.organisationInvites.length);
         return;
       }
@@ -162,23 +168,27 @@ export default {
 
       this.$refs.organisationsTable.resources
         .filter(organisation => organisation.email !== null)
-        .forEach(organisation => this.organisationInvites.push(organisation.id))
+        .forEach(organisation =>
+          this.organisationInvites.push(organisation.id)
+        );
     },
     async onInvite() {
-      this.inviting = true
+      this.inviting = true;
 
       await http.post("/organisation-admin-invites", {
         organisations: this.organisationInvites.map(organisationId => {
           return {
             organisation_id: organisationId,
             use_email: true
-          }
+          };
         })
-      })
+      });
 
-      window.alert("The organisations will have invitation emails sent out shortly.");
+      window.alert(
+        "The organisations will have invitation emails sent out shortly."
+      );
 
-      this.inviting = false
+      this.inviting = false;
     },
     onFetch() {
       this.organisationInvites.splice(0, this.organisationInvites.length);
