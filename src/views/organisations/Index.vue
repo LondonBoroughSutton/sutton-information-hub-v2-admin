@@ -59,6 +59,16 @@
                       :options="hasServicesOptions"
                     />
                   </gov-form-group>
+
+                  <gov-form-group v-if="auth.isSuperAdmin">
+                    <gov-label for="filter[has_admin_invite_status]">Has Admin invite status</gov-label>
+                    <gov-select
+                      v-model="filters.has_admin_invite_status"
+                      id="filter[has_admin_invite_status]"
+                      name="filter[has_admin_invite_status]"
+                      :options="hasAdminInviteStatusOptions"
+                    />
+                  </gov-form-group>
                 </template>
               </ck-table-filters>
             </gov-grid-column>
@@ -106,9 +116,12 @@
             <template slot="cell:3" slot-scope="{ resource: organisation }">
               {{ organisation.email || '-' }}
             </template>
+            <template v-if="auth.isSuperAdmin" slot="cell:4" slot-scope="{ resource: organisation }">
+              {{ organisation.admin_invite_status | ucFirst }}
+            </template>
             <template
               v-if="auth.isSuperAdmin"
-              slot="cell:4"
+              slot="cell:5"
               slot-scope="{ resource: organisation }"
             >
               <gov-checkbox
@@ -117,7 +130,7 @@
                 :id="`organisation_invite_${organisation.id}`"
                 :name="`organisation_invite_${organisation.id}`"
                 label=""
-                :disabled="organisation.email === null || inviting"
+                :disabled="organisation.email === null || organisation.admin_invite_status !== 'none' || inviting"
               />
             </template>
           </ck-resource-listing-table>
@@ -128,70 +141,84 @@
 </template>
 
 <script>
-import CkResourceListingTable from "@/components/Ck/CkResourceListingTable.vue";
-import CkTableFilters from "@/components/Ck/CkTableFilters.vue";
-import http from "@/http";
+import CkResourceListingTable from '@/components/Ck/CkResourceListingTable.vue';
+import CkTableFilters from '@/components/Ck/CkTableFilters.vue';
+import http from '@/http';
 
 export default {
-  name: "ListOrganisations",
+  name: 'ListOrganisations',
   components: { CkResourceListingTable, CkTableFilters },
   data() {
     return {
       filters: {
-        name: "",
-        has_email: "",
-        has_social_medias: "",
-        has_phone: "",
-        has_services: ""
+        name: '',
+        has_email: '',
+        has_social_medias: '',
+        has_phone: '',
+        has_services: '',
+        has_admin_invite_status: '',
       },
       organisationInvites: [],
       inviting: false,
       hasEmailOptions: [
-        { value: "", text: "All" },
-        { value: true, text: "Yes" },
-        { value: false, text: "No" }
+        { value: '', text: 'All' },
+        { value: true, text: 'Yes' },
+        { value: false, text: 'No' },
       ],
       hasSocialMediasOptions: [
-        { value: "", text: "All" },
-        { value: true, text: "Yes" },
-        { value: false, text: "No" }
+        { value: '', text: 'All' },
+        { value: true, text: 'Yes' },
+        { value: false, text: 'No' },
       ],
       hasPhoneOptions: [
-        { value: "", text: "All" },
-        { value: true, text: "Yes" },
-        { value: false, text: "No" }
+        { value: '', text: 'All' },
+        { value: true, text: 'Yes' },
+        { value: false, text: 'No' },
       ],
       hasServicesOptions: [
-        { value: "", text: "All" },
-        { value: true, text: "Yes" },
-        { value: false, text: "No" }
-      ]
+        { value: '', text: 'All' },
+        { value: true, text: 'Yes' },
+        { value: false, text: 'No' },
+      ],
+      hasAdminInviteStatusOptions: [
+        { value: '', text: 'All' },
+        { value: 'none', text: 'None' },
+        { value: 'invited', text: 'Invited' },
+        { value: 'pending', text: 'Pending' },
+        { value: 'confirmed', text: 'Confirmed' },
+      ],
     };
   },
   computed: {
     params() {
       const params = {
-        "filter[has_permission]": true
+        'filter[has_permission]': true,
       };
 
-      if (this.filters.name !== "") {
-        params["filter[name]"] = this.filters.name;
+      if (this.filters.name !== '') {
+        params['filter[name]'] = this.filters.name;
       }
 
-      if (this.filters.has_email !== "") {
-        params["filter[has_email]"] = this.filters.has_email;
+      if (this.filters.has_email !== '') {
+        params['filter[has_email]'] = this.filters.has_email;
       }
 
-      if (this.filters.has_social_medias !== "") {
-        params["filter[has_social_medias]"] = this.filters.has_social_medias;
+      if (this.filters.has_social_medias !== '') {
+        params['filter[has_social_medias]'] = this.filters.has_social_medias;
       }
 
-      if (this.filters.has_phone !== "") {
-        params["filter[has_phone]"] = this.filters.has_phone;
+      if (this.filters.has_phone !== '') {
+        params['filter[has_phone]'] = this.filters.has_phone;
       }
 
-      if (this.filters.has_services !== "") {
-        params["filter[has_services]"] = this.filters.has_services;
+      if (this.filters.has_services !== '') {
+        params['filter[has_services]'] = this.filters.has_services;
+      }
+
+      if (this.filters.has_admin_invite_status !== '') {
+        params[
+          'filter[has_admin_invite_status]'
+        ] = this.filters.has_admin_invite_status;
       }
 
       return params;
@@ -200,21 +227,22 @@ export default {
     columns() {
       if (this.auth.isSuperAdmin) {
         return [
-          { heading: "Organisation name", sort: "name" },
-          { heading: "Web address URL" },
-          { heading: "Phone number" },
-          { heading: "Email" },
-          { heading: "Invite" }
+          { heading: 'Organisation name', sort: 'name' },
+          { heading: 'Web address URL' },
+          { heading: 'Phone number' },
+          { heading: 'Email' },
+          { heading: 'Admin Status' },
+          { heading: 'Invite' },
         ];
       }
 
       return [
-        { heading: "Organisation name", sort: "name" },
-        { heading: "Web address URL" },
-        { heading: "Phone number" },
-        { heading: "Email" }
+        { heading: 'Organisation name', sort: 'name' },
+        { heading: 'Web address URL' },
+        { heading: 'Phone number' },
+        { heading: 'Email' },
       ];
-    }
+    },
   },
   methods: {
     onSearch() {
@@ -222,7 +250,7 @@ export default {
       this.$refs.organisationsTable.fetchResources();
     },
     onAddOrganisation() {
-      this.$router.push({ name: "organisations-create" });
+      this.$router.push({ name: 'organisations-create' });
     },
     onInviteOrganisation(organisationId) {
       if (this.organisationInviteSelected(organisationId)) {
@@ -242,7 +270,7 @@ export default {
       if (
         this.organisationInvites.length ===
         this.$refs.organisationsTable.resources.filter(
-          organisation => organisation.email !== null
+          (organisation) => organisation.email !== null
         ).length
       ) {
         this.organisationInvites.splice(0, this.organisationInvites.length);
@@ -252,32 +280,39 @@ export default {
       this.organisationInvites.splice(0, this.organisationInvites.length);
 
       this.$refs.organisationsTable.resources
-        .filter(organisation => organisation.email !== null)
-        .forEach(organisation =>
+        .filter((organisation) => organisation.email !== null)
+        .forEach((organisation) =>
           this.organisationInvites.push(organisation.id)
         );
     },
     async onInvite() {
       this.inviting = true;
 
-      await http.post("/organisation-admin-invites", {
-        organisations: this.organisationInvites.map(organisationId => {
+      await http.post('/organisation-admin-invites', {
+        organisations: this.organisationInvites.map((organisationId) => {
           return {
             organisation_id: organisationId,
-            use_email: true
+            use_email: true,
           };
-        })
+        }),
       });
 
       window.alert(
-        "The organisations will have invitation emails sent out shortly."
+        'The organisations will have invitation emails sent out shortly.'
       );
 
       this.inviting = false;
     },
     onFetch() {
       this.organisationInvites.splice(0, this.organisationInvites.length);
-    }
-  }
+    },
+  },
+  filters: {
+    ucFirst: function(s) {
+      return typeof s === 'string'
+        ? s.charAt(0).toUpperCase() + s.slice(1)
+        : '';
+    },
+  },
 };
 </script>
