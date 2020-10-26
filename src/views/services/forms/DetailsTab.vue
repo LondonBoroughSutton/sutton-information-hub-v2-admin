@@ -80,7 +80,7 @@
         >
           <template slot="hint">
             <gov-hint for="ios_app_url">
-              See <gov-link :href="androidAppStoreHelpUrl" external="true"> help creating Apple App Store links</gov-link>.
+              See <gov-link :href="androidAppStoreHelpUrl" :external="true"> help creating Apple App Store links</gov-link>.
             </gov-hint>
           </template>
         </ck-text-input>
@@ -96,7 +96,7 @@
         >
           <template slot="hint">
             <gov-hint for="android_app_url">
-              See <gov-link :href="androidAppStoreHelpUrl" external="true"> help on creating Google Play Store links</gov-link>.
+              See <gov-link :href="androidAppStoreHelpUrl" :external="true"> help on creating Google Play Store links</gov-link>.
             </gov-hint>
           </template>
         </ck-text-input>
@@ -138,6 +138,7 @@
           :hint="`Rate the overall effectiveness and quality of the ${type} between 1 (poor) and 5 (excellent). This is not displayed but affects positioning within search results.`"
           :options="scoreOptions"
           :error="errors.get('score')"
+          v-if="auth.isSuperAdmin"
         />
 
         <ck-radio-input
@@ -203,12 +204,12 @@ export default {
       required: true,
     },
     ios_app_url: {
-      required: false,
       type: String,
+      default: '',
     },
     android_app_url: {
-      required: false,
       type: String,
+      default: '',
     },
     is_national: {
       required: true,
