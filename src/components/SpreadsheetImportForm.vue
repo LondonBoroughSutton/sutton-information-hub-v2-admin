@@ -1,5 +1,6 @@
 <template>
   <ck-file-input
+    ref="fileInput"
     :value="spreadsheet"
     @input="onInput('spreadsheet', $event === null ? null : $event.content)"
     id="spreadsheet"
@@ -28,6 +29,14 @@ export default {
     feedback: {
       type: String,
       default: null
+    }
+  },
+
+  watch: {
+    spreadsheet(isNow, wasThen) {
+      if (wasThen && !isNow) {
+        this.$refs.fileInput.$refs.file.$el.value = "";
+      }
     }
   },
 
