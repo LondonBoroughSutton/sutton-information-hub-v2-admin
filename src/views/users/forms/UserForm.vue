@@ -45,6 +45,15 @@
       :error="errors.get('password')"
     />
 
+    <ck-text-input
+      :value="employer_name"
+      @input="onInput('employer_name', $event)"
+      id="employer_name"
+      label="Name of Employer"
+      type="text"
+      :error="errors.get('employer_name')"
+    />
+
     <gov-section-break size="l" />
 
     <gov-heading size="m">Permissions</gov-heading>
@@ -74,46 +83,50 @@
 </template>
 
 <script>
-import UserRolesInput from "@/views/users/inputs/UserRolesInput";
+import UserRolesInput from '@/views/users/inputs/UserRolesInput';
 
 export default {
-  name: "UserForm",
+  name: 'UserForm',
   components: { UserRolesInput },
   props: {
     errors: {
       required: true,
-      type: Object
+      type: Object,
     },
     first_name: {
       required: true,
-      type: String
+      type: String,
     },
     last_name: {
       required: true,
-      type: String
+      type: String,
     },
     email: {
       required: true,
-      type: String
+      type: String,
     },
     phone: {
       required: true,
-      type: String
+      type: String,
+    },
+    employer_name: {
+      type: String,
+      default: '',
     },
     password: {
       required: true,
-      type: String
+      type: String,
     },
     roles: {
       required: true,
-      type: Array
-    }
+      type: Array,
+    },
   },
   methods: {
     onInput(field, value) {
       this.$emit(`update:${field}`, value);
-      this.$emit("clear", field);
-    }
-  }
+      this.$emit('clear', field);
+    },
+  },
 };
 </script>
