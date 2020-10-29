@@ -54,6 +54,11 @@
       :error="errors.get('employer_name')"
     />
 
+    <user-address-form
+      :location_id="location_id"
+      @update:location_id="onInput('location_id', $event)"
+    />
+
     <gov-section-break size="l" />
 
     <gov-heading size="m">Permissions</gov-heading>
@@ -84,10 +89,14 @@
 
 <script>
 import UserRolesInput from '@/views/users/inputs/UserRolesInput';
+import UserAddressForm from './UserAddressForm';
 
 export default {
   name: 'UserForm',
-  components: { UserRolesInput },
+  components: {
+    UserRolesInput,
+    UserAddressForm,
+  },
   props: {
     errors: {
       required: true,
@@ -112,6 +121,10 @@ export default {
     employer_name: {
       type: String,
       default: '',
+    },
+    location_id: {
+      type: String,
+      default: null,
     },
     password: {
       required: true,
