@@ -27,6 +27,11 @@
         <gov-table-cell v-else>No address for this User</gov-table-cell>
       </gov-table-row>
       <gov-table-row>
+        <gov-table-header scope="row">Local Authority</gov-table-header>
+        <gov-table-cell v-if="user.local_authority">{{localAuthorityName}}</gov-table-cell>
+        <gov-table-cell v-else>No Local Authority for this User</gov-table-cell>
+      </gov-table-row>
+      <gov-table-row>
         <gov-table-header top scope="row">Permissions</gov-table-header>
         <gov-table-cell>
           <gov-list>
@@ -142,6 +147,16 @@ export default {
         }
       }
       return address.join(', ');
+    },
+    localAuthorityName() {
+      const nameParts = [];
+      if (this.user.local_authority) {
+        nameParts.push(this.user.local_authority.name);
+        if (this.user.local_authority.alt_name) {
+          nameParts.push(`(${this.user.local_authority.alt_name})`);
+        }
+      }
+      return nameParts.join(' ');
     },
   },
   created() {

@@ -59,6 +59,11 @@
       @update:location_id="onInput('location_id', $event)"
     />
 
+    <local-authority-select
+      :local_authority_id="local_authority_id"
+      @update:local_authority_id="onInput('local_authority_id', $event)"
+    />
+
     <gov-section-break size="l" />
 
     <gov-heading size="m">Permissions</gov-heading>
@@ -88,12 +93,14 @@
 </template>
 
 <script>
+import LocalAuthoritySelect from '@/views/users/inputs/LocalAuthoritySelect';
 import UserRolesInput from '@/views/users/inputs/UserRolesInput';
 import UserAddressForm from './UserAddressForm';
 
 export default {
   name: 'UserForm',
   components: {
+    LocalAuthoritySelect,
     UserRolesInput,
     UserAddressForm,
   },
@@ -123,6 +130,10 @@ export default {
       default: '',
     },
     location_id: {
+      type: String,
+      default: null,
+    },
+    local_authority_id: {
       type: String,
       default: null,
     },
