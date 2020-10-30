@@ -93,64 +93,64 @@
 </template>
 
 <script>
-import LocalAuthoritySelect from '@/views/users/inputs/LocalAuthoritySelect';
-import UserRolesInput from '@/views/users/inputs/UserRolesInput';
-import UserAddressForm from './UserAddressForm';
+import LocalAuthoritySelect from "@/views/users/inputs/LocalAuthoritySelect";
+import UserRolesInput from "@/views/users/inputs/UserRolesInput";
+import UserAddressForm from "./UserAddressForm";
 
 export default {
-  name: 'UserForm',
+  name: "UserForm",
   components: {
     LocalAuthoritySelect,
     UserRolesInput,
-    UserAddressForm,
+    UserAddressForm
   },
   props: {
     errors: {
       required: true,
-      type: Object,
+      type: Object
     },
     first_name: {
       required: true,
-      type: String,
+      type: String
     },
     last_name: {
       required: true,
-      type: String,
+      type: String
     },
     email: {
       required: true,
-      type: String,
+      type: String
     },
     phone: {
       required: true,
-      type: String,
+      type: String
     },
     employer_name: {
       type: String,
-      default: '',
+      default: ""
     },
     location_id: {
       type: String,
-      default: null,
+      default: null
     },
     local_authority_id: {
       type: String,
-      default: null,
+      default: null
     },
     password: {
       required: true,
-      type: String,
+      type: String
     },
     roles: {
       required: true,
-      type: Array,
-    },
+      type: Array
+    }
   },
   methods: {
     onInput(field, value) {
       this.$emit(`update:${field}`, value);
-      this.$emit('clear', field);
-    },
-  },
+      this.$emit("clear", field);
+    }
+  }
 };
 </script>

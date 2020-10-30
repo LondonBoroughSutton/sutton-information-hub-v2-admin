@@ -18,7 +18,8 @@
           track-by="value"
           class="govuk-select"
           :disabled="disabled"
-          @select="onSelect($event)">
+          @select="onSelect($event)"
+          @remove="onRemove($event)">
           </multiselect>
 
       <slot name="after-input" />
@@ -33,46 +34,49 @@
 </template>
 
 <script>
-import Multiselect from 'vue-multiselect';
+import Multiselect from "vue-multiselect";
 
 export default {
   components: {
-    Multiselect,
+    Multiselect
   },
   props: {
     id: {
       required: true,
-      type: String,
+      type: String
     },
     value: {
-      required: true,
+      required: true
     },
     label: {
       required: true,
-      type: String,
+      type: String
     },
     hint: {
       required: false,
-      type: String,
+      type: String
     },
     error: {
-      required: true,
+      required: true
     },
     options: {
       required: false,
-      type: Array,
+      type: Array
     },
     disabled: {
       required: false,
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
   },
   methods: {
     onSelect(selected) {
-      this.$emit('input', selected);
+      this.$emit("input", selected);
     },
-  },
+    onRemove(selected) {
+      this.$emit("remove", selected);
+    }
+  }
 };
 </script>
 

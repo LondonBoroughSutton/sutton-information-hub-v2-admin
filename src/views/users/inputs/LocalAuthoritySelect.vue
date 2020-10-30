@@ -6,29 +6,30 @@
       :options="localAuthorityOptions"
       :value="selectedOption"
       :error="null"
-      @input="$emit(`update:local_authority_id`, $event.value);"
+      @input="$emit(`update:local_authority_id`, $event.value)"
+      @remove="$emit('update:local_authority_id', null)"
     />
   </div>
 </template>
 
 <script>
-import http from '@/http';
-import SearchSelect from '@/components/SearchSelect';
+import http from "@/http";
+import SearchSelect from "@/components/SearchSelect";
 
 export default {
   components: {
-    SearchSelect,
+    SearchSelect
   },
   props: {
     local_authority_id: {
       type: String,
-      default: null,
-    },
+      default: null
+    }
   },
   data() {
     return {
       localAuthorities: [],
-      loading: false,
+      loading: false
     };
   },
   computed: {
@@ -36,18 +37,18 @@ export default {
       return this.localAuthorities.map(this.normaliseOption);
     },
     selectedOption() {
-      const selected = this.localAuthorities.find((la) => {
+      const selected = this.localAuthorities.find(la => {
         return la.id === this.local_authority_id;
       });
       return selected ? this.normaliseOption(selected) : null;
-    },
+    }
   },
   methods: {
     async fetchLocalAuthorities() {
       this.loading = true;
       const {
-        data: { data: localAuthorities },
-      } = await http.get('/local-authorities');
+        data: { data: localAuthorities }
+      } = await http.get("/local-authorities");
       this.localAuthorities = localAuthorities;
       this.loading = false;
     },
@@ -57,14 +58,14 @@ export default {
         label.push(`(${localAuthority.alt_name})`);
       }
       return {
-        text: label.join(' '),
-        value: localAuthority.id,
+        text: label.join(" "),
+        value: localAuthority.id
       };
-    },
+    }
   },
   created() {
     this.fetchLocalAuthorities();
-  },
+  }
 };
 </script>
 

@@ -63,40 +63,41 @@
       :error="getError('country')"
     />
       <gov-button v-if="submitting" disabled type="submit">{{ location_id? 'Updating' : 'Adding' }}...</gov-button>
-      <gov-button v-else @click="onSubmit" type="submit">{{ location_id? 'Update' : 'Add' }} Address</gov-button>
+      <gov-button v-else @click="onSubmit" type="submit">{{ location_id? 'Update' : 'Add' }} Address</gov-button>&nbsp;
+      <gov-button v-if="location_id" @click="onRemoveAddress()" error>Remove Address</gov-button>
       <ck-submit-error v-if="hasError()" />
       <gov-hint v-if="submitted">{{ submitted }}</gov-hint>
   </div>
 </template>
 
 <script>
-import Form from '@/classes/Form';
-import http from '@/http';
-import countries from '@/storage/countries';
+import Form from "@/classes/Form";
+import http from "@/http";
+import countries from "@/storage/countries";
 
 export default {
   props: {
     location_id: {
       required: false,
-      default: null,
-    },
+      default: null
+    }
   },
   data() {
     return {
       countries,
       address: {
-        address_line_1: '',
-        address_line_2: '',
-        address_line_3: '',
-        city: '',
-        county: '',
-        postcode: '',
-        country: 'United Kingdom',
+        address_line_1: "",
+        address_line_2: "",
+        address_line_3: "",
+        city: "",
+        county: "",
+        postcode: "",
+        country: "United Kingdom"
       },
       form: null,
       loading: false,
       submitting: false,
-      submitted: null,
+      submitted: null
     };
   },
   methods: {
@@ -119,9 +120,9 @@ export default {
         this.form = new Form(
           Object.assign(
             {
-              accessibility_info: '',
+              accessibility_info: "",
               has_wheelchair_access: false,
-              has_induction_loop: false,
+              has_induction_loop: false
             },
             this.address
           )
@@ -133,7 +134,7 @@ export default {
           response = await this.form.put(`/locations/${this.location_id}`);
         } else {
           // Put the location if exisiting
-          response = await this.form.post('/locations');
+          response = await this.form.post("/locations");
         }
         // Feedback success
         this.showSuccess();
@@ -142,16 +143,28 @@ export default {
         this.updateAddress(response.data);
 
         this.$emit(`update:location_id`, response.data.id);
-        this.$emit('clear-location', response.data.id);
+        this.$emit("clear-location", response.data.id);
       } catch (error) {
         this.submitting = false;
       }
     },
 
+    onRemoveAddress() {
+      this.updateAddress({
+        address_line_1: "",
+        city: "",
+        county: "",
+        postcode: "",
+        country: "United Kingdom"
+      });
+      this.$emit(`update:location_id`, null);
+      this.$emit("clear-location", null);
+    },
+
     async fetchLocation() {
       this.loading = true;
       const {
-        data: { data: location },
+        data: { data: location }
       } = await http.get(`/locations/${this.location_id}`);
 
       // Update the Address
@@ -161,25 +174,26 @@ export default {
 
     updateAddress(location) {
       this.address.address_line_1 = location.address_line_1;
-      this.address.address_line_2 = location.address_line_2 || '';
-      this.address.address_line_3 = location.address_line_3 || '';
+      this.address.address_line_2 = location.address_line_2 || "";
+      this.address.address_line_3 = location.address_line_3 || "";
       this.address.city = location.city;
       this.address.county = location.county;
       this.address.postcode = location.postcode;
+      this.address.country = location.country;
     },
     showSuccess() {
       this.submitting = false;
-      this.submitted = this.location_id ? 'Address updated' : 'Address added';
+      this.submitted = this.location_id ? "Address updated" : "Address added";
       window.setTimeout(() => {
         this.submitted = null;
       }, 3.0 * 1000);
-    },
+    }
   },
   created() {
     if (this.location_id) {
       this.fetchLocation();
     }
-  },
+  }
 };
 </script>
 

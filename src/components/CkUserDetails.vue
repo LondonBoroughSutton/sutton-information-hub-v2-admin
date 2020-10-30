@@ -79,12 +79,12 @@
 
 <script>
 export default {
-  name: 'CkUserDetails',
+  name: "CkUserDetails",
   props: {
     user: {
       type: Object,
-      required: true,
-    },
+      required: true
+    }
   },
   data() {
     return {
@@ -92,7 +92,7 @@ export default {
       globalAdmin: false,
       organisationAdmin: [],
       serviceAdmin: [],
-      serviceWorker: [],
+      serviceWorker: []
     };
   },
   methods: {
@@ -103,37 +103,37 @@ export default {
       this.serviceAdmin = [];
       this.serviceWorker = [];
 
-      this.user.roles.forEach((role) => {
-        if (role.role === 'Super Admin') {
+      this.user.roles.forEach(role => {
+        if (role.role === "Super Admin") {
           this.superAdmin = true;
-        } else if (role.role === 'Global Admin') {
+        } else if (role.role === "Global Admin") {
           this.globalAdmin = true;
-        } else if (role.hasOwnProperty('organisation')) {
+        } else if (role.hasOwnProperty("organisation")) {
           this.organisationAdmin.push(role);
         } else if (
-          role.hasOwnProperty('service') &&
-          role.role === 'Service Admin'
+          role.hasOwnProperty("service") &&
+          role.role === "Service Admin"
         ) {
           this.serviceAdmin.push(role);
         } else if (
-          role.hasOwnProperty('service') &&
-          role.role === 'Service Worker'
+          role.hasOwnProperty("service") &&
+          role.role === "Service Worker"
         ) {
           this.serviceWorker.push(role);
         }
       });
-    },
+    }
   },
   computed: {
     addressString() {
       const address = [];
       const fields = [
-        'address_line_1',
-        'address_line_2',
-        'address_line_3',
-        'city',
-        'county',
-        'postcode',
+        "address_line_1",
+        "address_line_2",
+        "address_line_3",
+        "city",
+        "county",
+        "postcode"
       ];
       if (this.user.address) {
         for (const key in this.user.address) {
@@ -146,7 +146,7 @@ export default {
           }
         }
       }
-      return address.join(', ');
+      return address.join(", ");
     },
     localAuthorityName() {
       const nameParts = [];
@@ -156,11 +156,11 @@ export default {
           nameParts.push(`(${this.user.local_authority.alt_name})`);
         }
       }
-      return nameParts.join(' ');
-    },
+      return nameParts.join(" ");
+    }
   },
   created() {
     this.sortRoles();
-  },
+  }
 };
 </script>
