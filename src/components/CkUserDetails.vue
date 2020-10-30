@@ -17,16 +17,16 @@
         <gov-table-header top scope="row">Phone number</gov-table-header>
         <gov-table-cell>{{ user.phone }}</gov-table-cell>
       </gov-table-row>
-      <gov-table-row>
+      <gov-table-row v-if="auth.isSuperAdmin">
         <gov-table-header top scope="row">Name of Employer</gov-table-header>
         <gov-table-cell>{{ user.employer_name }}</gov-table-cell>
       </gov-table-row>
-      <gov-table-row>
+      <gov-table-row v-if="auth.isSuperAdmin">
         <gov-table-header scope="row">Address</gov-table-header>
         <gov-table-cell v-if="user.address">{{addressString}}</gov-table-cell>
         <gov-table-cell v-else>No address for this User</gov-table-cell>
       </gov-table-row>
-      <gov-table-row>
+      <gov-table-row v-if="auth.isSuperAdmin">
         <gov-table-header scope="row">Local Authority</gov-table-header>
         <gov-table-cell v-if="user.local_authority">{{localAuthorityName}}</gov-table-cell>
         <gov-table-cell v-else>No Local Authority for this User</gov-table-cell>

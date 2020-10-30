@@ -57,11 +57,13 @@
     <user-address-form
       :location_id="location_id"
       @update:location_id="onInput('location_id', $event)"
+      v-if="auth.isSuperAdmin"
     />
 
     <local-authority-select
       :local_authority_id="local_authority_id"
       @update:local_authority_id="onInput('local_authority_id', $event)"
+      v-if="auth.isSuperAdmin"
     />
 
     <gov-section-break size="l" />
