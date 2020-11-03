@@ -19,6 +19,9 @@
             :last_name.sync="form.last_name"
             :email.sync="form.email"
             :phone.sync="form.phone"
+            :employer_name.sync="form.employer_name"
+            :location_id.sync="form.location_id"
+            :local_authority_id.sync="form.local_authority_id"
             :password.sync="form.password"
             :roles.sync="form.roles"
             @clear="form.$errors.clear($event)"
@@ -46,13 +49,16 @@ export default {
   data() {
     return {
       form: new Form({
-        first_name: '',
-        last_name: '',
-        email: '',
-        phone: '',
-        password: '',
-        roles: [],
-      }),
+        first_name: "",
+        last_name: "",
+        email: "",
+        phone: "",
+        employer_name: "",
+        location_id: null,
+        local_authority_id: null,
+        password: "",
+        roles: []
+      })
     };
   },
   methods: {

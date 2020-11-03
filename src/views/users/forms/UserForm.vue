@@ -45,6 +45,27 @@
       :error="errors.get('password')"
     />
 
+    <ck-text-input
+      :value="employer_name"
+      @input="onInput('employer_name', $event)"
+      id="employer_name"
+      label="Name of Employer"
+      type="text"
+      :error="errors.get('employer_name')"
+    />
+
+    <user-address-form
+      :location_id="location_id"
+      @update:location_id="onInput('location_id', $event)"
+      v-if="auth.isSuperAdmin"
+    />
+
+    <local-authority-select
+      :local_authority_id="local_authority_id"
+      @update:local_authority_id="onInput('local_authority_id', $event)"
+      v-if="auth.isSuperAdmin"
+    />
+
     <gov-section-break size="l" />
 
     <gov-heading size="m">Permissions</gov-heading>
@@ -74,11 +95,17 @@
 </template>
 
 <script>
+import LocalAuthoritySelect from "@/views/users/inputs/LocalAuthoritySelect";
 import UserRolesInput from "@/views/users/inputs/UserRolesInput";
+import UserAddressForm from "./UserAddressForm";
 
 export default {
   name: "UserForm",
-  components: { UserRolesInput },
+  components: {
+    LocalAuthoritySelect,
+    UserRolesInput,
+    UserAddressForm
+  },
   props: {
     errors: {
       required: true,
@@ -99,6 +126,18 @@ export default {
     phone: {
       required: true,
       type: String
+    },
+    employer_name: {
+      type: String,
+      default: ""
+    },
+    location_id: {
+      type: String,
+      default: null
+    },
+    local_authority_id: {
+      type: String,
+      default: null
     },
     password: {
       required: true,
