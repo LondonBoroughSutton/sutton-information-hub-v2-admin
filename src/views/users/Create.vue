@@ -40,11 +40,11 @@
 </template>
 
 <script>
-import Form from '@/classes/Form';
-import UserForm from '@/views/users/forms/UserForm';
+import Form from "@/classes/Form";
+import UserForm from "@/views/users/forms/UserForm";
 
 export default {
-  name: 'CreateUser',
+  name: "CreateUser",
   components: { UserForm },
   data() {
     return {
@@ -63,28 +63,28 @@ export default {
   },
   methods: {
     async onSubmit() {
-      const data = await this.form.post('/users', (config, data) => {
+      const data = await this.form.post("/users", (config, data) => {
         // Strip spaces from the phone number.
-        data.phone = data.phone.replace(/\s/g, '');
+        data.phone = data.phone.replace(/\s/g, "");
 
-        data.roles.forEach((role) => {
+        data.roles.forEach(role => {
           switch (role.role) {
             // Delete the organisation and service IDs instead of sending null values.
-            case 'Super Admin':
-            case 'Global Admin':
-            case 'Local Admin':
+            case "Super Admin":
+            case "Global Admin":
+            case "Local Admin":
               delete role.organisation_id;
               delete role.service_id;
               break;
-            case 'Organisation Admin':
+            case "Organisation Admin":
               delete role.service_id;
               break;
           }
         });
       });
 
-      this.$router.push({ name: 'users-show', params: { user: data.data.id } });
-    },
-  },
+      this.$router.push({ name: "users-show", params: { user: data.data.id } });
+    }
+  }
 };
 </script>

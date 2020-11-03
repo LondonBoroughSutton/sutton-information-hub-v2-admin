@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 class Auth {
   /**
@@ -6,7 +6,7 @@ class Auth {
    */
   constructor() {
     this.http = axios.create({
-      baseURL: process.env.VUE_APP_API_URI,
+      baseURL: process.env.VUE_APP_API_URI
     });
   }
 
@@ -14,7 +14,7 @@ class Auth {
     return `${process.env.VUE_APP_API_URI}/oauth/authorize?client_id=${
       process.env.VUE_APP_API_CLIENT_ID
     }&redirect_uri=${encodeURI(
-      process.env.VUE_APP_URI + '/login'
+      process.env.VUE_APP_URI + "/login"
     )}&response_type=token`;
   }
 
@@ -25,13 +25,13 @@ class Auth {
    * @returns {Object}
    */
   parseQueryString(url) {
-    let query = url.substring(url.indexOf('#') + 1);
+    let query = url.substring(url.indexOf("#") + 1);
 
     let e,
       a = /\+/g, // Regex for replacing addition symbol with a space
       r = /([^&;=]+)=?([^&;]*)/g,
       d = function(s) {
-        return decodeURIComponent(s.replace(a, ' '));
+        return decodeURIComponent(s.replace(a, " "));
       },
       q = query,
       urlParams = {};
@@ -60,10 +60,10 @@ class Auth {
   async login(accessToken, expiresIn) {
     // OAuth tokens.
     localStorage.setItem(
-      'oauth',
+      "oauth",
       JSON.stringify({
         expires_at: expiresIn * 1000 + new Date().setHours(24, 0, 0, 0),
-        access_token: accessToken,
+        access_token: accessToken
       })
     );
 
@@ -75,24 +75,24 @@ class Auth {
   }
 
   async fetchUser() {
-    const { data } = await this.http.get('/core/v1/users/user', {
-      params: { include: 'user-roles' },
+    const { data } = await this.http.get("/core/v1/users/user", {
+      params: { include: "user-roles" },
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.accessToken}`,
-      },
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${this.accessToken}`
+      }
     });
 
-    localStorage.setItem('user', JSON.stringify(data.data));
+    localStorage.setItem("user", JSON.stringify(data.data));
   }
 
   /**
    * @return {boolean}
    */
   logout() {
-    localStorage.removeItem('oauth');
-    localStorage.removeItem('user');
-    localStorage.removeItem('last_active');
+    localStorage.removeItem("oauth");
+    localStorage.removeItem("user");
+    localStorage.removeItem("last_active");
 
     return true;
   }
@@ -101,11 +101,11 @@ class Auth {
    * Clears the user's sessions on the API.
    */
   async clearSessions() {
-    await this.http.delete('/core/v1/users/user/sessions', {
+    await this.http.delete("/core/v1/users/user/sessions", {
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.accessToken}`,
-      },
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${this.accessToken}`
+      }
     });
   }
 
@@ -113,7 +113,7 @@ class Auth {
    * Touches the last_active timestamp.
    */
   invokeActivity() {
-    localStorage.setItem('last_active', Date.now());
+    localStorage.setItem("last_active", Date.now());
   }
 
   /**
@@ -142,21 +142,21 @@ class Auth {
    * @returns {object|null}
    */
   get oauth() {
-    return JSON.parse(localStorage.getItem('oauth'));
+    return JSON.parse(localStorage.getItem("oauth"));
   }
 
   /**
    * @returns {object|null}
    */
   get user() {
-    return JSON.parse(localStorage.getItem('user'));
+    return JSON.parse(localStorage.getItem("user"));
   }
 
   /**
    * @returns {object|null}
    */
   get lastActive() {
-    return JSON.parse(localStorage.getItem('last_active'));
+    return JSON.parse(localStorage.getItem("last_active"));
   }
 
   /**
@@ -194,7 +194,7 @@ class Auth {
     }
 
     return (
-      this.user.roles.find((role) => {
+      this.user.roles.find(role => {
         if (role.role !== roleName) {
           return false;
         }
@@ -216,21 +216,21 @@ class Auth {
    * @returns {boolean}
    */
   get isSuperAdmin() {
-    return this.hasRole('Super Admin');
+    return this.hasRole("Super Admin");
   }
 
   /**
    * @returns {boolean}
    */
   get isGlobalAdmin() {
-    return this.hasRole('Global Admin') || this.isSuperAdmin;
+    return this.hasRole("Global Admin") || this.isSuperAdmin;
   }
 
   /**
    * @returns {boolean}
    */
   get isLocalAdmin() {
-    return this.hasRole('Local Admin');
+    return this.hasRole("Local Admin");
   }
 
   /**
@@ -238,7 +238,7 @@ class Auth {
    */
   isOrganisationAdmin(organisation = null) {
     return (
-      this.hasRole('Organisation Admin', null, organisation) ||
+      this.hasRole("Organisation Admin", null, organisation) ||
       this.isGlobalAdmin
     );
   }
@@ -248,7 +248,7 @@ class Auth {
    */
   isServiceAdmin(service = null) {
     return (
-      this.hasRole('Service Admin', service) ||
+      this.hasRole("Service Admin", service) ||
       this.isOrganisationAdmin(service !== null ? service.organisation : null)
     );
   }
@@ -258,7 +258,7 @@ class Auth {
    */
   isServiceWorker(service = null) {
     return (
-      this.hasRole('Service Worker', service) || this.isServiceAdmin(service)
+      this.hasRole("Service Worker", service) || this.isServiceAdmin(service)
     );
   }
 }

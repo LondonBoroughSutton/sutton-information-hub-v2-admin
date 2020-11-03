@@ -93,7 +93,7 @@
                   v-if="isTabActive('taxonomies')"
                   @clear="form.$errors.clear($event); errors = {}"
                   :errors="form.$errors"
-                  :is-global-admin="auth.isGlobalAdmin"
+                  :is-global-admin="auth.isGlobalAdmin || auth.isLocalAdmin"
                   :type="form.type"
                   :category_taxonomies.sync="form.category_taxonomies"
                 >
@@ -186,16 +186,22 @@ export default {
   },
   computed: {
     allowedTabs() {
-      if (!this.auth.isGlobalAdmin) {
-        const taxonomiesTabIndex = this.tabs.findIndex(
-          tab => tab.id === "taxonomies"
-        );
-        const tabs = this.tabs.slice();
-        tabs.splice(taxonomiesTabIndex, 1);
-
-        return tabs;
+      // Super or Global Admin see all tabs
+      if (this.auth.isGlobalAdmin) {
+        return this.tabs;
       }
-
+      // Service and Organisation admins see all tabs except taxonomies
+      if (!this.auth.isLocalAdmin && this.auth.isServiceAdmin(this.service)) {
+        return this.tabs.filter(tab => tab.id !== "taxonomies");
+      }
+      // Local Admin see only Taxonomies
+      if (this.auth.isLocalAdmin && !this.auth.isServiceAdmin(this.service)) {
+        return this.tabs.filter(tab => tab.id === "taxonomies").map(tab => {
+          tab.active = true;
+          return tab;
+        });
+      }
+      // Local Admin who are also Service admins can see all tabs
       return this.tabs;
     }
   },
