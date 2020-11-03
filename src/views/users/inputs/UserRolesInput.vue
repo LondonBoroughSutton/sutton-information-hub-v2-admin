@@ -85,35 +85,36 @@
 
 <script>
 export default {
-  name: "UserRolesInput",
+  name: 'UserRolesInput',
   model: {
-    prop: "roles",
-    event: "input"
+    prop: 'roles',
+    event: 'input',
   },
   props: {
     roles: {
       required: true,
-      type: Array
+      type: Array,
     },
     errors: {
       required: true,
-      type: Object
-    }
+      type: Object,
+    },
   },
   data() {
     return {
       roleOptions: [
-        { text: "Please select", value: null, disabled: true },
-        { text: "Super admin", value: "Super Admin" },
-        { text: "Global admin", value: "Global Admin" },
-        { text: "Organisation admin", value: "Organisation Admin" },
-        { text: "Service admin", value: "Service Admin" },
-        { text: "Service worker", value: "Service Worker" }
+        { text: 'Please select', value: null, disabled: true },
+        { text: 'Super admin', value: 'Super Admin' },
+        { text: 'Global admin', value: 'Global Admin' },
+        { text: 'Local admin', value: 'Local Admin' },
+        { text: 'Organisation admin', value: 'Organisation Admin' },
+        { text: 'Service admin', value: 'Service Admin' },
+        { text: 'Service worker', value: 'Service Worker' },
       ],
       roleIndex: 0,
       loadingOrganisations: false,
       organisations: [],
-      services: {}
+      services: {},
     };
   },
   watch: {
@@ -123,70 +124,69 @@ export default {
           return;
         }
 
-        newRoles = newRoles.map(role => ({ ...role }));
+        newRoles = newRoles.map((role) => ({ ...role }));
 
-        newRoles.forEach(role => {
+        newRoles.forEach((role) => {
           // If the role uses a service, then lazy load the services and cache them.
-          if (role.role === "Service Admin" || role.role === "Service Worker") {
+          if (role.role === 'Service Admin' || role.role === 'Service Worker') {
             if (role.organisation_id !== null) {
               this.cacheServices(role.organisation_id);
             }
           }
 
-          // Reset the organisation adn service ID when no longer applies to role.
+          // Reset the organisation and service ID when no longer applies to role.
           switch (role.role) {
-            case "Super Admin":
-            case "Global Admin": {
+            case 'Super Admin':
+            case 'Global Admin':
+            case 'Local Admin':
               role.organisation_id = null;
               role.service_id = null;
-              this.$emit("input", newRoles);
+              this.$emit('input', newRoles);
               break;
-            }
-            case "Organisation Admin": {
+            case 'Organisation Admin':
               role.service_id = null;
-              this.$emit("input", newRoles);
+              this.$emit('input', newRoles);
               break;
-            }
           }
         });
       },
-      deep: true
-    }
+      deep: true,
+    },
   },
   methods: {
     cloneRoles() {
-      return this.roles.map(role => ({ ...role }));
+      return this.roles.map((role) => ({ ...role }));
     },
     showOrganisationSelect(index) {
-      return ["Organisation Admin", "Service Admin", "Service Worker"].includes(
+      return ['Organisation Admin', 'Service Admin', 'Service Worker'].includes(
         this.roles[index].role
       );
     },
     showServiceSelect(index) {
-      return ["Service Admin", "Service Worker"].includes(
+      return ['Service Admin', 'Service Worker'].includes(
         this.roles[index].role
       );
     },
     onRoleInput({ key, value }) {
-      this.$emit("clear", `roles.${key}.role`);
+      this.$emit('clear', `roles.${key}.role`);
 
       let roles = this.cloneRoles();
       roles[key].role = value;
-      this.$emit("input", roles);
+      this.$emit('input', roles);
     },
     onOrganisationInput({ key, value }) {
-      this.$emit("clear", `roles.${key}.organisation_id`);
+      this.$emit('clear', `roles.${key}.organisation_id`);
 
       let roles = this.cloneRoles();
       roles[key].organisation_id = value;
-      this.$emit("input", roles);
+      this.$emit('input', roles);
     },
     onServiceInput({ key, value }) {
-      this.$emit("clear", `roles.${key}.service_id`);
+      this.$emit('clear', `roles.${key}.service_id`);
 
       let roles = this.cloneRoles();
       roles[key].service_id = value;
-      this.$emit("input", roles);
+      this.$emit('input', roles);
     },
     onAddPermission() {
       // The role index is purely used for Vue to keep track when looping.
@@ -195,31 +195,31 @@ export default {
         role: null,
         organisation_id: null,
         service_id: null,
-        index: this.roleIndex
+        index: this.roleIndex,
       });
-      this.$emit("input", roles);
-      this.$emit("clear", "roles");
+      this.$emit('input', roles);
+      this.$emit('clear', 'roles');
       this.roleIndex++;
     },
     onRemovePermission(index) {
-      this.$emit("clear", `roles.${index}.role`);
-      this.$emit("clear", `roles.${index}.organisation_id`);
-      this.$emit("clear", `roles.${index}.service_id`);
+      this.$emit('clear', `roles.${index}.role`);
+      this.$emit('clear', `roles.${index}.organisation_id`);
+      this.$emit('clear', `roles.${index}.service_id`);
       let roles = this.cloneRoles();
       this.$delete(roles, index);
-      this.$emit("input", roles);
+      this.$emit('input', roles);
     },
     async cacheOrganisations() {
       this.loadingOrganisations = true;
       this.organisations = [
-        { value: null, text: "Please select", disabled: true }
+        { value: null, text: 'Please select', disabled: true },
       ];
 
-      let organisations = await this.fetchAll("/organisations");
-      organisations = organisations.map(organisation => {
+      let organisations = await this.fetchAll('/organisations');
+      organisations = organisations.map((organisation) => {
         return {
           value: organisation.id,
-          text: organisation.name
+          text: organisation.name,
         };
       });
       this.organisations = [...this.organisations, ...organisations];
@@ -239,43 +239,43 @@ export default {
 
         // Set the initial object.
         this.services[organisationId] = {
-          items: [{ value: null, text: "Please select", disabled: true }],
-          loading: true
+          items: [{ value: null, text: 'Please select', disabled: true }],
+          loading: true,
         };
       }
 
       let services = await this.fetchAll(
-        "/services/index",
-        { "filter[organisation_id]": organisationIds.join(",") },
-        "POST"
+        '/services/index',
+        { 'filter[organisation_id]': organisationIds.join(',') },
+        'POST'
       );
 
       for (let organisationId of organisationIds) {
         this.services[organisationId].items = [
           ...this.services[organisationId].items,
           ...services
-            .filter(service => service.organisation_id === organisationId)
-            .map(service => ({ value: service.id, text: service.name }))
+            .filter((service) => service.organisation_id === organisationId)
+            .map((service) => ({ value: service.id, text: service.name })),
         ];
 
         this.services[organisationId].loading = false;
       }
 
       this.$forceUpdate();
-    }
+    },
   },
   created() {
     this.cacheOrganisations();
 
     let organisationIds = {};
 
-    this.roles.forEach(role => {
-      if (role.hasOwnProperty("organisation_id")) {
+    this.roles.forEach((role) => {
+      if (role.hasOwnProperty('organisation_id')) {
         organisationIds[role.organisation_id] = null;
       }
     });
 
     this.cacheServices(Object.keys(organisationIds));
-  }
+  },
 };
 </script>

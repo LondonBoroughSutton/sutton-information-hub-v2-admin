@@ -23,6 +23,7 @@
           <gov-list>
             <li>Super admin: {{ superAdmin ? 'Yes' : 'No' }}</li>
             <li>Global admin: {{ globalAdmin ? 'Yes' : 'No' }}</li>
+            <li>Local admin: {{ localAdmin ? 'Yes' : 'No' }}</li>
             <li>
               <template v-if="organisationAdmin.length === 0">Organisation admin: No</template>
               <gov-details v-else summary="Organisation admin: Yes" class="no-margin">
@@ -65,20 +66,21 @@
 
 <script>
 export default {
-  name: "CkUserDetails",
+  name: 'CkUserDetails',
   props: {
     user: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
       superAdmin: false,
       globalAdmin: false,
+      localAdmin: false,
       organisationAdmin: [],
       serviceAdmin: [],
-      serviceWorker: []
+      serviceWorker: [],
     };
   },
   methods: {
@@ -89,29 +91,31 @@ export default {
       this.serviceAdmin = [];
       this.serviceWorker = [];
 
-      this.user.roles.forEach(role => {
-        if (role.role === "Super Admin") {
+      this.user.roles.forEach((role) => {
+        if (role.role === 'Super Admin') {
           this.superAdmin = true;
-        } else if (role.role === "Global Admin") {
+        } else if (role.role === 'Global Admin') {
           this.globalAdmin = true;
-        } else if (role.hasOwnProperty("organisation")) {
+        } else if (role.role === 'Local Admin') {
+          this.localAdmin = true;
+        } else if (role.hasOwnProperty('organisation')) {
           this.organisationAdmin.push(role);
         } else if (
-          role.hasOwnProperty("service") &&
-          role.role === "Service Admin"
+          role.hasOwnProperty('service') &&
+          role.role === 'Service Admin'
         ) {
           this.serviceAdmin.push(role);
         } else if (
-          role.hasOwnProperty("service") &&
-          role.role === "Service Worker"
+          role.hasOwnProperty('service') &&
+          role.role === 'Service Worker'
         ) {
           this.serviceWorker.push(role);
         }
       });
-    }
+    },
   },
   created() {
     this.sortRoles();
-  }
+  },
 };
 </script>
