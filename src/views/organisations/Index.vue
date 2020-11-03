@@ -63,14 +63,14 @@
               </ck-table-filters>
             </gov-grid-column>
 
-            <gov-grid-column v-if="auth.isGlobalAdmin" width="one-third">
+            <gov-grid-column v-if="auth.isGlobalAdmin || auth.isLocalAdmin" width="one-third">
               <gov-button @click="onAddOrganisation" type="submit" success expand>Add organisation</gov-button>
               <gov-button v-if="auth.isSuperAdmin" :to="{name: 'organisations-import'}" type="submit" success expand>Bulk import</gov-button>
             </gov-grid-column>
           </gov-grid-row>
 
-          <div v-if="auth.isSuperAdmin" class="text-right">
-            <gov-button @click="onSelectAllInvites" type="button" class="govuk-!-margin-right-2" :disabled="inviting">
+          <div v-if="auth.isSuperAdmin || auth.isLocalAdmin" class="text-right">
+            <gov-button v-if="auth.isSuperAdmin" @click="onSelectAllInvites" type="button" class="govuk-!-margin-right-2" :disabled="inviting">
               Select/deselect all
             </gov-button>
 
@@ -78,6 +78,7 @@
               <template v-if="!inviting">Invite selected</template>
               <template v-else>Inviting selected...</template>
             </gov-button>
+            <gov-hint v-show="organisationInviteLimitReached">Invite limit reached</gov-hint>
           </div>
 
           <ck-resource-listing-table
@@ -107,7 +108,7 @@
               {{ organisation.email || '-' }}
             </template>
             <template
-              v-if="auth.isSuperAdmin"
+              v-if="auth.isSuperAdmin || auth.isLocalAdmin"
               slot="cell:4"
               slot-scope="{ resource: organisation }"
             >
@@ -117,7 +118,7 @@
                 :id="`organisation_invite_${organisation.id}`"
                 :name="`organisation_invite_${organisation.id}`"
                 label=""
-                :disabled="organisation.email === null || inviting"
+                :disabled="!canInviteOrganisation(organisation)"
               />
             </template>
           </ck-resource-listing-table>
@@ -128,101 +129,112 @@
 </template>
 
 <script>
-import CkResourceListingTable from "@/components/Ck/CkResourceListingTable.vue";
-import CkTableFilters from "@/components/Ck/CkTableFilters.vue";
-import http from "@/http";
+import CkResourceListingTable from '@/components/Ck/CkResourceListingTable.vue';
+import CkTableFilters from '@/components/Ck/CkTableFilters.vue';
+import http from '@/http';
 
 export default {
-  name: "ListOrganisations",
+  name: 'ListOrganisations',
   components: { CkResourceListingTable, CkTableFilters },
   data() {
     return {
       filters: {
-        name: "",
-        has_email: "",
-        has_social_medias: "",
-        has_phone: "",
-        has_services: ""
+        name: '',
+        has_email: '',
+        has_social_medias: '',
+        has_phone: '',
+        has_services: '',
       },
       organisationInvites: [],
       inviting: false,
       hasEmailOptions: [
-        { value: "", text: "All" },
-        { value: true, text: "Yes" },
-        { value: false, text: "No" }
+        { value: '', text: 'All' },
+        { value: true, text: 'Yes' },
+        { value: false, text: 'No' },
       ],
       hasSocialMediasOptions: [
-        { value: "", text: "All" },
-        { value: true, text: "Yes" },
-        { value: false, text: "No" }
+        { value: '', text: 'All' },
+        { value: true, text: 'Yes' },
+        { value: false, text: 'No' },
       ],
       hasPhoneOptions: [
-        { value: "", text: "All" },
-        { value: true, text: "Yes" },
-        { value: false, text: "No" }
+        { value: '', text: 'All' },
+        { value: true, text: 'Yes' },
+        { value: false, text: 'No' },
       ],
       hasServicesOptions: [
-        { value: "", text: "All" },
-        { value: true, text: "Yes" },
-        { value: false, text: "No" }
-      ]
+        { value: '', text: 'All' },
+        { value: true, text: 'Yes' },
+        { value: false, text: 'No' },
+      ],
     };
   },
   computed: {
     params() {
       const params = {
-        "filter[has_permission]": true
+        'filter[has_permission]': true,
       };
 
-      if (this.filters.name !== "") {
-        params["filter[name]"] = this.filters.name;
+      if (this.filters.name !== '') {
+        params['filter[name]'] = this.filters.name;
       }
 
-      if (this.filters.has_email !== "") {
-        params["filter[has_email]"] = this.filters.has_email;
+      if (this.filters.has_email !== '') {
+        params['filter[has_email]'] = this.filters.has_email;
       }
 
-      if (this.filters.has_social_medias !== "") {
-        params["filter[has_social_medias]"] = this.filters.has_social_medias;
+      if (this.filters.has_social_medias !== '') {
+        params['filter[has_social_medias]'] = this.filters.has_social_medias;
       }
 
-      if (this.filters.has_phone !== "") {
-        params["filter[has_phone]"] = this.filters.has_phone;
+      if (this.filters.has_phone !== '') {
+        params['filter[has_phone]'] = this.filters.has_phone;
       }
 
-      if (this.filters.has_services !== "") {
-        params["filter[has_services]"] = this.filters.has_services;
+      if (this.filters.has_services !== '') {
+        params['filter[has_services]'] = this.filters.has_services;
       }
 
       return params;
     },
 
     columns() {
-      if (this.auth.isSuperAdmin) {
+      if (this.auth.isSuperAdmin || this.auth.isLocalAdmin) {
         return [
-          { heading: "Organisation name", sort: "name" },
-          { heading: "Web address URL" },
-          { heading: "Phone number" },
-          { heading: "Email" },
-          { heading: "Invite" }
+          { heading: 'Organisation name', sort: 'name' },
+          { heading: 'Web address URL' },
+          { heading: 'Phone number' },
+          { heading: 'Email' },
+          { heading: 'Invite' },
         ];
       }
 
       return [
-        { heading: "Organisation name", sort: "name" },
-        { heading: "Web address URL" },
-        { heading: "Phone number" },
-        { heading: "Email" }
+        { heading: 'Organisation name', sort: 'name' },
+        { heading: 'Web address URL' },
+        { heading: 'Phone number' },
+        { heading: 'Email' },
       ];
-    }
+    },
+    organisationInviteLimitReached() {
+      return this.organisationInvites.length === 1 && this.auth.isLocalAdmin
+        ? true
+        : false;
+    },
   },
   methods: {
+    canInviteOrganisation(organisation) {
+      if (this.organisationInviteLimitReached) {
+        return this.organisationInviteSelected(organisation.id);
+      }
+      return organisation.email === null || this.inviting;
+    },
     onSearch() {
       this.$refs.organisationsTable.currentPage = 1;
       this.$refs.organisationsTable.fetchResources();
     },
     onAddOrganisation() {
-      this.$router.push({ name: "organisations-create" });
+      this.$router.push({ name: 'organisations-create' });
     },
     onInviteOrganisation(organisationId) {
       if (this.organisationInviteSelected(organisationId)) {
@@ -242,7 +254,7 @@ export default {
       if (
         this.organisationInvites.length ===
         this.$refs.organisationsTable.resources.filter(
-          organisation => organisation.email !== null
+          (organisation) => organisation.email !== null
         ).length
       ) {
         this.organisationInvites.splice(0, this.organisationInvites.length);
@@ -252,32 +264,32 @@ export default {
       this.organisationInvites.splice(0, this.organisationInvites.length);
 
       this.$refs.organisationsTable.resources
-        .filter(organisation => organisation.email !== null)
-        .forEach(organisation =>
+        .filter((organisation) => organisation.email !== null)
+        .forEach((organisation) =>
           this.organisationInvites.push(organisation.id)
         );
     },
     async onInvite() {
       this.inviting = true;
 
-      await http.post("/organisation-admin-invites", {
-        organisations: this.organisationInvites.map(organisationId => {
+      await http.post('/organisation-admin-invites', {
+        organisations: this.organisationInvites.map((organisationId) => {
           return {
             organisation_id: organisationId,
-            use_email: true
+            use_email: true,
           };
-        })
+        }),
       });
 
       window.alert(
-        "The organisations will have invitation emails sent out shortly."
+        'The organisations will have invitation emails sent out shortly.'
       );
 
       this.inviting = false;
     },
     onFetch() {
       this.organisationInvites.splice(0, this.organisationInvites.length);
-    }
-  }
+    },
+  },
 };
 </script>
