@@ -269,9 +269,7 @@ export default {
     onSelectAllInvites() {
       if (
         this.organisationInvites.length ===
-        this.$refs.organisationsTable.resources.filter(
-          organisation => organisation.email !== null
-        ).length
+        this.$refs.organisationsTable.resources.filter(this.canInvite).length
       ) {
         this.organisationInvites.splice(0, this.organisationInvites.length);
         return;
@@ -280,7 +278,7 @@ export default {
       this.organisationInvites.splice(0, this.organisationInvites.length);
 
       this.$refs.organisationsTable.resources
-        .filter(organisation => organisation.email !== null)
+        .filter(this.canInvite)
         .forEach(organisation =>
           this.organisationInvites.push(organisation.id)
         );
@@ -305,6 +303,12 @@ export default {
     },
     onFetch() {
       this.organisationInvites.splice(0, this.organisationInvites.length);
+    },
+    canInvite(organisation) {
+      return (
+        organisation.email !== null &&
+        organisation.admin_invite_status === "none"
+      );
     }
   },
   filters: {
