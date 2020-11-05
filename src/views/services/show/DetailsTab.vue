@@ -76,37 +76,37 @@
 </template>
 
 <script>
-import CkCarousel from '@/components/Ck/CkCarousel';
+import CkCarousel from "@/components/Ck/CkCarousel";
 
 export default {
-  name: 'DetailsTab',
+  name: "DetailsTab",
 
   components: { CkCarousel },
 
   props: {
     service: {
       type: Object,
-      required: true,
-    },
+      required: true
+    }
   },
 
   data() {
     return {
       qualityScores: {
-        0: 'Unrated',
-        1: 'Poor',
-        2: 'Below Average',
-        3: 'Average',
-        4: 'Above Average',
-        5: 'Excellent',
-      },
+        0: "Unrated",
+        1: "Poor",
+        2: "Below Average",
+        3: "Average",
+        4: "Above Average",
+        5: "Excellent"
+      }
     };
   },
 
   computed: {
     imageUrls() {
-      return this.service.gallery_items.map((galleryItem) => galleryItem.url);
-    },
-  },
+      return this.service.gallery_items.map(galleryItem => galleryItem.url);
+    }
+  }
 };
 </script>
