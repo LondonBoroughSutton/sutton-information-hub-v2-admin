@@ -5,7 +5,7 @@
 export default {
   install(Vue) {
     Vue.prototype.$webStorage = webStorage;
-  },
+  }
 };
 
 /**
@@ -25,7 +25,7 @@ let storage = {
     if (this.items.hasOwnProperty(key)) {
       delete this.items[key];
     }
-  },
+  }
 };
 
 /**
@@ -33,7 +33,7 @@ let storage = {
  * Interface to allow access to whichever storage type is used
  */
 const webStorage = {
-  setStorage: (storageType) => {
+  setStorage: storageType => {
     if (storageAvailable(storageType)) {
       storage = window[storageType];
       return true;
@@ -45,17 +45,17 @@ const webStorage = {
     return storage;
   },
   set: (key, item) => {
-    if (typeof item === 'object') {
+    if (typeof item === "object") {
       item = JSON.stringify(item);
     }
     storage.setItem(key, item);
   },
-  get: (key) => {
+  get: key => {
     return JSON.parse(storage.getItem(key));
   },
-  remove: (key) => {
+  remove: key => {
     storage.removeItem(key);
-  },
+  }
 };
 
 /**
@@ -66,7 +66,7 @@ function storageAvailable(type) {
   let storage;
   try {
     storage = window[type];
-    const x = '__storage_test__';
+    const x = "__storage_test__";
     storage.setItem(x, x);
     storage.removeItem(x);
     return true;
@@ -79,9 +79,9 @@ function storageAvailable(type) {
         e.code === 1014 ||
         // test name field too, because code might not be present
         // everything except Firefox
-        e.name === 'QuotaExceededError' ||
+        e.name === "QuotaExceededError" ||
         // Firefox
-        e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
+        e.name === "NS_ERROR_DOM_QUOTA_REACHED") &&
       // acknowledge QuotaExceededError only if there's something already stored
       storage &&
       storage.length !== 0

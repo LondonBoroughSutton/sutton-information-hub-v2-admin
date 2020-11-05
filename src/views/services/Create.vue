@@ -258,15 +258,18 @@ export default {
           data.useful_infos = [];
         }
       });
+
       const serviceId = data.data.id;
 
       // Refetch the user as new permissions added for the new service.
       await this.auth.fetchUser();
 
       if (data.data.is_national) {
+        this.clearFormStore();
         // Cannot add locations so go direct to Service view
         this.$router.push({ path: `/services/${serviceId}` });
       } else {
+        this.clearFormStore();
         // Add locations if required
         this.$router.push({
           name: "services-post-create",
@@ -278,6 +281,7 @@ export default {
       this.tabs.forEach(tab => (tab.active = false));
       const tabId = this.allowedTabs[index].id;
       this.tabs.find(tab => tab.id === tabId).active = true;
+      this.$webStorage.set("activeTabIndex", index);
     },
     onNext() {
       const currentTabIndex = this.allowedTabs.findIndex(
@@ -295,7 +299,35 @@ export default {
       const tab = this.allowedTabs.find(tab => tab.id === id);
 
       return tab === undefined ? false : tab.active;
+    },
+    storeFormChanges(newData) {
+      // Store the form data
+      this.$webStorage.set("serviceCreating", newData);
+    },
+    clearFormStore() {
+      // Clear the service store
+      this.$webStorage.remove("serviceCreating");
+      // Clear the tab index
+      this.$webStorage.remove("activeTabIndex");
     }
+  },
+  mounted() {
+    // Set storage to localStorage
+    this.$webStorage.setStorage("localStorage");
+    // Look for a serviceCreating key and use it to populate form if found
+    const service = this.$webStorage.get("serviceCreating");
+    if (service) {
+      this.form = new Form(service);
+    }
+    // Look for a stored tabIndex and use it to set the active tab if found
+    const tabIndex = this.$webStorage.get("activeTabIndex");
+    if (tabIndex) {
+      this.onTabChange({ index: tabIndex });
+    }
+    // Watch the form data for changes
+    this.$watch(() => {
+      return this.form.data();
+    }, this.storeFormChanges);
   }
 };
 </script>
