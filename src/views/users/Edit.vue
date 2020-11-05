@@ -18,6 +18,9 @@
               :last_name.sync="form.last_name"
               :email.sync="form.email"
               :phone.sync="form.phone"
+              :employer_name.sync="form.employer_name"
+              :location_id.sync="form.location_id"
+              :local_authority_id.sync="form.local_authority_id"
               :password.sync="form.password"
               :roles.sync="form.roles"
               @clear="form.$errors.clear($event)"
@@ -61,6 +64,11 @@ export default {
         last_name: this.user.last_name,
         email: this.user.email,
         phone: this.user.phone || "",
+        employer_name: this.user.employer_name || "",
+        location_id: this.user.address ? this.user.address.id : null,
+        local_authority_id: this.user.local_authority
+          ? this.user.local_authority.id
+          : null,
         password: "",
         roles: this.user.roles
       });
