@@ -16,7 +16,7 @@
               </gov-heading>
 
             </gov-grid-column>
-            <gov-grid-column v-if="auth.isServiceAdmin(service)" width="one-third" class="text-right">
+            <gov-grid-column v-if="auth.isServiceAdmin(service) || auth.isLocalAdmin" width="one-third" class="text-right">
 
               <gov-button :to="{ name: 'services-edit', params: { service: service.id } }">Edit {{ service.type }}</gov-button>
 
@@ -71,13 +71,7 @@ export default {
   computed: {
     allowedTabs() {
       if (this.service.is_national) {
-        const locationsTabIndex = this.tabs.findIndex(
-          tab => tab.heading === "Locations"
-        );
-        const tabs = this.tabs.slice();
-        tabs.splice(locationsTabIndex, 1);
-
-        return tabs;
+        return this.tabs.filter(tab => tab.heading !== "Locations");
       }
 
       return this.tabs;

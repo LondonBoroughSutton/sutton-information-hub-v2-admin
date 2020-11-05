@@ -19,6 +19,9 @@
             :last_name.sync="form.last_name"
             :email.sync="form.email"
             :phone.sync="form.phone"
+            :employer_name.sync="form.employer_name"
+            :location_id.sync="form.location_id"
+            :local_authority_id.sync="form.local_authority_id"
             :password.sync="form.password"
             :roles.sync="form.roles"
             @clear="form.$errors.clear($event)"
@@ -50,6 +53,9 @@ export default {
         last_name: "",
         email: "",
         phone: "",
+        employer_name: "",
+        location_id: null,
+        local_authority_id: null,
         password: "",
         roles: []
       })
@@ -66,6 +72,7 @@ export default {
             // Delete the organisation and service IDs instead of sending null values.
             case "Super Admin":
             case "Global Admin":
+            case "Local Admin":
               delete role.organisation_id;
               delete role.service_id;
               break;
