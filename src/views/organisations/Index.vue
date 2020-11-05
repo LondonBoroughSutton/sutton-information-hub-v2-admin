@@ -63,14 +63,14 @@
               </ck-table-filters>
             </gov-grid-column>
 
-            <gov-grid-column v-if="auth.isGlobalAdmin" width="one-third">
+            <gov-grid-column v-if="auth.isGlobalAdmin || auth.isLocalAdmin" width="one-third">
               <gov-button @click="onAddOrganisation" type="submit" success expand>Add organisation</gov-button>
               <gov-button v-if="auth.isSuperAdmin" :to="{name: 'organisations-import'}" type="submit" success expand>Bulk import</gov-button>
             </gov-grid-column>
           </gov-grid-row>
 
-          <div v-if="auth.isSuperAdmin" class="text-right">
-            <gov-button @click="onSelectAllInvites" type="button" class="govuk-!-margin-right-2" :disabled="inviting">
+          <div v-if="auth.isSuperAdmin || auth.isLocalAdmin" class="text-right">
+            <gov-button v-if="auth.isSuperAdmin" @click="onSelectAllInvites" type="button" class="govuk-!-margin-right-2" :disabled="inviting">
               Select/deselect all
             </gov-button>
 
@@ -78,6 +78,7 @@
               <template v-if="!inviting">Invite selected</template>
               <template v-else>Inviting selected...</template>
             </gov-button>
+            <gov-hint v-show="organisationInviteLimitReached">Invite limit reached</gov-hint>
           </div>
 
           <ck-resource-listing-table
@@ -107,7 +108,7 @@
               {{ organisation.email || '-' }}
             </template>
             <template
-              v-if="auth.isSuperAdmin"
+              v-if="auth.isSuperAdmin || auth.isLocalAdmin"
               slot="cell:4"
               slot-scope="{ resource: organisation }"
             >
@@ -117,7 +118,7 @@
                 :id="`organisation_invite_${organisation.id}`"
                 :name="`organisation_invite_${organisation.id}`"
                 label=""
-                :disabled="organisation.email === null || inviting"
+                :disabled="!canInviteOrganisation(organisation)"
               />
             </template>
           </ck-resource-listing-table>
@@ -198,7 +199,7 @@ export default {
     },
 
     columns() {
-      if (this.auth.isSuperAdmin) {
+      if (this.auth.isSuperAdmin || this.auth.isLocalAdmin) {
         return [
           { heading: "Organisation name", sort: "name" },
           { heading: "Web address URL" },
@@ -214,9 +215,20 @@ export default {
         { heading: "Phone number" },
         { heading: "Email" }
       ];
+    },
+    organisationInviteLimitReached() {
+      return this.organisationInvites.length === 1 && this.auth.isLocalAdmin
+        ? true
+        : false;
     }
   },
   methods: {
+    canInviteOrganisation(organisation) {
+      if (this.organisationInviteLimitReached) {
+        return this.organisationInviteSelected(organisation.id);
+      }
+      return organisation.email === null || this.inviting;
+    },
     onSearch() {
       this.$refs.organisationsTable.currentPage = 1;
       this.$refs.organisationsTable.fetchResources();

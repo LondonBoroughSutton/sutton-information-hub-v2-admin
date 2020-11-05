@@ -102,7 +102,7 @@
               v-if="isTabActive('taxonomies')"
               @clear="form.$errors.clear($event); errors = {}"
               :errors="form.$errors"
-              :is-global-admin="auth.isGlobalAdmin"
+              :is-global-admin="auth.isGlobalAdmin || auth.isLocalAdmin"
               :type="form.type"
               :category_taxonomies.sync="form.category_taxonomies"
             >
@@ -233,7 +233,7 @@ export default {
   },
   computed: {
     allowedTabs() {
-      if (!this.auth.isGlobalAdmin) {
+      if (!(this.auth.isGlobalAdmin || this.auth.isLocalAdmin)) {
         const taxonomiesTabIndex = this.tabs.findIndex(
           tab => tab.id === "taxonomies"
         );

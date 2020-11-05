@@ -203,6 +203,12 @@ export default {
         return "Global Admin";
       }
 
+      const isLocalAdmin =
+        roles.find(role => role.role === "Local Admin") !== undefined;
+      if (isLocalAdmin) {
+        return "Local Admin";
+      }
+
       const isOrganisationAdmin =
         roles.find(role => role.role === "Organisation Admin") !== undefined;
       if (isOrganisationAdmin) {
