@@ -153,13 +153,20 @@ export default {
       ],
       hasSocialMediasOptions: [
         { value: "", text: "All" },
-        { value: true, text: "Yes" },
-        { value: false, text: "No" }
+        { value: "any", text: "Any" },
+        { value: "none", text: "None" },
+        { value: "facebook", text: "Facebook" },
+        { value: "twitter", text: "Twitter" },
+        { value: "instagram", text: "Instagram" },
+        { value: "youtube", text: "YouTube" },
+        { value: "other", text: "Other" }
       ],
       hasPhoneOptions: [
         { value: "", text: "All" },
-        { value: true, text: "Yes" },
-        { value: false, text: "No" }
+        { value: "any", text: "Any" },
+        { value: "none", text: "None" },
+        { value: "landline", text: "Landline" },
+        { value: "mobile", text: "Mobile" }
       ],
       hasServicesOptions: [
         { value: "", text: "All" },
