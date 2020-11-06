@@ -7,7 +7,7 @@
         :id="`social_media.${index}.type`"
         label="Platform:"
         :options="socialMediaTypeOptions"
-        :error="errors.get(`social_media.${index}.type`)"
+        :error="errors.get(`social_medias_${index}_type`)"
       />
 
       <ck-text-input
@@ -17,7 +17,7 @@
         label="Link to your page:"
         hint="Copy the link from your browser, e.g. https://www.twitter.com/ConnectedKings or https://www.facebook.com/ConnectedKingston"
         type="url"
-        :error="errors.get(`social_medias.${index}.url`)"
+        :error="errors.get(`social_medias_${index}_url`)"
       />
 
       <gov-button @click="onDeleteSocialMedia(index)" error>Delete</gov-button>
@@ -59,7 +59,7 @@ export default {
         { text: "YouTube", value: "youtube" },
         { text: "Other", value: "other" }
       ],
-      socialMediasIndex: 1
+      socialMediasIndex: 0
     };
   },
   methods: {
