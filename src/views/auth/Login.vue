@@ -28,15 +28,15 @@
 </template>
 
 <script>
-import Auth from '@/classes/Auth';
+import Auth from "@/classes/Auth";
 
 export default {
-  name: 'Login',
+  name: "Login",
   data() {
     return {
       accessToken:
         Auth.parseQueryString(window.location.href).access_token || null,
-      expiresIn: Auth.parseQueryString(window.location.href).expires_in || null,
+      expiresIn: Auth.parseQueryString(window.location.href).expires_in || null
     };
   },
   computed: {
@@ -56,19 +56,19 @@ export default {
     },
     sessionTimeout() {
       return process.env.VUE_APP_SESSION_TIMEOUT;
-    },
+    }
   },
   methods: {
     async login() {
       await Auth.login(this.accessToken, this.expiresIn);
-      this.$root.$emit('login');
-      this.$router.push({ name: 'dashboard' });
-    },
+      this.$root.$emit("login");
+      this.$router.push({ name: "dashboard" });
+    }
   },
   created() {
     if (this.validateRequest) {
       this.login();
     }
-  },
+  }
 };
 </script>
