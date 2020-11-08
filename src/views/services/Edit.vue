@@ -36,6 +36,7 @@
                   @update:logo_file_id="form.logo_file_id = $event"
                   @update:logo="form.logo = $event"
                   :is_national.sync="form.is_national"
+                  :score.sync="form.score"
                   :status.sync="form.status"
                   :gallery_items.sync="form.gallery_items"
                   :id="service.id"
@@ -93,7 +94,7 @@
                   v-if="isTabActive('taxonomies')"
                   @clear="form.$errors.clear($event); errors = {}"
                   :errors="form.$errors"
-                  :is-global-admin="auth.isGlobalAdmin"
+                  :is-global-admin="auth.isGlobalAdmin || auth.isLocalAdmin"
                   :type="form.type"
                   :category_taxonomies.sync="form.category_taxonomies"
                 >
@@ -186,16 +187,36 @@ export default {
   },
   computed: {
     allowedTabs() {
-      if (!this.auth.isGlobalAdmin) {
-        const taxonomiesTabIndex = this.tabs.findIndex(
-          tab => tab.id === "taxonomies"
-        );
-        const tabs = this.tabs.slice();
-        tabs.splice(taxonomiesTabIndex, 1);
-
-        return tabs;
+      // Super or Global Admin see all tabs
+      if (this.auth.isGlobalAdmin) {
+        return this.tabs;
       }
-
+      // Service and Organisation admins see all tabs except taxonomies
+      if (
+        !this.auth.isLocalAdmin &&
+        (this.auth.hasRole("Service Admin", this.service) ||
+          this.auth.hasRole("Organisation Admin", null, {
+            id: this.service.organisation_id
+          }))
+      ) {
+        return this.tabs.filter(tab => tab.id !== "taxonomies");
+      }
+      // Local Admin see only Taxonomies
+      if (
+        this.auth.isLocalAdmin &&
+        !(
+          this.auth.hasRole("Service Admin", this.service) ||
+          this.auth.hasRole("Organisation Admin", null, {
+            id: this.service.organisation_id
+          })
+        )
+      ) {
+        return this.tabs.filter(tab => tab.id === "taxonomies").map(tab => {
+          tab.active = true;
+          return tab;
+        });
+      }
+      // Local Admin who are also Service admins can see all tabs
       return this.tabs;
     }
   },
@@ -212,6 +233,7 @@ export default {
         name: this.service.name,
         slug: this.service.slug,
         type: this.service.type,
+        score: this.service.score,
         status: this.service.status,
         is_national: this.service.is_national,
         intro: this.service.intro,
@@ -223,8 +245,8 @@ export default {
         testimonial: this.service.testimonial || "",
         video_embed: this.service.video_embed || "",
         url: this.service.url,
-        ios_app_url: this.service.ios_app_url,
-        android_app_url: this.service.android_app_url,
+        ios_app_url: this.service.ios_app_url || "",
+        android_app_url: this.service.android_app_url || "",
         contact_name: this.service.contact_name || "",
         contact_phone: this.service.contact_phone || "",
         contact_email: this.service.contact_email || "",
@@ -276,6 +298,9 @@ export default {
         }
         if (data.is_national === this.service.is_national) {
           delete data.is_national;
+        }
+        if (data.score === this.service.score) {
+          delete data.score;
         }
         if (data.status === this.service.status) {
           delete data.status;

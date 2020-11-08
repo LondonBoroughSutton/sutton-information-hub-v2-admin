@@ -46,6 +46,7 @@
               :android_app_url.sync="form.android_app_url"
               @update:logo_file_id="form.logo_file_id = $event"
               :is_national.sync="form.is_national"
+              :score.sync="form.score"
               :status.sync="form.status"
               :gallery_items.sync="form.gallery_items"
             >
@@ -102,7 +103,7 @@
               v-if="isTabActive('taxonomies')"
               @clear="form.$errors.clear($event); errors = {}"
               :errors="form.$errors"
-              :is-global-admin="auth.isGlobalAdmin"
+              :is-global-admin="auth.isGlobalAdmin || auth.isLocalAdmin"
               :type="form.type"
               :category_taxonomies.sync="form.category_taxonomies"
             >
@@ -175,6 +176,7 @@ export default {
         name: "",
         slug: "",
         type: "service",
+        score: 0,
         status: "inactive",
         is_national: true,
         intro: "",
@@ -233,7 +235,7 @@ export default {
   },
   computed: {
     allowedTabs() {
-      if (!this.auth.isGlobalAdmin) {
+      if (!(this.auth.isGlobalAdmin || this.auth.isLocalAdmin)) {
         const taxonomiesTabIndex = this.tabs.findIndex(
           tab => tab.id === "taxonomies"
         );

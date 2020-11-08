@@ -106,6 +106,7 @@ export default {
         { text: "Please select", value: null, disabled: true },
         { text: "Super admin", value: "Super Admin" },
         { text: "Global admin", value: "Global Admin" },
+        { text: "Local admin", value: "Local Admin" },
         { text: "Organisation admin", value: "Organisation Admin" },
         { text: "Service admin", value: "Service Admin" },
         { text: "Service worker", value: "Service Worker" }
@@ -133,20 +134,19 @@ export default {
             }
           }
 
-          // Reset the organisation adn service ID when no longer applies to role.
+          // Reset the organisation and service ID when no longer applies to role.
           switch (role.role) {
             case "Super Admin":
-            case "Global Admin": {
+            case "Global Admin":
+            case "Local Admin":
               role.organisation_id = null;
               role.service_id = null;
               this.$emit("input", newRoles);
               break;
-            }
-            case "Organisation Admin": {
+            case "Organisation Admin":
               role.service_id = null;
               this.$emit("input", newRoles);
               break;
-            }
           }
         });
       },

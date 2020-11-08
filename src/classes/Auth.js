@@ -229,6 +229,13 @@ class Auth {
   /**
    * @returns {boolean}
    */
+  get isLocalAdmin() {
+    return this.hasRole("Local Admin");
+  }
+
+  /**
+   * @returns {boolean}
+   */
   isOrganisationAdmin(organisation = null) {
     return (
       this.hasRole("Organisation Admin", null, organisation) ||

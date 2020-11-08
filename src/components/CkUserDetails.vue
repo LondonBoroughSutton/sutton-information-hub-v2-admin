@@ -17,12 +17,27 @@
         <gov-table-header top scope="row">Phone number</gov-table-header>
         <gov-table-cell>{{ user.phone }}</gov-table-cell>
       </gov-table-row>
+      <gov-table-row v-if="auth.isSuperAdmin">
+        <gov-table-header top scope="row">Name of Employer</gov-table-header>
+        <gov-table-cell>{{ user.employer_name }}</gov-table-cell>
+      </gov-table-row>
+      <gov-table-row v-if="auth.isSuperAdmin">
+        <gov-table-header scope="row">Address</gov-table-header>
+        <gov-table-cell v-if="user.address">{{addressString}}</gov-table-cell>
+        <gov-table-cell v-else>No address for this User</gov-table-cell>
+      </gov-table-row>
+      <gov-table-row v-if="auth.isSuperAdmin">
+        <gov-table-header scope="row">Local Authority</gov-table-header>
+        <gov-table-cell v-if="user.local_authority">{{localAuthorityName}}</gov-table-cell>
+        <gov-table-cell v-else>No Local Authority for this User</gov-table-cell>
+      </gov-table-row>
       <gov-table-row>
         <gov-table-header top scope="row">Permissions</gov-table-header>
         <gov-table-cell>
           <gov-list>
             <li>Super admin: {{ superAdmin ? 'Yes' : 'No' }}</li>
             <li>Global admin: {{ globalAdmin ? 'Yes' : 'No' }}</li>
+            <li>Local admin: {{ localAdmin ? 'Yes' : 'No' }}</li>
             <li>
               <template v-if="organisationAdmin.length === 0">Organisation admin: No</template>
               <gov-details v-else summary="Organisation admin: Yes" class="no-margin">
@@ -76,6 +91,7 @@ export default {
     return {
       superAdmin: false,
       globalAdmin: false,
+      localAdmin: false,
       organisationAdmin: [],
       serviceAdmin: [],
       serviceWorker: []
@@ -94,6 +110,8 @@ export default {
           this.superAdmin = true;
         } else if (role.role === "Global Admin") {
           this.globalAdmin = true;
+        } else if (role.role === "Local Admin") {
+          this.localAdmin = true;
         } else if (role.hasOwnProperty("organisation")) {
           this.organisationAdmin.push(role);
         } else if (
@@ -108,6 +126,41 @@ export default {
           this.serviceWorker.push(role);
         }
       });
+    }
+  },
+  computed: {
+    addressString() {
+      const address = [];
+      const fields = [
+        "address_line_1",
+        "address_line_2",
+        "address_line_3",
+        "city",
+        "county",
+        "postcode"
+      ];
+      if (this.user.address) {
+        for (const key in this.user.address) {
+          if (
+            this.user.address.hasOwnProperty(key) &&
+            this.user.address[key] &&
+            fields.includes(key)
+          ) {
+            address.push(this.user.address[key]);
+          }
+        }
+      }
+      return address.join(", ");
+    },
+    localAuthorityName() {
+      const nameParts = [];
+      if (this.user.local_authority) {
+        nameParts.push(this.user.local_authority.name);
+        if (this.user.local_authority.alt_name) {
+          nameParts.push(`(${this.user.local_authority.alt_name})`);
+        }
+      }
+      return nameParts.join(" ");
     }
   },
   created() {

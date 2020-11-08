@@ -94,7 +94,6 @@ export default {
         ]
       });
 
-      console.log();
       this.inviteUrl = {
         relative: `/organisation-admin-invites/${data[0].id}`,
         absolute: `${window.location.protocol}//${
