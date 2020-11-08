@@ -130,6 +130,17 @@
           :error="errors.get('is_national')"
         />
 
+        <ck-select-input
+          :value="score"
+          @input="$emit('update:score', $event); $emit('clear', 'score')"
+          id="score"
+          label="Quality Score"
+          :hint="`Rate the overall effectiveness and quality of the ${type} between 1 (poor) and 5 (excellent). This is not displayed but affects positioning within search results.`"
+          :options="scoreOptions"
+          :error="errors.get('score')"
+          v-if="auth.isSuperAdmin"
+        />
+
         <ck-radio-input
           :value="status"
           @input="$emit('update:status', $event); $emit('clear', 'status')"
@@ -193,15 +204,19 @@ export default {
       required: true
     },
     ios_app_url: {
-      required: false,
-      type: String
+      type: String,
+      default: ""
     },
     android_app_url: {
-      required: false,
-      type: String
+      type: String,
+      default: ""
     },
     is_national: {
       required: true
+    },
+    score: {
+      type: Number,
+      default: 0
     },
     status: {
       required: true
@@ -235,7 +250,15 @@ export default {
       iosAppStoreHelpUrl:
         "https://developer.apple.com/library/archive/qa/qa1633/_index.html",
       androidAppStoreHelpUrl:
-        "https://support.google.com/admob/answer/3086746?hl=en"
+        "https://support.google.com/admob/answer/3086746?hl=en",
+      scoreOptions: [
+        { text: "Unrated", value: 0 },
+        { text: "Poor", value: 1 },
+        { text: "Below Average", value: 2 },
+        { text: "Average", value: 3 },
+        { text: "Above Average", value: 4 },
+        { text: "Excellent", value: 5 }
+      ]
     };
   },
   computed: {
