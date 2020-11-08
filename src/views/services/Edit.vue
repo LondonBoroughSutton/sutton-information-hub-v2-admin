@@ -192,11 +192,25 @@ export default {
         return this.tabs;
       }
       // Service and Organisation admins see all tabs except taxonomies
-      if (!this.auth.isLocalAdmin && this.auth.isServiceAdmin(this.service)) {
+      if (
+        !this.auth.isLocalAdmin &&
+        (this.auth.hasRole("Service Admin", this.service) ||
+          this.auth.hasRole("Organisation Admin", null, {
+            id: this.service.organisation_id
+          }))
+      ) {
         return this.tabs.filter(tab => tab.id !== "taxonomies");
       }
       // Local Admin see only Taxonomies
-      if (this.auth.isLocalAdmin && !this.auth.isServiceAdmin(this.service)) {
+      if (
+        this.auth.isLocalAdmin &&
+        !(
+          this.auth.hasRole("Service Admin", this.service) ||
+          this.auth.hasRole("Organisation Admin", null, {
+            id: this.service.organisation_id
+          })
+        )
+      ) {
         return this.tabs.filter(tab => tab.id === "taxonomies").map(tab => {
           tab.active = true;
           return tab;
