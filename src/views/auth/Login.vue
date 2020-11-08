@@ -17,7 +17,7 @@
             <gov-button :href="loginUrl">Login</gov-button>
 
             <gov-body size="s">
-              For security reasons, you will be automatically logged out after 20 minutes.
+              For security reasons, you will be automatically logged out after {{ sessionTimeout }} minutes.
             </gov-body>
           </template>
 
@@ -53,6 +53,9 @@ export default {
       }
 
       return true;
+    },
+    sessionTimeout() {
+      return process.env.VUE_APP_SESSION_TIMEOUT;
     }
   },
   methods: {
