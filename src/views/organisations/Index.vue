@@ -227,7 +227,7 @@ export default {
       if (this.organisationInviteLimitReached) {
         return this.organisationInviteSelected(organisation.id);
       }
-      return organisation.email === null || this.inviting;
+      return organisation.email !== null && !this.inviting;
     },
     onSearch() {
       this.$refs.organisationsTable.currentPage = 1;
@@ -280,6 +280,8 @@ export default {
           };
         })
       });
+
+      this.$refs.organisationsTable.fetchResources();
 
       window.alert(
         "The organisations will have invitation emails sent out shortly."
