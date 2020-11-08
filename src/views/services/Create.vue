@@ -46,6 +46,7 @@
               :android_app_url.sync="form.android_app_url"
               @update:logo_file_id="form.logo_file_id = $event"
               :is_national.sync="form.is_national"
+              :score.sync="form.score"
               :status.sync="form.status"
               :gallery_items.sync="form.gallery_items"
             >
@@ -175,6 +176,7 @@ export default {
         name: "",
         slug: "",
         type: "service",
+        score: 0,
         status: "inactive",
         is_national: true,
         intro: "",
