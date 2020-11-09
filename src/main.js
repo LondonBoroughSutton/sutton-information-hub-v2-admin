@@ -53,6 +53,10 @@ if (process.env.VUE_APP_BUGSNAG_API_KEY) {
 import VueHeadful from "vue-headful";
 Vue.component("vue-headful", VueHeadful);
 
+// WebStorage Plugin
+import WebStorage from "@/plugins/WebStorage.js";
+Vue.use(WebStorage);
+
 // Custom Vue Components
 Vue.component("CkFileInput", () => import("@/components/Ck/CkFileInput"));
 Vue.component("CkRadioInput", () => import("@/components/Ck/CkRadioInput"));
