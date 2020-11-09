@@ -131,7 +131,7 @@
                 :id="`organisation_invite_${organisation.id}`"
                 :name="`organisation_invite_${organisation.id}`"
                 label=""
-                :disabled="!canInviteOrganisation(organisation)"
+                :disabled="!canInvite(organisation)"
               />
             </template>
           </ck-resource-listing-table>
@@ -251,12 +251,6 @@ export default {
     }
   },
   methods: {
-    canInviteOrganisation(organisation) {
-      if (this.organisationInviteLimitReached) {
-        return this.organisationInviteSelected(organisation.id);
-      }
-      return organisation.email !== null && !this.inviting;
-    },
     onSearch() {
       this.$refs.organisationsTable.currentPage = 1;
       this.$refs.organisationsTable.fetchResources();
@@ -319,10 +313,16 @@ export default {
       this.organisationInvites.splice(0, this.organisationInvites.length);
     },
     canInvite(organisation) {
-      return (
+      if (
+        !this.inviting &&
         organisation.email !== null &&
         organisation.admin_invite_status === "none"
-      );
+      ) {
+        return this.organisationInviteLimitReached
+          ? this.organisationInviteSelected(organisation.id)
+          : true;
+      }
+      return false;
     }
   },
   filters: {
