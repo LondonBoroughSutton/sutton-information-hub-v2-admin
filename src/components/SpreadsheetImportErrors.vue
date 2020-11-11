@@ -11,7 +11,7 @@
             >
               {{ field }}
             </gov-table-header>
-            <gov-table-header>
+            <gov-table-header v-if="duplicateRows.length">
               Duplicates
             </gov-table-header>
           </gov-table-row>
@@ -25,7 +25,7 @@
                 v-if="error.errors && error.errors[index]"
                 :for="`OrganisiationImportErrorField-${index}`">{{error.errors[index][0]}}</gov-error-message>
             </gov-table-cell>
-            <gov-table-cell>
+            <gov-table-cell v-if="duplicateRows.length">
               <gov-list v-if="error.originals">
               <li v-for="(original, index) in error.originals"
               :key="`OrganisiationImportDuplicate-${index}`">
@@ -62,11 +62,17 @@ export default {
     },
     invalidRows: {
       type: Array,
-      required: false
+      required: false,
+      default() {
+        return [];
+      }
     },
     duplicateRows: {
       type: Array,
-      required: false
+      required: false,
+      default() {
+        return [];
+      }
     }
   },
   computed: {

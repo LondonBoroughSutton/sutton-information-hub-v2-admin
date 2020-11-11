@@ -110,6 +110,12 @@ let router = new Router({
       meta: { auth: true }
     },
     {
+      path: "/users/import",
+      name: "users-import",
+      component: () => import("@/views/users/Import"),
+      meta: { auth: true }
+    },
+    {
       path: "/users/:user",
       name: "users-show",
       component: () => import("@/views/users/Show"),

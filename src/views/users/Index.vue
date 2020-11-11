@@ -58,6 +58,7 @@
             </gov-grid-column>
             <gov-grid-column v-if="auth.isServiceAdmin()" width="one-third">
               <gov-button @click="onAddUser" type="submit" success expand>Add user</gov-button>
+              <gov-button v-if="auth.isSuperAdmin" :to="{name: 'users-import'}" type="submit" success expand>Bulk import</gov-button>
             </gov-grid-column>
           </gov-grid-row>
 
