@@ -66,7 +66,7 @@
           :value="employment"
           :options="employmentOptions"
           :maxSelections="3"
-          @input:employment="$emit('update:employment', $event); $emit('clear', 'criteria.employment')"
+          @update:employment="$emit('update:employment', $event); $emit('clear', 'criteria.employment')"
           :error="errors.get('criteria.employment')"
           id="employment"
           label="Employment Status (if applicable)"
