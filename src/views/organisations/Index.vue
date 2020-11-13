@@ -59,6 +59,16 @@
                       :options="hasServicesOptions"
                     />
                   </gov-form-group>
+
+                  <gov-form-group v-if="auth.isSuperAdmin">
+                    <gov-label for="filter[has_admin_invite_status]">Has Admin invite status</gov-label>
+                    <gov-select
+                      v-model="filters.has_admin_invite_status"
+                      id="filter[has_admin_invite_status]"
+                      name="filter[has_admin_invite_status]"
+                      :options="hasAdminInviteStatusOptions"
+                    />
+                  </gov-form-group>
                 </template>
               </ck-table-filters>
             </gov-grid-column>
@@ -107,9 +117,12 @@
             <template slot="cell:3" slot-scope="{ resource: organisation }">
               {{ organisation.email || '-' }}
             </template>
+            <template v-if="auth.isSuperAdmin" slot="cell:4" slot-scope="{ resource: organisation }">
+              {{ organisation.admin_invite_status | ucFirst }}
+            </template>
             <template
               v-if="auth.isSuperAdmin || auth.isLocalAdmin"
-              slot="cell:4"
+              slot="cell:5"
               slot-scope="{ resource: organisation }"
             >
               <gov-checkbox
@@ -118,7 +131,7 @@
                 :id="`organisation_invite_${organisation.id}`"
                 :name="`organisation_invite_${organisation.id}`"
                 label=""
-                :disabled="!canInviteOrganisation(organisation)"
+                :disabled="!canInvite(organisation)"
               />
             </template>
           </ck-resource-listing-table>
@@ -143,7 +156,8 @@ export default {
         has_email: "",
         has_social_medias: "",
         has_phone: "",
-        has_services: ""
+        has_services: "",
+        has_admin_invite_status: ""
       },
       organisationInvites: [],
       inviting: false,
@@ -154,18 +168,32 @@ export default {
       ],
       hasSocialMediasOptions: [
         { value: "", text: "All" },
-        { value: true, text: "Yes" },
-        { value: false, text: "No" }
+        { value: "any", text: "Any" },
+        { value: "none", text: "None" },
+        { value: "facebook", text: "Facebook" },
+        { value: "twitter", text: "Twitter" },
+        { value: "instagram", text: "Instagram" },
+        { value: "youtube", text: "YouTube" },
+        { value: "other", text: "Other" }
       ],
       hasPhoneOptions: [
         { value: "", text: "All" },
-        { value: true, text: "Yes" },
-        { value: false, text: "No" }
+        { value: "any", text: "Any" },
+        { value: "none", text: "None" },
+        { value: "landline", text: "Landline" },
+        { value: "mobile", text: "Mobile" }
       ],
       hasServicesOptions: [
         { value: "", text: "All" },
         { value: true, text: "Yes" },
         { value: false, text: "No" }
+      ],
+      hasAdminInviteStatusOptions: [
+        { value: "", text: "All" },
+        { value: "none", text: "None" },
+        { value: "invited", text: "Invited" },
+        { value: "pending", text: "Pending" },
+        { value: "confirmed", text: "Confirmed" }
       ]
     };
   },
@@ -195,6 +223,12 @@ export default {
         params["filter[has_services]"] = this.filters.has_services;
       }
 
+      if (this.filters.has_admin_invite_status !== "") {
+        params[
+          "filter[has_admin_invite_status]"
+        ] = this.filters.has_admin_invite_status;
+      }
+
       return params;
     },
 
@@ -205,6 +239,7 @@ export default {
           { heading: "Web address URL" },
           { heading: "Phone number" },
           { heading: "Email" },
+          { heading: "Admin Status" },
           { heading: "Invite" }
         ];
       }
@@ -223,12 +258,6 @@ export default {
     }
   },
   methods: {
-    canInviteOrganisation(organisation) {
-      if (this.organisationInviteLimitReached) {
-        return this.organisationInviteSelected(organisation.id);
-      }
-      return organisation.email === null || this.inviting;
-    },
     onSearch() {
       this.$refs.organisationsTable.currentPage = 1;
       this.$refs.organisationsTable.fetchResources();
@@ -253,9 +282,7 @@ export default {
     onSelectAllInvites() {
       if (
         this.organisationInvites.length ===
-        this.$refs.organisationsTable.resources.filter(
-          organisation => organisation.email !== null
-        ).length
+        this.$refs.organisationsTable.resources.filter(this.canInvite).length
       ) {
         this.organisationInvites.splice(0, this.organisationInvites.length);
         return;
@@ -264,7 +291,7 @@ export default {
       this.organisationInvites.splice(0, this.organisationInvites.length);
 
       this.$refs.organisationsTable.resources
-        .filter(organisation => organisation.email !== null)
+        .filter(this.canInvite)
         .forEach(organisation =>
           this.organisationInvites.push(organisation.id)
         );
@@ -281,6 +308,8 @@ export default {
         })
       });
 
+      this.$refs.organisationsTable.fetchResources();
+
       window.alert(
         "The organisations will have invitation emails sent out shortly."
       );
@@ -289,6 +318,25 @@ export default {
     },
     onFetch() {
       this.organisationInvites.splice(0, this.organisationInvites.length);
+    },
+    canInvite(organisation) {
+      if (
+        !this.inviting &&
+        organisation.email !== null &&
+        organisation.admin_invite_status === "none"
+      ) {
+        return this.organisationInviteLimitReached
+          ? this.organisationInviteSelected(organisation.id)
+          : true;
+      }
+      return false;
+    }
+  },
+  filters: {
+    ucFirst: function(s) {
+      return typeof s === "string"
+        ? s.charAt(0).toUpperCase() + s.slice(1)
+        : "";
     }
   }
 };
