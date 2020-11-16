@@ -534,7 +534,27 @@ router.beforeEach((to, from, next) => {
     }
   }
 
-  next();
+  // Local Admin Restrictions
+  const localAdminViews = [
+    "login",
+    "logout",
+    "dashboard",
+    "service",
+    "services",
+    "organisations"
+  ];
+  if (
+    Auth.isLocalAdmin &&
+    !localAdminViews.filter(localAdminView => {
+      return to.name.startsWith(localAdminView);
+    }).length
+  ) {
+    // Prevent access
+    next(false);
+  } else {
+    // Allow access
+    next();
+  }
 });
 
 export default router;
