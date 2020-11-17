@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <vue-headful :title="appName" :head="headAttributes" :html="htmlAttributes" />
+    <vue-headful :title="title" :head="headAttributes" :html="htmlAttributes" />
 
     <gov-skip-link href="#main-content">Skip to main content</gov-skip-link>
 
-    <gov-header :service-name="appName" :navigation="headerNav" />
+    <gov-header :service-name="title" :navigation="headerNav" />
 
     <div class="govuk-width-container">
       <main class="govuk-main-wrapper" :class="mainClasses" id="main-content" role="main">
@@ -17,85 +17,82 @@
 </template>
 
 <script>
-import _ from "lodash";
-import Auth from "@/classes/Auth";
+import _ from 'lodash';
+import Auth from '@/classes/Auth';
 
 export default {
-  name: "App",
+  name: 'App',
   data() {
     return {
-      themeColor: "#0b0c0c",
-      bodyClasses: ["js-enabled"],
+      themeColor: '#0b0c0c',
+      bodyClasses: ['js-enabled'],
       mainClasses: [],
-      headerNav: []
+      headerNav: [],
     };
   },
   computed: {
     headAttributes() {
       return {
-        "meta[name=theme-color]": { content: this.themeColor }
+        'meta[name=theme-color]': { content: this.themeColor },
       };
     },
     htmlAttributes() {
       return {
         body: {
-          class: [document.body.className, ...this.bodyClasses].join(" ")
-        }
+          class: [document.body.className, ...this.bodyClasses].join(' '),
+        },
       };
+    },
+    title() {
+      return Auth.isLoggedIn ? this.appName : `Welcome to ${this.appName}`;
     },
     loggedInItems() {
       return [
-        { text: "Services", to: { name: "services-index" } },
-        { text: "Locations", to: { name: "locations-index" } },
-        { text: "Referrals", to: { name: "referrals-index" } },
-        { text: "Organisations", to: { name: "organisations-index" } },
+        { text: 'Services', to: { name: 'services-index' } },
+        { text: 'Locations', to: { name: 'locations-index' } },
+        { text: 'Referrals', to: { name: 'referrals-index' } },
+        { text: 'Organisations', to: { name: 'organisations-index' } },
         {
-          text: "Users",
-          to: { name: "users-index" }
+          text: 'Users',
+          to: { name: 'users-index' },
         },
         {
-          text: "Reports",
-          to: { name: "reports-index" },
-          hide: !Auth.isGlobalAdmin
+          text: 'Reports',
+          to: { name: 'reports-index' },
+          hide: !Auth.isGlobalAdmin,
         },
         {
-          text: "Admin",
-          to: { name: "admin-index" },
-          hide: !Auth.isGlobalAdmin
-        }
+          text: 'Admin',
+          to: { name: 'admin-index' },
+          hide: !Auth.isGlobalAdmin,
+        },
       ];
     },
-    loggedOutItems() {
-      return [
-        { text: "Register", to: { name: "register-index" } },
-        { text: "Login", href: Auth.authorizeUrl }
-      ];
-    }
   },
   methods: {
     setHeaderItems() {
-      this.headerNav = Auth.isLoggedIn
-        ? this.loggedInItems
-        : this.loggedOutItems;
+      if (Auth.isLoggedIn) {
+        this.headerNav = this.loggedInItems;
+      }
     },
     bindActivityTracking() {
-      document.addEventListener("mousemove", this.trackActivity);
-      document.addEventListener("touchmove", this.trackActivity);
-      document.addEventListener("keypress", this.trackActivity);
-      document.addEventListener("scroll", this.trackActivity);
+      document.addEventListener('mousemove', this.trackActivity);
+      document.addEventListener('touchmove', this.trackActivity);
+      document.addEventListener('keypress', this.trackActivity);
+      document.addEventListener('scroll', this.trackActivity);
     },
     trackActivity: _.throttle(() => {
       if (Auth.isLoggedIn && !Auth.inactive()) {
         Auth.invokeActivity();
       }
-    }, 1000)
+    }, 1000),
   },
 
   created() {
     this.setHeaderItems();
     this.bindActivityTracking();
-    this.$root.$on("login", this.setHeaderItems);
-    this.$root.$on("logout", this.setHeaderItems);
-  }
+    this.$root.$on('login', this.setHeaderItems);
+    this.$root.$on('logout', this.setHeaderItems);
+  },
 };
 </script>
