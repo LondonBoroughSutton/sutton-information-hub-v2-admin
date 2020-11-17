@@ -8,12 +8,11 @@
       <gov-grid-row>
         <gov-grid-column width="two-thirds">
           <gov-heading size="l">
-            Create an account
+            Step 1: Create an account
           </gov-heading>
 
           <gov-body>
-            First, create an account to login to the {{appName}}
-            administration portal
+            Before you can add your org’s details you need to create an account.
           </gov-body>
 
           <ck-text-input
@@ -59,11 +58,18 @@
             label="Password"
             type="password"
             :error="errors.get('user.password')"
-          />
+          >
+          <template slot="after-input">
+            <gov-body>Please ensure your password contains the following:</gov-body>
+            <gov-list :bullet="true">
+              <li v-for="(item, index) in passwordPolicies" :key="`password-criteria-${index}`">{{ item }}</li>
+            </gov-list>
+          </template>
+          </ck-text-input>
 
           <gov-body>
             User account details are held in line with our
-            <gov-link href="https://www.connectedtogether.org.uk/privacy-policy" target="_blank">privacy policy</gov-link>.
+            <gov-link :href="privacyPolicyUrl" target="_blank">privacy policy</gov-link>.
           </gov-body>
 
           <gov-button start :to="{ name: 'register-index-organisation' }">
@@ -86,6 +92,24 @@ export default {
     errors: {
       type: Object,
       required: true
+    }
+  },
+
+  data() {
+    return {
+      passwordPolicies: [
+        "A minimum of 8 characters long.",
+        "Uppercase letters.",
+        "Lowercase letters.",
+        "Numbers.",
+        "Special characters or non-alphanumeric characters, such as - ! ” £ $ % & * @."
+      ]
+    };
+  },
+
+  computed: {
+    privacyPolicyUrl() {
+      return `${process.env.VUE_APP_FRONTEND_URI}/privacy-policy`;
     }
   },
 
