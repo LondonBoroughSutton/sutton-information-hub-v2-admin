@@ -33,7 +33,7 @@
                     </template>
 
                     <span class="govuk-footer__licence-description">
-                        For any feedback or technical queries, please email <gov-link href="mailto:info@connectedtogether.org.uk">info@connectedtogether.org.uk</gov-link>
+                        For any feedback or technical queries, please email <gov-link href="mailto:hlp.admin.connect@nhs.net">hlp.admin.connect@nhs.net</gov-link>
                     </span>
                 </div>
                 <div class="govuk-footer__meta-item">
@@ -45,28 +45,28 @@
 
 <script>
 export default {
-  name: "GovFooter",
+  name: 'GovFooter',
   props: {
     containerClasses: {
       type: Array,
       required: false,
       default() {
         return [];
-      }
+      },
     },
     navigation: {
       type: Array,
-      required: false
+      required: false,
     },
     meta: {
       type: Object,
-      required: false
-    }
+      required: false,
+    },
   },
   methods: {
     listClasses(item) {
       return item.items ? `govuk-footer__list--columns-${item.columns}` : null;
-    }
-  }
+    },
+  },
 };
 </script>

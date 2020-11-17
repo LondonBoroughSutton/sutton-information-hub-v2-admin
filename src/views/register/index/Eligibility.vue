@@ -80,40 +80,40 @@ export default {
   props: {
     form: {
       type: Object,
-      required: true
+      required: true,
     },
 
     errors: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
 
   methods: {
     onInput(organisationType) {
       if (this.form.organisation_types.includes(organisationType)) {
         this.$emit(
-          "input",
+          'input',
           Object.assign(this.form, {
             organisation_types: this.form.organisation_types.filter(
-              type => type !== organisationType
-            )
+              (type) => type !== organisationType
+            ),
           })
         );
       } else {
         this.$emit(
-          "input",
+          'input',
           Object.assign(this.form, {
             organisation_types: [
               ...this.form.organisation_types,
-              organisationType
-            ]
+              organisationType,
+            ],
           })
         );
       }
 
-      this.$emit("clear", "organisation_types");
-    }
-  }
+      this.$emit('clear', 'organisation_types');
+    },
+  },
 };
 </script>
