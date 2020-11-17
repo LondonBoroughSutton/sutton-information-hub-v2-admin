@@ -1,8 +1,6 @@
 <template>
   <div>
-    <gov-back-link :to="{ name: 'dashboard' }">
-      Back to dashboard
-    </gov-back-link>
+    <a :href="homepageUrl" class="govuk-back-link">Back to homepage and search</a>
 
     <gov-main-wrapper>
       <gov-grid-row>
@@ -89,6 +87,11 @@ export default {
     },
   },
 
+  computed: {
+    homepageUrl() {
+      return process.env.VUE_APP_FRONTEND_URI;
+    },
+  },
   methods: {
     onInput(organisationType) {
       if (this.form.organisation_types.includes(organisationType)) {
