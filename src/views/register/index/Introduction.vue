@@ -10,7 +10,9 @@
           </gov-heading>
 
           <gov-list type="ordered">
-            <li v-for="(step, index) in steps" :key="`step-${index}`">{{ step }}</li>
+            <li>Step 1: add your name, email address and a password to create an account</li>
+            <li>Step 2: add your organisation’s details</li>
+            <li>Step 3: add your first support listing</li>
           </gov-list>
 
           <gov-body>
@@ -39,23 +41,15 @@
 </template>
 
 <script>
-import GovBody from "../../../components/Gov/GovBody.vue";
+import GovBody from '../../../components/Gov/GovBody.vue';
 export default {
   components: { GovBody },
-  data() {
-    return {
-      steps: [
-        "Step 1: add your name, email address and a password to create an account",
-        "Step 2: add your organisation’s details",
-        "Step 3: add your first support listing"
-      ]
-    };
-  },
+
   computed: {
     homepageUrl() {
       return process.env.VUE_APP_FRONTEND_URI;
-    }
-  }
+    },
+  },
 };
 </script>
 
