@@ -450,7 +450,7 @@ let router = new Router({
         {
           path: "",
           name: "register-index",
-          component: () => import("@/views/register/index/Eligibility"),
+          component: () => import("@/views/register/index/Introduction"),
           meta: { auth: false }
         },
         {
