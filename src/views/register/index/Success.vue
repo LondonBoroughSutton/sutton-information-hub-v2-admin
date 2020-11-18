@@ -14,7 +14,7 @@
 
           <gov-body>
             For further information, please contact:
-            <gov-link href="mailto:info@connectedtogether.org.uk">info@connectedtogether.org.uk</gov-link>
+            <gov-link :href="'mailto:' + +this.contactEmail">{{ this.contactEmail }}</gov-link>
           </gov-body>
 
           <gov-button :to="{ name: 'dashboard' }" start>Home</gov-button>

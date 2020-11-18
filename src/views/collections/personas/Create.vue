@@ -19,6 +19,7 @@
           </gov-body>
 
           <collection-form
+            type="Persona"
             :errors="form.$errors"
             :name.sync="form.name"
             :subtitle.sync="form.subtitle"
@@ -46,7 +47,7 @@
 </template>
 
 <script>
-import CollectionForm from "@/views/collections/personas/forms/CollectionForm";
+import CollectionForm from "@/views/collections/forms/CollectionForm";
 import Form from "@/classes/Form";
 
 export default {
