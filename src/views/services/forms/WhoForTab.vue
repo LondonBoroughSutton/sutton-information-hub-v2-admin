@@ -4,8 +4,7 @@
     <gov-grid-row>
       <gov-grid-column width="one-half">
         <gov-body>
-          Use this section to help indicate who should be using your {{ type }}.
-          If any of these criteria do not apply, please leave them blank.
+          Only select options that are essential for describing the target audience (clicking more options will reduce your search prominence).
         </gov-body>
         <gov-section-break size="l" />
 
@@ -17,7 +16,7 @@
           @update:age_group="$emit('update:age_group', $event); $emit('clear', 'criteria.age_group')"
           :error="errors.get('criteria.age_group')"
           id="age_group"
-          label="Target age group (if applicable)"
+          label="Target age group (required)"
           hint="Select up to 3"
         />
         <!-- /Age group -->
