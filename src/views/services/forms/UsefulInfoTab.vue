@@ -4,7 +4,7 @@
     <gov-grid-row>
       <gov-grid-column width="one-half">
 
-        <gov-body>What do people want to know about your {{ type }}.</gov-body>
+        <gov-body>What do people want to know about your {{ type }}? You can add in content for the following options:</gov-body>
 
         <useful-infos-input
           :useful-infos="useful_infos"

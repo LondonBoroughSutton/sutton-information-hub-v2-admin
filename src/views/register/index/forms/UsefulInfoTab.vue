@@ -5,7 +5,7 @@
       <gov-grid-column width="one-half">
 
         <gov-body>
-          What do people want to know about your {{ service.type }}.
+          What do people want to know about your {{ service.type }}? You can add in content for the following options:
         </gov-body>
 
         <useful-infos-input
