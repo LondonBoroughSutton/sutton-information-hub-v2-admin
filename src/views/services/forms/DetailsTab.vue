@@ -263,7 +263,7 @@ export default {
   },
   computed: {
     logoHelpHref() {
-      const to = "info@connectedtogether.org.uk";
+      const to = this.contactEmail;
       const subject = "Help uploading service logo";
 
       return `mailto:${to}?subject=${encodeURIComponent(subject)}`;
