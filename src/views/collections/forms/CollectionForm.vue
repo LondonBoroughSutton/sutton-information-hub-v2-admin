@@ -11,34 +11,33 @@
     />
 
     <ck-textarea-input
+      v-if="subtitle"
+      :value="subtitle"
+      @input="$emit('update:subtitle', $event); $emit('clear', 'subtitle')"
+      id="subtitle"
+      label="Subtitle"
+      :hint="`A one line summary of the ${type}.`"
+      :maxlength="150"
+      :error="errors.get('subtitle')"
+    />
+
+    <ck-textarea-input
       :value="intro"
       @input="$emit('update:intro', $event); $emit('clear', 'intro')"
       id="intro"
-      label="Description of category"
-      hint="A short summary detailing what type of services the category contains."
+      :label="`Description of ${type}`"
+      :hint="`A short summary detailing what type of services the ${type} contains.`"
       :maxlength="150"
       :error="errors.get('intro')"
     />
 
-    <ck-select-input
-      :value="icon"
-      @input="onInput('icon', $event)"
-      id="icon"
-      label="Icon"
-      :error="errors.get('icon')"
-      has-icons
-    >
-      <gov-hint slot="hint" for="icon">
-        If you're having trouble viewing the icons, refer to the <gov-link href="https://fontawesome.com/icons" target="_blank">Font Awesome website</gov-link> (the font library used).
-      </gov-hint>
-      <option
-        v-for="(option, key) in icons"
-        :key="key"
-        :value="option.value"
-        :disabled="option.disabled"
-        v-html="option.text"
-      />
-    </ck-select-input>
+    <ck-image-input
+      @input="onInput('image_file_id', $event.file_id)"
+      id="image"
+      :label="`${type} image`"
+      accept="image/x-png"
+      :existing-url="id ? apiUrl(`/collections/${lowerPluralType}/${id}/image.png?v=${now}`) : undefined"
+    />
 
     <gov-heading size="m">Sideboxes</gov-heading>
 
@@ -67,13 +66,17 @@
 </template>
 
 <script>
-import icons from "@/storage/icons";
+import CkImageInput from "@/components/Ck/CkImageInput";
 import CategoryTaxonomyInput from "@/views/services/inputs/CategoryTaxonomyInput";
 import CkSideboxesInput from "@/views/collections/inputs/SideboxesInput";
 
 export default {
   name: "CollectionForm",
-  components: { CategoryTaxonomyInput, CkSideboxesInput },
+  components: {
+    CkImageInput,
+    CategoryTaxonomyInput,
+    CkSideboxesInput
+  },
   props: {
     errors: {
       required: true,
@@ -85,8 +88,9 @@ export default {
     intro: {
       required: true
     },
-    icon: {
-      required: true
+    subtitle: {
+      required: false,
+      default: null
     },
     order: {
       required: true
@@ -96,15 +100,30 @@ export default {
     },
     category_taxonomies: {
       required: true
+    },
+    type: {
+      type: String,
+      validator: function(value) {
+        return ["Persona", "Category"].indexOf(value) !== -1;
+      }
+    },
+    id: {
+      required: false,
+      type: String
     }
   },
-  data() {
-    return {
-      icons: [
-        { text: "Please select...", value: null, disabled: true },
-        ...icons
-      ]
-    };
+  computed: {
+    lowerType() {
+      return this.type.toLowerCase();
+    },
+    lowerPluralType() {
+      switch (this.lowerType) {
+        case "persona":
+          return "personas";
+        case "category":
+          return "categories";
+      }
+    }
   },
   methods: {
     onInput(field, value) {
