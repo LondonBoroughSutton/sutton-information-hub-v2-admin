@@ -21,13 +21,16 @@
             </gov-body>
 
             <collection-form
+              type="Category"
               :errors="form.$errors"
+              :id="collection.id"
               :name.sync="form.name"
               :intro.sync="form.intro"
               :icon.sync="form.icon"
               :order.sync="form.order"
               :sideboxes.sync="form.sideboxes"
               :category_taxonomies.sync="form.category_taxonomies"
+              @update:image_file_id="form.image_file_id = $event"
               @clear="form.$errors.clear($event)"
             />
 
@@ -52,7 +55,7 @@
 <script>
 import http from "@/http";
 import Form from "@/classes/Form";
-import CollectionForm from "@/views/collections/categories/forms/CollectionForm";
+import CollectionForm from "@/views/collections/forms/CollectionForm";
 
 export default {
   name: "EditCollectionCategory",
@@ -75,18 +78,31 @@ export default {
       this.form = new Form({
         name: this.collection.name,
         intro: this.collection.intro,
-        icon: this.collection.icon,
         order: this.collection.order,
         sideboxes: this.collection.sideboxes,
         category_taxonomies: this.collection.category_taxonomies.map(
           taxonomy => taxonomy.id
-        )
+        ),
+        image_file_id: null
       });
 
       this.loading = false;
     },
     async onSubmit() {
-      await this.form.put(`/collections/categories/${this.collection.id}`);
+      await this.form.put(
+        `/collections/categories/${this.collection.id}`,
+        (config, data) => {
+          // Unset the image field if not provided.
+          if (data.image_file_id === null) {
+            delete data.image_file_id;
+          }
+
+          // Set the image to null if explicitly removed.
+          if (data.image_file_id === false) {
+            data.image_file_id = null;
+          }
+        }
+      );
       this.$router.push({ name: "admin-index-collections" });
     },
     onDelete() {
