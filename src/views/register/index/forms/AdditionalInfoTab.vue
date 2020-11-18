@@ -259,7 +259,7 @@ export default {
     },
 
     videoEmbedHelpHref() {
-      const to = "info@connectedtogether.org.uk";
+      const to = this.contactEmail;
       const subject = `Make a video for my ${this.service.type}`;
       const body = `My ${
         this.service.type

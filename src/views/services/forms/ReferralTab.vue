@@ -12,10 +12,6 @@
           If you are interested in turning on referrals for your organisation, please
           <gov-link :href="contactAdminTeamEmail">contact the admin team</gov-link>.
         </gov-body>
-        <gov-body>
-          Further information on referrals can be found on the
-          <gov-link href="https://kva.org.uk/kingston-s-vcs/connected-kingston/how-to-add-your-organisation/">KVA website</gov-link>.
-        </gov-body>
 
         <gov-section-break size="l" />
 
@@ -152,7 +148,7 @@ export default {
       return this.referral_method !== null && this.referral_method !== "none";
     },
     contactAdminTeamEmail() {
-      const to = "info@connectedtogether.org.uk";
+      const to = this.contactEmail;
       const subject = `Turn referrals on for my ${this.type}`;
       const body = `${this.$options.filters.ucfirst(
         this.type
