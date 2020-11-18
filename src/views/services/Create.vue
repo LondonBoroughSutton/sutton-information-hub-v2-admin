@@ -199,14 +199,11 @@ export default {
         referral_email: "",
         referral_url: "",
         criteria: {
-          age_group: "",
-          disability: "",
-          employment: "",
-          gender: "",
-          housing: "",
-          income: "",
-          language: "",
-          other: ""
+          age_group: [],
+          disability: [],
+          employment: [],
+          gender: [],
+          benefits: []
         },
         useful_infos: [
           {
