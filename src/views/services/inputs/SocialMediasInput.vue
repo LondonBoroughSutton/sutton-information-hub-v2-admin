@@ -7,7 +7,7 @@
         :id="`social_media.${index}.type`"
         label="Platform:"
         :options="socialMediaTypeOptions"
-        :error="errors.get(`social_media.${index}.type`)"
+        :error="errors.get(`social_medias.${index}.type`)"
       />
 
       <ck-text-input
@@ -59,7 +59,7 @@ export default {
         { text: "YouTube", value: "youtube" },
         { text: "Other", value: "other" }
       ],
-      socialMediasIndex: 1
+      socialMediasIndex: 0
     };
   },
   methods: {
