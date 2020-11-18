@@ -43,7 +43,7 @@
           :value="service.is_free"
           @input="$emit('input', { field: 'is_free', value: $event })"
           id="is_free"
-          :label="`Is the ${service.type} free?`"
+          :label="`Is the ${service.type} free? (required)`"
           :options="isFreeOptions"
           :error="errors.get('service.is_free')"
         >
@@ -92,15 +92,12 @@
           label="Quote from a satisfied user, client, beneficiary or customer"
           :maxlength="150"
           :error="errors.get('service.testimonial')"
+          :placeholder="`This ${type} changed my life!`"
         >
           <template slot="hint">
               <gov-hint for="testimonial">
                 Please enter a quote from a service user highlighting a positive
                 outcome to help promote your good work. For example:
-              </gov-hint>
-
-              <gov-hint for="testimonial">
-                This {{ service.type }} changed my life!
               </gov-hint>
           </template>
         </ck-textarea-input>
@@ -109,7 +106,7 @@
           :value="service.video_embed"
           @input="$emit('input', { field: 'video_embed', value: $event })"
           id="video_embed"
-          :label="`${$options.filters.ucfirst(service.type)} video`"
+          label="Promotional video"
           type="url"
           :error="errors.get('service.video_embed')"
         >
@@ -124,11 +121,6 @@
               Youtube and Vimeo links are accepted.
             </gov-hint>
 
-            <gov-hint for="video_embed">
-              <gov-link :href="videoEmbedHelpHref">
-                Need help editing or creating a {{ service.type }} video?
-              </gov-link>
-            </gov-hint>
           </template>
         </ck-text-input>
       </gov-grid-column>
@@ -136,12 +128,13 @@
 
     <gov-section-break size="m" visible/>
 
-    <gov-heading size="l">Contact details</gov-heading>
+    <gov-heading size="l">Public Contact details</gov-heading>
     <gov-grid-row>
       <gov-grid-column width="one-half">
         <gov-body>
-          Please provide your {{ service.type }}’s public-facing contact details
-          if available.
+          Please provide an email or phone number so the public can contact you. These
+          will be displayed on your {{ type }}’s page on the {{appName}}
+          website.
         </gov-body>
 
         <gov-section-break size="l" />
@@ -160,7 +153,7 @@
           :value="service.contact_phone"
           @input="$emit('input', { field: 'contact_phone', value: $event })"
           id="contact_phone"
-          label="Contact phone number"
+          label="Contact phone number (optional)"
           type="tel"
           :error="errors.get('service.contact_phone')"
         >
@@ -182,7 +175,7 @@
           :value="service.contact_email"
           @input="$emit('input', { field: 'contact_email', value: $event })"
           id="contact_email"
-          :label="`Public ${service.type} email address`"
+          :label="`Public ${service.type} email address (optional)`"
           :hint="`Please provide the contact email address for the ${service.type}.`"
           type="email"
           :error="errors.get('service.contact_email')"
@@ -190,7 +183,7 @@
 
         <gov-section-break size="l" />
 
-        <gov-heading size="m">Social media links</gov-heading>
+        <gov-heading size="m">Social media links (optional)</gov-heading>
 
         <gov-body>
           If you have any social media accounts for your {{ service.type }},
