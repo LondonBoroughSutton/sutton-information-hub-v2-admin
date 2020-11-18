@@ -9,6 +9,7 @@
     :name="name"
     :type="type"
     :aria-describedby="ariaDescribedBy"
+    :placeholder="placeholder"
   >
 </template>
 
@@ -36,6 +37,11 @@ export default {
     width: {
       type: Number,
       required: false
+    },
+    placeholder: {
+      type: String,
+      required: false,
+      default: ""
     }
   },
   computed: {
