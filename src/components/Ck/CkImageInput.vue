@@ -39,7 +39,7 @@
 
     <gov-error-message
       v-if="form.$errors.any()"
-      v-text="form.$errors.any(['is_private', 'mime_type', 'file'])"
+      v-text="form.$errors.get(['is_private', 'mime_type', 'file'])"
       :for="id"
     />
 
@@ -129,8 +129,10 @@ export default {
         data: { id }
       } = await this.form.post("/files");
 
-      // Emit the file ID.
-      this.$emit("input", { file_id: id, image: this.form.file });
+      if (!this.form.$errors.any()) {
+        // Emit the file ID.
+        this.$emit("input", { file_id: id, image: this.form.file });
+      }
     },
 
     onRemove() {
@@ -139,6 +141,7 @@ export default {
         this.$refs.file.$el.value = "";
         this.form.mime_type = null;
         this.form.file = null;
+        this.form.$errors.clear();
         this.$emit("input", { file_id: null, image: null });
         return;
       }

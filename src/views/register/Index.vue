@@ -69,14 +69,11 @@ export default {
             contact_phone: "",
             contact_email: "",
             criteria: {
-              age_group: "",
-              disability: "",
-              employment: "",
-              gender: "",
-              housing: "",
-              income: "",
-              language: "",
-              other: ""
+              age_group: [],
+              disability: [],
+              employment: [],
+              gender: [],
+              benefits: []
             },
             useful_infos: [],
             offerings: [],
