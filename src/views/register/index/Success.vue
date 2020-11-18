@@ -20,6 +20,11 @@
             <li>And don’t forget to log into your account, add new support listings and keep the information you are presenting to the world uptodate and accurate.</li>
           </gov-list>
 
+          <gov-body>
+            For further information, please contact:
+            <gov-link :href="'mailto:' + +this.contactEmail">{{ this.contactEmail }}</gov-link>
+          </gov-body>
+
           <gov-button :to="{ name: 'dashboard' }" start>Home</gov-button>
         </gov-grid-column>
       </gov-grid-row>
