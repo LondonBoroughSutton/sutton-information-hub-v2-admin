@@ -8,7 +8,7 @@
         <gov-grid-column width="one-half">
           <gov-heading size="xl">Locations</gov-heading>
           <gov-heading size="m">Add location</gov-heading>
-          <gov-body>The locations will appear on the service pages which will inform people of where to find your service/organisation</gov-body>
+          <gov-body>The locations will appear on the support listing pages which will inform people of where to find your support listing/organisation</gov-body>
 
           <location-form
             :errors="form.$errors"

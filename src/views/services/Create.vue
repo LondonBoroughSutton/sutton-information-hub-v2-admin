@@ -2,11 +2,11 @@
   <gov-width-container>
     <vue-headful :title="`${appName} - Add Service`" />
 
-    <gov-back-link :to="{ name: 'services-index' }">Back to services</gov-back-link>
+    <gov-back-link :to="{ name: 'services-index' }">Back to support listings</gov-back-link>
     <gov-main-wrapper>
       <gov-grid-row>
         <gov-grid-column width="full">
-          <gov-heading size="xl">Services</gov-heading>
+          <gov-heading size="xl">Support listings</gov-heading>
 
           <template v-if="!auth.isGlobalAdmin">
             <gov-body class="govuk-!-font-weight-bold">
@@ -18,11 +18,11 @@
               <li>The {{ form.type }} won't be made active until an admin has reviewed it.</li>
               <li>If there are any issues upon review, an admin will get directly in touch with you.</li>
               <li>You can return to edit this {{ form.type }} at any time.</li>
-              <li>If you would like your service to accept referrals through {{appName}}, please contact the team at <gov-link href="mailto:info@connectedtogether.org.uk">info@connectedtogether.org.uk</gov-link></li>
+              <li>If you would like your support listing to accept referrals through {{appName}}, please contact the team at <gov-link href="mailto:info@connectedtogether.org.uk">info@connectedtogether.org.uk</gov-link></li>
             </gov-list>
           </template>
 
-          <gov-heading size="m">Add service</gov-heading>
+          <gov-heading size="m">Add support listing</gov-heading>
 
           <gov-error-summary v-if="form.$errors.any()" title="Check for errors">
             <gov-list>
@@ -268,7 +268,7 @@ export default {
 
       if (data.data.is_national) {
         this.clearFormStore();
-        // Cannot add locations so go direct to Service view
+        // Cannot add locations so go direct to Support listing view
         this.$router.push({ path: `/services/${serviceId}` });
       } else {
         this.clearFormStore();
@@ -307,7 +307,7 @@ export default {
       this.$webStorage.set("serviceCreating", newData);
     },
     clearFormStore() {
-      // Clear the service store
+      // Clear the support listing store
       this.$webStorage.remove("serviceCreating");
       // Clear the tab index
       this.$webStorage.remove("activeTabIndex");

@@ -45,7 +45,7 @@ export default {
     },
     loggedInItems() {
       return [
-        { text: "Services", to: { name: "services-index" } },
+        { text: "Support Listings", to: { name: "services-index" } },
         { text: "Locations", to: { name: "locations-index" } },
         { text: "Referrals", to: { name: "referrals-index" } },
         { text: "Organisations", to: { name: "organisations-index" } },

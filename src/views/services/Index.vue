@@ -1,6 +1,6 @@
 <template>
   <gov-width-container>
-    <vue-headful :title="`${appName} - List Services`" />
+    <vue-headful :title="`${appName} - List Support listings`" />
 
     <gov-back-link :to="{ name: 'dashboard' }">Back to dashboard</gov-back-link>
 
@@ -8,13 +8,13 @@
       <gov-grid-row>
         <gov-grid-column width="full">
 
-          <gov-heading size="xl">Services</gov-heading>
+          <gov-heading size="xl">Support listings</gov-heading>
 
           <gov-grid-row>
             <gov-grid-column width="two-thirds">
               <ck-table-filters @search="onSearch">
                 <gov-form-group>
-                  <gov-label for="filter[name]">Service name</gov-label>
+                  <gov-label for="filter[name]">Support listing name</gov-label>
                   <gov-input v-model="filters.name" id="filter[name]" name="filter[name]" type="search"/>
                 </gov-form-group>
 
@@ -54,7 +54,7 @@
               </ck-table-filters>
             </gov-grid-column>
             <gov-grid-column v-if="auth.isOrganisationAdmin() || auth.isLocalAdmin" width="one-third">
-              <gov-button @click="onAddService" type="submit" success expand>Add service</gov-button>
+              <gov-button @click="onAddService" type="submit" success expand>Add support listing</gov-button>
               <gov-button :to="{name: 'services-import'}" type="submit" success expand>Bulk import</gov-button>
             </gov-grid-column>
           </gov-grid-row>

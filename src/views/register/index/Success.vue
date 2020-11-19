@@ -4,7 +4,7 @@
       <gov-grid-row>
         <gov-grid-column width="two-thirds">
           <gov-heading size="l">
-            Thank you for adding your service to {{appName}}
+            Thank you for adding your support listing to {{appName}}
           </gov-heading>
 
           <gov-body>

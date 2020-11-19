@@ -3,13 +3,13 @@
     <vue-headful :title="`${appName} - Add Service`" />
 
     <gov-back-link :to="{ name: 'services-index' }">
-      Back to services
+      Back to support listings
     </gov-back-link>
 
     <gov-main-wrapper>
       <gov-grid-row>
         <gov-grid-column width="one-half">
-          <gov-heading size="xl">Add a new Service Page</gov-heading>
+          <gov-heading size="xl">Add a new Support listing Page</gov-heading>
 
           <gov-body>
             You’re about to add a service/club/activity/group/helpline/information/app/advice
@@ -19,11 +19,11 @@
           <gov-list bullet>
             <li>
               You will be asked to provide information a customer would want to
-              know about your service - make sure you have it to hand
+              know about your support listing - make sure you have it to hand
             </li>
             <li>
-              You can add as many services as you want - so please split your
-              services into multiple pages as appropriate
+              You can add as many support listings as you want - so please split your
+              support listings into multiple pages as appropriate
             </li>
             <li>
               When you are finished your page will be sent to the admin team for
@@ -37,7 +37,7 @@
           </gov-warning-text>
 
           <gov-button :to="{name: 'services-index'}">
-            Back to services
+            Back to support listings
           </gov-button><!--
           -->&nbsp;<!--
           --><gov-button :to="{ name: 'services-create' }">

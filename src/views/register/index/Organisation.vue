@@ -8,12 +8,12 @@
       <gov-grid-row>
         <gov-grid-column width="two-thirds">
           <gov-heading size="l">
-            What organisation runs this service?
+            What organisation runs this support listing?
           </gov-heading>
 
           <gov-body>
             If you are a smaller group or activity that isn't directly run by an
-            organisation, you can enter details about your service/group below.
+            organisation, you can enter details about your support listing/group below.
           </gov-body>
 
           <ck-text-input

@@ -5,7 +5,7 @@
         <gov-heading size="l">Taxonomy: Organisations</gov-heading>
 
         <gov-body>
-          This page shows the list of organisations a user can select from when referring a client to another service.
+          This page shows the list of organisations a user can select from when referring a client to another support listing.
           Essentially, these are the organisations a champion can refer 'from'.
         </gov-body>
 

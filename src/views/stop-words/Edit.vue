@@ -17,7 +17,7 @@
 
                 <gov-heading size="m">Edit Stop Words</gov-heading>
 
-                <gov-body>Update the stop words used when searching for services.</gov-body>
+                <gov-body>Update the stop words used when searching for support listings.</gov-body>
 
                 <stop-words-form
                   :errors="form.$errors"

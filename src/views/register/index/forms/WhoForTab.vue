@@ -22,7 +22,7 @@
           "
           :error="errors.get('service.criteria.age_group')"
           id="criteria.age_group"
-          label="Age of service user (if applicable)"
+          label="Age of support listing user (if applicable)"
           :hint="`E.g “This ${service.type} is for people 16+” or “This ${service.type} is aimed at people nearing retirement”`"
         />
         <!-- /Age group -->

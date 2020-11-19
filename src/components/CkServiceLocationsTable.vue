@@ -20,7 +20,7 @@
         </gov-table-cell>
       </gov-table-row>
       <gov-table-row v-if="serviceLocations.length === 0">
-        <gov-table-cell center colspan="5">No locations for this service</gov-table-cell>
+        <gov-table-cell center colspan="5">No locations for this support listing</gov-table-cell>
       </gov-table-row>
     </template>
   </gov-table>

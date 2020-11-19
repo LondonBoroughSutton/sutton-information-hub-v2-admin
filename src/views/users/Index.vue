@@ -49,7 +49,7 @@
                   </gov-form-group>
 
                   <gov-form-group>
-                    <gov-label for="filter[at_service]">Service</gov-label>
+                    <gov-label for="filter[at_service]">Support listing</gov-label>
                     <ck-loader v-if="loadingServices" />
                     <gov-select v-else v-model="filters.at_service" id="filter[at_service]" name="filter[at_service]" :options="services"/>
                   </gov-form-group>

@@ -50,8 +50,8 @@
               </gov-details>
             </li>
             <li>
-              <template v-if="serviceAdmin.length === 0">Service admin: No</template>
-              <gov-details v-else summary="Service admin: Yes" class="no-margin">
+              <template v-if="serviceAdmin.length === 0">Support listing admin: No</template>
+              <gov-details v-else summary="Support Listing admin: Yes" class="no-margin">
                 <div v-for="(role, key) in serviceAdmin" :key="key">
                   <gov-link
                     :to="{ name: 'services-show', params: { service: role.service_id } }"
@@ -61,8 +61,8 @@
               </gov-details>
             </li>
             <li>
-              <template v-if="serviceWorker.length === 0">Service worker: No</template>
-              <gov-details v-else summary="Service worker: Yes" class="no-margin">
+              <template v-if="serviceWorker.length === 0">Support listing worker: No</template>
+              <gov-details v-else summary="Support Listing worker: Yes" class="no-margin">
                 <div v-for="(role, key) in serviceWorker" :key="key">
                   <gov-link
                     :to="{ name: 'services-show', params: { service: role.service_id } }"

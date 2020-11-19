@@ -17,7 +17,7 @@
 
                 <gov-heading size="m">Edit Thesaurus</gov-heading>
 
-                <gov-body>Update the synonyms used when searching for services.</gov-body>
+                <gov-body>Update the synonyms used when searching for support listings.</gov-body>
                 <gov-body>
                   As all rows in a CSV must contain the same number of columns, the system will
                   strip out any blank cells. See the example below for reference:

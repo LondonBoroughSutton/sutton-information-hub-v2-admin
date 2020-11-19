@@ -51,7 +51,7 @@
                   </gov-form-group>
 
                   <gov-form-group>
-                    <gov-label for="filter[has_services]">Has services</gov-label>
+                    <gov-label for="filter[has_services]">Has Support listings</gov-label>
                     <gov-select
                       v-model="filters.has_services"
                       id="filter[has_services]"

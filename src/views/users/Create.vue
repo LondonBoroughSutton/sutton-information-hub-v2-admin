@@ -11,7 +11,7 @@
 
           <gov-heading size="m">Add user</gov-heading>
 
-          <gov-body>Create users to be able to acces the back-end of the {{appName}} service (deciding their permissions in what they have access to)</gov-body>
+          <gov-body>Create users to be able to acces the back-end of the {{appName}} support listing (deciding their permissions in what they have access to)</gov-body>
 
           <user-form
             :errors="form.$errors"

@@ -10,7 +10,7 @@
           <gov-grid-column width="one-half">
             <gov-heading size="xl">Users</gov-heading>
             <gov-heading size="m">Edit user</gov-heading>
-            <gov-body>Edit users who can acces the back-end of the {{appName}} service (deciding their permissions in what they have access to)</gov-body>
+            <gov-body>Edit users who can acces the back-end of the {{appName}} support listing (deciding their permissions in what they have access to)</gov-body>
 
             <user-form
               :errors="form.$errors"

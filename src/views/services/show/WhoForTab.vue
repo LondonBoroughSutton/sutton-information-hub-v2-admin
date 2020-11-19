@@ -4,7 +4,7 @@
     <gov-table>
       <template slot="body">
         <gov-table-row>
-          <gov-table-header scope="row" top>Age of service user</gov-table-header>
+          <gov-table-header scope="row" top>Age of support listing user</gov-table-header>
           <gov-table-cell>{{ service.criteria.age_group || "No specific requirement" }}</gov-table-cell>
         </gov-table-row>
         <gov-table-row>

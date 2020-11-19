@@ -26,7 +26,7 @@
       @input="$emit('update:intro', $event); $emit('clear', 'intro')"
       id="intro"
       :label="`Description of ${type}`"
-      :hint="`A short summary detailing what type of services the ${type} contains.`"
+      :hint="`A short summary detailing what type of support listings the ${type} contains.`"
       :maxlength="150"
       :error="errors.get('intro')"
     />

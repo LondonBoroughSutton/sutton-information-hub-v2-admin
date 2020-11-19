@@ -5,7 +5,7 @@
       <gov-grid-column width="one-half">
 
         <gov-body>
-          General details about the service (we use service in the broadest
+          General details about the support listing (we use support listing in the broadest
           sense, this could be counselling, a website, or an app).
         </gov-body>
 

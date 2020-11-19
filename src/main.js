@@ -214,6 +214,7 @@ Vue.mixin({
     },
     plural(string) {
       const plurals = {
+        listing: "listings",
         service: "services",
         activity: "activities",
         club: "clubs",

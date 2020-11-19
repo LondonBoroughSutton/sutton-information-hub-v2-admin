@@ -56,7 +56,7 @@ export default {
         case "referrals":
           return "Referral";
         case "services":
-          return "Service";
+          return "Support Listing";
         case null:
           return "-";
         default:

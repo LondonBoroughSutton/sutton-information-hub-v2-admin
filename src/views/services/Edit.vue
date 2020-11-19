@@ -2,7 +2,7 @@
   <gov-width-container>
     <ck-loader v-if="loading" />
     <template v-else>
-      <vue-headful :title="`${appName} - Edit Service: ${service.name}`" />
+      <vue-headful :title="`${appName} - Edit Support listing: ${service.name}`" />
 
       <!-- Edit form -->
       <div>
@@ -10,7 +10,7 @@
         <gov-main-wrapper>
           <gov-grid-row>
             <gov-grid-column width="full">
-              <gov-heading size="xl">Services</gov-heading>
+              <gov-heading size="xl">Support listings</gov-heading>
 
               <gov-heading size="m">Edit {{ form.type }}</gov-heading>
 

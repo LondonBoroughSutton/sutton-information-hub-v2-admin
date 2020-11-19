@@ -15,7 +15,7 @@
           @input="$emit('update:age_group', $event); $emit('clear', 'criteria.age_group')"
           :error="errors.get('criteria.age_group')"
           id="criteria.age_group"
-          label="Age of service user (if applicable)"
+          label="Age of support listing user (if applicable)"
           :hint="`E.g “This ${type} is for people 16+” or “This ${type} is aimed at people nearing retirement”`"
         />
         <!-- /Age group -->

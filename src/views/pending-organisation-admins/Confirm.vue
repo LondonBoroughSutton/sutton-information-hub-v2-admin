@@ -22,16 +22,16 @@
 
           <gov-body>
             We recommend a quick check of your organisation's details and then
-            going straight on to adding once service. Maybe start with the
-            service that's easiest to describe or that you know best.
+            going straight on to adding once support listing. Maybe start with the
+            support listing that's easiest to describe or that you know best.
           </gov-body>
 
           <gov-heading size="l">
-            Add a service
+            Add a support listing
           </gov-heading>
 
           <gov-body>
-            Once you've added one service, your listing will be live and can be
+            Once you've added one support listing, your listing will be live and can be
             viewed by GPs and other professionals who might want to make
             referrals, plus people who access NHS Connect through a wide range
             of different websites and social media channels.
