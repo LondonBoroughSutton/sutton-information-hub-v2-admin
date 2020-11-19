@@ -8,6 +8,7 @@
     :name="name"
     :rows="rows"
     :aria-describedby="ariaDescribedBy"
+    :placeholder="placeholder"
   ></textarea>
 </template>
 
@@ -31,6 +32,11 @@ export default {
       type: Number,
       required: false,
       default: 5
+    },
+    placeholder: {
+      type: String,
+      required: false,
+      default: ""
     }
   },
   computed: {

@@ -7,7 +7,7 @@
         :id="`social_media.${index}.type`"
         label="Platform:"
         :options="socialMediaTypeOptions"
-        :error="errors.get(`social_media.${index}.type`)"
+        :error="errors.get(`social_medias.${index}.type`)"
       />
 
       <ck-text-input
@@ -15,7 +15,7 @@
         @input="onUrlInput({ index, value: $event })"
         :id="`social_medias.${index}.url`"
         label="Link to your page:"
-        hint="Copy the link from your browser, e.g. https://www.twitter.com/ConnectedKings or https://www.facebook.com/ConnectedKingston"
+        hint="Copy the link from your browser, e.g. https://www.twitter.com/example or https://www.facebook.com/example"
         type="url"
         :error="errors.get(`social_medias.${index}.url`)"
       />
@@ -59,7 +59,7 @@ export default {
         { text: "YouTube", value: "youtube" },
         { text: "Other", value: "other" }
       ],
-      socialMediasIndex: 1
+      socialMediasIndex: 0
     };
   },
   methods: {
