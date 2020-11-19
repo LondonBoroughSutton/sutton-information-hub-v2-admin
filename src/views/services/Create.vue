@@ -135,6 +135,7 @@
               :referral_email.sync="form.referral_email"
               :referral_url.sync="form.referral_url"
             >
+            <gov-button @click="onNext" start>Next</gov-button>
             </referral-tab>
             <save-and-submit-tab
               v-if="isTabActive('save-submit')"

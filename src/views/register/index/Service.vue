@@ -58,14 +58,16 @@
               :errors="errors"
               @input="onInput($event.field, $event.value)"
             >
-
+              <gov-button @click="onNext" start>
+                Next
+              </gov-button>
             </description-tab>
             <save-and-submit-tab
               v-if="isTabActive('save-submit')"
               :submitting="form.$submitting"
               :errors="errors"
               @submit="$emit('submit')"
-             />>
+             />
           </gov-tabs>
         </gov-grid-column>
       </gov-grid-row>
