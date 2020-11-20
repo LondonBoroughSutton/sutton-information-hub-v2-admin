@@ -68,7 +68,7 @@
             :error="errors.get('organisation.email')"
           />
 
-          <gov-button start :to="{ name: 'register-index-service' }">
+          <gov-button start :to="{ name: 'register-index-service-intro' }">
             Next
           </gov-button>
         </gov-grid-column>
