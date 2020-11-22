@@ -1,6 +1,6 @@
 <template>
   <div>
-    <gov-back-link :to="{ name: 'register-index-user' }">
+    <gov-back-link :to="{ name: 'register-index-organisation-intro' }">
       Back
     </gov-back-link>
 

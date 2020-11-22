@@ -76,7 +76,7 @@
             <gov-link :href="privacyPolicyUrl" target="_blank">privacy policy</gov-link>.
           </gov-body>
 
-          <gov-button start :to="{ name: 'register-index-organisation' }">
+          <gov-button start :to="{ name: 'register-index-organisation-intro' }">
             Next
           </gov-button>
         </gov-grid-column>

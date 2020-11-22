@@ -460,6 +460,12 @@ let router = new Router({
           meta: { auth: false }
         },
         {
+          path: "organisation-intro",
+          name: "register-index-organisation-intro",
+          component: () => import("@/views/register/index/OrganisationIntro"),
+          meta: { auth: false }
+        },
+        {
           path: "organisation",
           name: "register-index-organisation",
           component: () => import("@/views/register/index/Organisation"),
