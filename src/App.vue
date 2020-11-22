@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <vue-headful :title="appName" :head="headAttributes" :html="htmlAttributes" />
+    <vue-headful :title="title" :head="headAttributes" :html="htmlAttributes" />
 
     <gov-skip-link href="#main-content">Skip to main content</gov-skip-link>
 
-    <gov-header :service-name="appName" :navigation="headerNav" />
+    <gov-header :service-name="title" :navigation="headerNav" />
 
     <div class="govuk-width-container">
       <main class="govuk-main-wrapper" :class="mainClasses" id="main-content" role="main">
@@ -43,40 +43,42 @@ export default {
         }
       };
     },
-    loggedInItems() {
-      return [
-        { text: "Services", to: { name: "services-index" } },
-        { text: "Locations", to: { name: "locations-index" } },
-        { text: "Referrals", to: { name: "referrals-index" } },
-        { text: "Organisations", to: { name: "organisations-index" } },
-        {
-          text: "Users",
-          to: { name: "users-index" }
-        },
-        {
-          text: "Reports",
-          to: { name: "reports-index" },
-          hide: !Auth.isGlobalAdmin
-        },
-        {
-          text: "Admin",
-          to: { name: "admin-index" },
-          hide: !Auth.isGlobalAdmin
-        }
-      ];
+    title() {
+      return Auth.isLoggedIn ? this.appName : `Welcome to ${this.appName}`;
     },
-    loggedOutItems() {
-      return [
-        { text: "Register", to: { name: "register-index" } },
-        { text: "Login", href: Auth.authorizeUrl }
-      ];
+    loggedInItems() {
+      return Auth.isLocalAdmin
+        ? [
+            { text: "Support offers", to: { name: "services-index" } },
+            { text: "Organisations", to: { name: "organisations-index" } }
+          ]
+        : [
+            { text: "Services", to: { name: "services-index" } },
+            { text: "Locations", to: { name: "locations-index" } },
+            { text: "Referrals", to: { name: "referrals-index" } },
+            { text: "Organisations", to: { name: "organisations-index" } },
+            {
+              text: "Users",
+              to: { name: "users-index" }
+            },
+            {
+              text: "Reports",
+              to: { name: "reports-index" },
+              hide: !Auth.isGlobalAdmin
+            },
+            {
+              text: "Admin",
+              to: { name: "admin-index" },
+              hide: !Auth.isGlobalAdmin
+            }
+          ];
     }
   },
   methods: {
     setHeaderItems() {
-      this.headerNav = Auth.isLoggedIn
-        ? this.loggedInItems
-        : this.loggedOutItems;
+      if (Auth.isLoggedIn) {
+        this.headerNav = this.loggedInItems;
+      }
     },
     bindActivityTracking() {
       document.addEventListener("mousemove", this.trackActivity);

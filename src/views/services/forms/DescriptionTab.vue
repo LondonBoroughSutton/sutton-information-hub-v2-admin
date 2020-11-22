@@ -1,6 +1,6 @@
 <template>
   <div>
-    <gov-heading size="l">What does your {{ type }} offer</gov-heading>
+    <gov-heading size="l">Short and longer description of your support offer</gov-heading>
     <gov-grid-row>
       <gov-grid-column width="one-half">
 
@@ -21,29 +21,12 @@
           :error="errors.get('intro')"
         />
 
-          <gov-heading size="m">What you offer</gov-heading>
-
-        <gov-body>
-          Include a bullet list of some of the things you do as a {{ type }}.
-        </gov-body>
-
-        <gov-body>
-          For example: (Weekly Meetups, Peer Support, Group Therapy)
-        </gov-body>
-
-        <ck-offerings-input
-          :offerings="offerings"
-          @input="$emit('update:offerings', $event)"
-          @clear="$emit('clear', $event)"
-          :errors="errors"
-        />
-
         <ck-wysiwyg-input
           :value="description"
           @input="$emit('update:description', $event); $emit('clear', 'description')"
           id="description"
           label="Long description"
-          :hint="`This is the largest body of text on your page. Fill it with everything else someone should know about your ${type}. Use headers, bullets and formatting for the maximum effect.`"
+          hint="This is the information that people will see when they have clicked on your summary page and want to know more. A good description will make sure that the right people come your way."
           :error="errors.get('description')"
           large
           :maxlength="1600"

@@ -17,6 +17,7 @@
           :name="id"
           :rows="rows"
           :maxlength="maxlength"
+          :placeholder="placeholder"
         />
         <ck-character-count
           v-if="maxlength"
@@ -71,6 +72,11 @@ export default {
     maxlength: {
       required: false,
       type: Number
+    },
+    placeholder: {
+      type: String,
+      required: false,
+      default: ""
     }
   }
 };
