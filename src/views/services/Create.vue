@@ -135,11 +135,14 @@
               :referral_email.sync="form.referral_email"
               :referral_url.sync="form.referral_url"
             >
-              <gov-button v-if="form.$submitting" disabled type="submit">Creating...</gov-button>
-              <gov-button v-else @click="onSubmit" type="submit">Create</gov-button>
-              <ck-submit-error v-if="form.$errors.any()" />
+            <gov-button @click="onNext" start>Next</gov-button>
             </referral-tab>
-
+            <save-and-submit-tab
+              v-if="isTabActive('save-submit')"
+              :submitting="form.$submitting"
+              :errors="form.$errors"
+              @submit="onSubmit"
+             />
           </gov-tabs>
         </gov-grid-column>
       </gov-grid-row>
@@ -156,6 +159,7 @@ import UsefulInfoTab from "@/views/services/forms/UsefulInfoTab";
 import WhoForTab from "@/views/services/forms/WhoForTab";
 import ReferralTab from "@/views/services/forms/ReferralTab";
 import TaxonomiesTab from "@/views/services/forms/TaxonomiesTab";
+import SaveAndSubmitTab from "@/views/register/index/forms/SaveAndSubmitTab";
 
 export default {
   name: "CreateService",
@@ -166,7 +170,8 @@ export default {
     UsefulInfoTab,
     WhoForTab,
     ReferralTab,
-    TaxonomiesTab
+    TaxonomiesTab,
+    SaveAndSubmitTab
   },
   data() {
     return {
@@ -226,7 +231,8 @@ export default {
         { id: "who-for", heading: "Who is it for?", active: false },
         { id: "taxonomies", heading: "Taxonomies", active: false },
         { id: "description", heading: "Description", active: false },
-        { id: "referral", heading: "Referral", active: false }
+        { id: "referral", heading: "Referral", active: false },
+        { id: "save-submit", heading: "Save and Submit", active: false }
       ]
     };
   },

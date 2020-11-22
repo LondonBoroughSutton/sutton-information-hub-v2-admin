@@ -58,21 +58,16 @@
               :errors="errors"
               @input="onInput($event.field, $event.value)"
             >
-              <gov-button v-if="form.$submitting" disabled type="submit">
-                Submitting...
+              <gov-button @click="onNext" start>
+                Next
               </gov-button>
-
-              <gov-button v-else @click="$emit('submit')" type="submit">
-                Submit
-              </gov-button>
-
-              <ck-submit-error v-if="errors.any()">
-                <strong>Check for errors</strong>
-                <br><br>
-                Errors may be on earlier sections of the form. You can navigate
-                to these by clicking ‘Back’
-              </ck-submit-error>
             </description-tab>
+            <save-and-submit-tab
+              v-if="isTabActive('save-submit')"
+              :submitting="form.$submitting"
+              :errors="errors"
+              @submit="$emit('submit')"
+             />
           </gov-tabs>
         </gov-grid-column>
       </gov-grid-row>
@@ -86,6 +81,7 @@ import DescriptionTab from "@/views/register/index/forms/DescriptionTab";
 import AdditionalInfoTab from "@/views/register/index/forms/AdditionalInfoTab";
 import UsefulInfoTab from "@/views/register/index/forms/UsefulInfoTab";
 import WhoForTab from "@/views/register/index/forms/WhoForTab";
+import SaveAndSubmitTab from "@/views/register/index/forms/SaveAndSubmitTab";
 
 export default {
   components: {
@@ -93,7 +89,8 @@ export default {
     DescriptionTab,
     AdditionalInfoTab,
     UsefulInfoTab,
-    WhoForTab
+    WhoForTab,
+    SaveAndSubmitTab
   },
 
   props: {
@@ -115,7 +112,8 @@ export default {
         { id: "additional-info", heading: "Additional info", active: false },
         { id: "useful-info", heading: "Good to know", active: false },
         { id: "who-for", heading: "Who is it for?", active: false },
-        { id: "description", heading: "Description", active: false }
+        { id: "description", heading: "Description", active: false },
+        { id: "save-submit", heading: "Save and Submit", active: false }
       ]
     };
   },
