@@ -450,7 +450,7 @@ let router = new Router({
         {
           path: "",
           name: "register-index",
-          component: () => import("@/views/register/index/Eligibility"),
+          component: () => import("@/views/register/index/Introduction"),
           meta: { auth: false }
         },
         {
@@ -469,6 +469,12 @@ let router = new Router({
           path: "organisation",
           name: "register-index-organisation",
           component: () => import("@/views/register/index/Organisation"),
+          meta: { auth: false }
+        },
+        {
+          path: "service-intro",
+          name: "register-index-service-intro",
+          component: () => import("@/views/register/index/ServiceIntro"),
           meta: { auth: false }
         },
         {
@@ -540,7 +546,27 @@ router.beforeEach((to, from, next) => {
     }
   }
 
-  next();
+  // Local Admin Restrictions
+  const localAdminViews = [
+    "login",
+    "logout",
+    "dashboard",
+    "service",
+    "services",
+    "organisations"
+  ];
+  if (
+    Auth.isLocalAdmin &&
+    !localAdminViews.filter(localAdminView => {
+      return to.name.startsWith(localAdminView);
+    }).length
+  ) {
+    // Prevent access
+    next(false);
+  } else {
+    // Allow access
+    next();
+  }
 });
 
 export default router;

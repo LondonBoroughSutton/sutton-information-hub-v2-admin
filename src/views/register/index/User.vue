@@ -62,7 +62,11 @@
           <template slot="after-input">
             <gov-body>Please ensure your password contains the following:</gov-body>
             <gov-list :bullet="true">
-              <li v-for="(item, index) in passwordPolicies" :key="`password-criteria-${index}`">{{ item }}</li>
+              <li>A minimum of 8 characters long.</li>
+              <li>Uppercase letters.</li>
+              <li>Lowercase letters.</li>
+              <li>Numbers.</li>
+              <li>Special characters or non-alphanumeric characters, such as - ! ” £ $ % & * @.</li>
             </gov-list>
           </template>
           </ck-text-input>
@@ -86,46 +90,34 @@ export default {
   props: {
     form: {
       type: Object,
-      required: true
+      required: true,
     },
 
     errors: {
       type: Object,
-      required: true
-    }
-  },
-
-  data() {
-    return {
-      passwordPolicies: [
-        "A minimum of 8 characters long.",
-        "Uppercase letters.",
-        "Lowercase letters.",
-        "Numbers.",
-        "Special characters or non-alphanumeric characters, such as - ! ” £ $ % & * @."
-      ]
-    };
+      required: true,
+    },
   },
 
   computed: {
     privacyPolicyUrl() {
       return `${process.env.VUE_APP_FRONTEND_URI}/privacy-policy`;
-    }
+    },
   },
 
   methods: {
     onInput(field, value) {
       this.$emit(
-        "input",
+        'input',
         Object.assign(this.form, {
           user: {
             ...this.form.user,
-            [field]: value
-          }
+            [field]: value,
+          },
         })
       );
-      this.$emit("clear", `user.${field}`);
-    }
-  }
+      this.$emit('clear', `user.${field}`);
+    },
+  },
 };
 </script>

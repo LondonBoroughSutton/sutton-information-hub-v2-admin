@@ -18,7 +18,7 @@
               <li>The {{ form.type }} won't be made active until an admin has reviewed it.</li>
               <li>If there are any issues upon review, an admin will get directly in touch with you.</li>
               <li>You can return to edit this {{ form.type }} at any time.</li>
-              <li>If you would like your service to accept referrals through {{appName}}, please contact the team at <gov-link href="mailto:info@connectedtogether.org.uk">info@connectedtogether.org.uk</gov-link></li>
+              <li>If you would like your service to accept referrals through {{appName}}, please contact the team at <gov-link :href="'mailto:' + this.contactEmail">{{ this.contactEmail }}</gov-link></li>
             </gov-list>
           </template>
 
@@ -199,14 +199,11 @@ export default {
         referral_email: "",
         referral_url: "",
         criteria: {
-          age_group: "",
-          disability: "",
-          employment: "",
-          gender: "",
-          housing: "",
-          income: "",
-          language: "",
-          other: ""
+          age_group: [],
+          disability: [],
+          employment: [],
+          gender: [],
+          benefits: []
         },
         useful_infos: [
           {
