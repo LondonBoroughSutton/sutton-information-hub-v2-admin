@@ -36,7 +36,7 @@
           :value="is_free"
           @input="$emit('update:is_free', $event); $emit('clear', 'is_free')"
           id="is_free"
-          :label="`Is the ${type} free?`"
+          :label="`Is the ${type} free? (required)`"
           :options="isFreeOptions"
           :error="errors.get('is_free')"
         >
@@ -84,14 +84,12 @@
           label="Quote from a satisfied user, client, beneficiary or customer"
           :maxlength="150"
           :error="errors.get('testimonial')"
+          :placeholder="`This ${type} changed my life!`"
         >
           <template slot="hint">
               <gov-hint for="testimonial">
                 Please enter a quote from a service user highlighting a positive outcome to
                 help promote your good work. For example:
-              </gov-hint>
-              <gov-hint for="testimonial">
-                This {{ type }} changed my life!
               </gov-hint>
           </template>
         </ck-textarea-input>
@@ -100,7 +98,7 @@
           :value="video_embed"
           @input="$emit('update:video_embed', $event); $emit('clear', 'video_embed')"
           id="video_embed"
-          :label="`${$options.filters.ucfirst(type)} video`"
+          label="Promotional video"
           type="url"
           :error="errors.get('video_embed')"
         >
@@ -112,11 +110,6 @@
             <gov-hint for="video_embed">
               Youtube and Vimeo links are accepted.
             </gov-hint>
-            <gov-hint for="video_embed">
-              <gov-link :href="videoEmbedHelpHref">
-                Need help editing or creating a {{ type }} video?
-              </gov-link>
-            </gov-hint>
           </template>
         </ck-text-input>
 
@@ -125,12 +118,12 @@
 
     <gov-section-break size="m" visible/>
 
-    <gov-heading size="l">Contact details</gov-heading>
+    <gov-heading size="l">Public contact details</gov-heading>
     <gov-grid-row>
       <gov-grid-column width="one-half">
 
         <gov-body>
-          Please provide your {{ type }}’s public-facing contact details. These
+          Please provide an email or phone number so the public can contact you. These
           will be displayed on your {{ type }}’s page on the {{appName}}
           website.
         </gov-body>
@@ -151,7 +144,7 @@
           :value="contact_phone"
           @input="$emit('update:contact_phone', $event); $emit('clear', 'contact_phone')"
           id="contact_phone"
-          label="Contact phone number"
+          label="Contact phone number (optional)"
           type="tel"
           :error="errors.get('contact_phone')"
         >
@@ -172,7 +165,7 @@
           :value="contact_email"
           @input="$emit('update:contact_email', $event); $emit('clear', 'contact_email')"
           id="contact_email"
-          :label="`Public ${type} email address`"
+          :label="`Public ${type} email address (optional)`"
           :hint="`Please provide the contact email address for the ${type}.`"
           type="email"
           :error="errors.get('contact_email')"
@@ -180,7 +173,7 @@
 
         <gov-section-break size="l" />
 
-        <gov-heading size="m">Social media links</gov-heading>
+        <gov-heading size="m">Social media links (optional)</gov-heading>
 
         <gov-body>
           If you have any social media accounts for your {{ type }}, please
@@ -272,7 +265,7 @@ export default {
       ];
     },
     videoEmbedHelpHref() {
-      const to = "info@connectedtogether.org.uk";
+      const to = this.contactEmail;
       const subject = `Make a video for my ${this.type}`;
       const body = `My ${
         this.type

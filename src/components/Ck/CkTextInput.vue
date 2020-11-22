@@ -17,6 +17,7 @@
         :type="type"
         :maxlength="maxlength"
         :disabled="disabled"
+        :placeholder="placeholder"
       />
 
       <slot name="after-input" />
@@ -66,6 +67,11 @@ export default {
       required: false,
       type: Boolean,
       default: false
+    },
+    placeholder: {
+      type: String,
+      required: false,
+      default: ""
     }
   }
 };
