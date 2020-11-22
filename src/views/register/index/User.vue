@@ -8,12 +8,11 @@
       <gov-grid-row>
         <gov-grid-column width="two-thirds">
           <gov-heading size="l">
-            Create an account
+            Step 1: Create an account
           </gov-heading>
 
           <gov-body>
-            First, create an account to login to the {{appName}}
-            administration portal
+            Before you can add your org’s details you need to create an account.
           </gov-body>
 
           <ck-text-input
@@ -59,14 +58,25 @@
             label="Password"
             type="password"
             :error="errors.get('user.password')"
-          />
+          >
+          <template slot="after-input">
+            <gov-body>Please ensure your password contains the following:</gov-body>
+            <gov-list :bullet="true">
+              <li>A minimum of 8 characters long.</li>
+              <li>Uppercase letters.</li>
+              <li>Lowercase letters.</li>
+              <li>Numbers.</li>
+              <li>Special characters or non-alphanumeric characters, such as - ! ” £ $ % & * @.</li>
+            </gov-list>
+          </template>
+          </ck-text-input>
 
           <gov-body>
             User account details are held in line with our
-            <gov-link href="https://www.connectedtogether.org.uk/privacy-policy" target="_blank">privacy policy</gov-link>.
+            <gov-link :href="privacyPolicyUrl" target="_blank">privacy policy</gov-link>.
           </gov-body>
 
-          <gov-button start :to="{ name: 'register-index-organisation' }">
+          <gov-button start :to="{ name: 'register-index-organisation-intro' }">
             Next
           </gov-button>
         </gov-grid-column>
@@ -80,28 +90,34 @@ export default {
   props: {
     form: {
       type: Object,
-      required: true
+      required: true,
     },
 
     errors: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
+  },
+
+  computed: {
+    privacyPolicyUrl() {
+      return `${process.env.VUE_APP_FRONTEND_URI}/privacy-policy`;
+    },
   },
 
   methods: {
     onInput(field, value) {
       this.$emit(
-        "input",
+        'input',
         Object.assign(this.form, {
           user: {
             ...this.form.user,
-            [field]: value
-          }
+            [field]: value,
+          },
         })
       );
-      this.$emit("clear", `user.${field}`);
-    }
-  }
+      this.$emit('clear', `user.${field}`);
+    },
+  },
 };
 </script>
