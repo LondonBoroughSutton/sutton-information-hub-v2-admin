@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <vue-headful :title="appName" :head="headAttributes" :html="htmlAttributes" />
+    <vue-headful :title="title" :head="headAttributes" :html="htmlAttributes" />
 
     <gov-skip-link href="#main-content">Skip to main content</gov-skip-link>
 
-    <gov-header :service-name="appName" :navigation="headerNav" />
+    <gov-header :service-name="title" :navigation="headerNav" />
 
     <div class="govuk-width-container">
       <main class="govuk-main-wrapper" :class="mainClasses" id="main-content" role="main">
@@ -43,6 +43,9 @@ export default {
         }
       };
     },
+    title() {
+      return Auth.isLoggedIn ? this.appName : `Welcome to ${this.appName}`;
+    },
     loggedInItems() {
       return Auth.isLocalAdmin
         ? [
@@ -69,19 +72,13 @@ export default {
               hide: !Auth.isGlobalAdmin
             }
           ];
-    },
-    loggedOutItems() {
-      return [
-        { text: "Register", to: { name: "register-index" } },
-        { text: "Login", href: Auth.authorizeUrl }
-      ];
     }
   },
   methods: {
     setHeaderItems() {
-      this.headerNav = Auth.isLoggedIn
-        ? this.loggedInItems
-        : this.loggedOutItems;
+      if (Auth.isLoggedIn) {
+        this.headerNav = this.loggedInItems;
+      }
     },
     bindActivityTracking() {
       document.addEventListener("mousemove", this.trackActivity);
