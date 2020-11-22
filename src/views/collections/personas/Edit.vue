@@ -21,6 +21,7 @@
             </gov-body>
 
             <collection-form
+              type="Persona"
               :errors="form.$errors"
               :id="collection.id"
               :name.sync="form.name"
@@ -54,7 +55,7 @@
 <script>
 import http from "@/http";
 import Form from "@/classes/Form";
-import CollectionForm from "@/views/collections/personas/forms/CollectionForm";
+import CollectionForm from "@/views/collections/forms/CollectionForm";
 
 export default {
   name: "EditCollectionPersona",

@@ -18,6 +18,7 @@
           </gov-body>
 
           <collection-form
+            type="Category"
             :errors="form.$errors"
             :name.sync="form.name"
             :intro.sync="form.intro"
@@ -25,6 +26,7 @@
             :order.sync="form.order"
             :sideboxes.sync="form.sideboxes"
             :category_taxonomies.sync="form.category_taxonomies"
+            @update:image_file_id="form.image_file_id = $event"
             @clear="form.$errors.clear($event)"
           />
 
@@ -38,7 +40,7 @@
 </template>
 
 <script>
-import CollectionForm from "@/views/collections/categories/forms/CollectionForm";
+import CollectionForm from "@/views/collections/forms/CollectionForm";
 import Form from "@/classes/Form";
 
 export default {
@@ -49,16 +51,21 @@ export default {
       form: new Form({
         name: "",
         intro: "",
-        icon: "",
         order: 1,
         sideboxes: [],
-        category_taxonomies: []
+        category_taxonomies: [],
+        image_file_id: null
       })
     };
   },
   methods: {
     async onSubmit() {
-      await this.form.post("/collections/categories");
+      await this.form.post("/collections/categories", (config, data) => {
+        // Unset the image field if not provided.
+        if (data.image_file_id === null) {
+          delete data.image_file_id;
+        }
+      });
       this.$router.push({ name: "admin-index-collections" });
     }
   }

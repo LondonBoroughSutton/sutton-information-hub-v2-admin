@@ -1,6 +1,6 @@
 <template>
   <div>
-    <gov-back-link :to="{ name: 'register-index-user' }">
+    <gov-back-link :to="{ name: 'register-index-organisation-intro' }">
       Back
     </gov-back-link>
 
@@ -12,8 +12,7 @@
           </gov-heading>
 
           <gov-body>
-            If you are a smaller group or activity that isn't directly run by an
-            organisation, you can enter details about your service/group below.
+            If you are a smaller group or activity that isn't directly run by an organisation, just fill in the organisation boxes below with the name of your service, description of your activity etc.
           </gov-body>
 
           <ck-text-input
@@ -23,6 +22,7 @@
             label="Organisation name"
             type="text"
             :error="errors.get(['organisation.name', 'organisation.slug'])"
+            placeholder="Dare2Care"
           >
             <gov-hint slot="hint" for="name">
               The name of your organisation must be unique. The URL of your page
@@ -44,7 +44,7 @@
             :value="form.organisation.url"
             @input="onInput('url', $event)"
             id="url"
-            label="Organisation website address"
+            label="Organisation website address (optional)"
             hint="This must start with ‘http://’ or ‘https://’."
             type="url"
             :error="errors.get('organisation.url')"
@@ -68,7 +68,7 @@
             :error="errors.get('organisation.email')"
           />
 
-          <gov-button start :to="{ name: 'register-index-service' }">
+          <gov-button start :to="{ name: 'register-index-service-intro' }">
             Next
           </gov-button>
         </gov-grid-column>

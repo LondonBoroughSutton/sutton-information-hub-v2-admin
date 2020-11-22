@@ -1,13 +1,13 @@
 <template>
   <div>
-    <gov-heading size="l">{{ service.type | ucfirst }} details</gov-heading>
+    <gov-heading size="l">Step 3: add a Support listing</gov-heading>
     <gov-grid-row>
       <gov-grid-column width="one-half">
 
         <gov-body>
-          General details about the service (we use service in the broadest
-          sense, this could be counselling, a website, or an app).
+          You can create a listing for different types of support including: apps / digital, services, information (e.g. videos), groups, clubs, activities, help lines and advice
         </gov-body>
+        <gov-body>You can then select a more specific description of your support offer.</gov-body>
 
         <gov-section-break size="l" />
 
@@ -15,8 +15,8 @@
           :value="service.type"
           @input="$emit('input', { field: 'type', value: $event })"
           id="type"
-          label="What is it?"
-          :hint="`This option changes how your page is described on ${appName}`"
+          label="Type of support"
+          hint="Choose one type of support"
           :options="typeOptions"
           :error="errors.get('service.type')"
         />
@@ -25,22 +25,17 @@
           :value="service.name"
           @input="$emit('input', { field: 'name', value: $event })"
           id="name"
-          :label="`What is the name of your ${service.type}?`"
+          :label="`What is the name of your ${service.type}? (required)`"
           type="text"
           :error="errors.get(['service.name', 'service.slug'])"
-        >
-          <gov-hint slot="hint" for="name">
-            The name of your {{ service.type }} must be unique. The URL
-            of your page will be: <br>
-            www.connectedtogether.org.uk/services/{{ service.slug }}
-          </gov-hint>
-        </ck-text-input>
+          placeholder="Dare2Care"
+        />
 
         <ck-text-input
           :value="service.url"
           @input="$emit('input', { field: 'url', value: $event })"
           id="url"
-          :label="`What is the web address of your ${service.type}?`"
+          :label="`What is the web address of your ${service.type}? (optional)`"
           :hint="`This must start with ‘http://’ or ‘https://’. You can use your organisation’s website address if the ${service.type} doesn’t have its own.`"
           type="url"
           :error="errors.get('service.url')"
