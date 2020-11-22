@@ -44,26 +44,31 @@ export default {
       };
     },
     loggedInItems() {
-      return [
-        { text: "Services", to: { name: "services-index" } },
-        { text: "Locations", to: { name: "locations-index" } },
-        { text: "Referrals", to: { name: "referrals-index" } },
-        { text: "Organisations", to: { name: "organisations-index" } },
-        {
-          text: "Users",
-          to: { name: "users-index" }
-        },
-        {
-          text: "Reports",
-          to: { name: "reports-index" },
-          hide: !Auth.isGlobalAdmin
-        },
-        {
-          text: "Admin",
-          to: { name: "admin-index" },
-          hide: !Auth.isGlobalAdmin
-        }
-      ];
+      return Auth.isLocalAdmin
+        ? [
+            { text: "Support offers", to: { name: "services-index" } },
+            { text: "Organisations", to: { name: "organisations-index" } }
+          ]
+        : [
+            { text: "Services", to: { name: "services-index" } },
+            { text: "Locations", to: { name: "locations-index" } },
+            { text: "Referrals", to: { name: "referrals-index" } },
+            { text: "Organisations", to: { name: "organisations-index" } },
+            {
+              text: "Users",
+              to: { name: "users-index" }
+            },
+            {
+              text: "Reports",
+              to: { name: "reports-index" },
+              hide: !Auth.isGlobalAdmin
+            },
+            {
+              text: "Admin",
+              to: { name: "admin-index" },
+              hide: !Auth.isGlobalAdmin
+            }
+          ];
     },
     loggedOutItems() {
       return [
