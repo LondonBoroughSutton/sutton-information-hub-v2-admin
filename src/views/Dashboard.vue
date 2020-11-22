@@ -12,8 +12,8 @@
           <gov-body size="l">
             From here, you can add and edit your pages on {{appName}}, as
             well as manage referrals into your service. For any support, contact
-            <gov-link href="mailto:info@connectedtogether.org.uk">
-              info@connectedtogether.org.uk
+            <gov-link :href="'mailto:' + this.contactEmail">
+              {{ this.contactEmail }}
             </gov-link>
           </gov-body>
         </gov-grid-column>

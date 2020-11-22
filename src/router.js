@@ -466,6 +466,12 @@ let router = new Router({
           meta: { auth: false }
         },
         {
+          path: "service-intro",
+          name: "register-index-service-intro",
+          component: () => import("@/views/register/index/ServiceIntro"),
+          meta: { auth: false }
+        },
+        {
           path: "service",
           name: "register-index-service",
           component: () => import("@/views/register/index/Service"),
