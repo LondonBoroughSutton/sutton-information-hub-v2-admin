@@ -59,7 +59,7 @@ export default {
   },
   computed: {
     contactAdminTeamEmail() {
-      const to = "info@connectedtogether.org.uk";
+      const to = this.contactEmail;
       const subject = `Incorrect taxonomies applied to ${this.type}`;
       const body = `${this.$options.filters.ucfirst(
         this.type

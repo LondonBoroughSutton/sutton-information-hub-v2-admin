@@ -82,10 +82,7 @@
                   :disability.sync="form.criteria.disability"
                   :employment.sync="form.criteria.employment"
                   :gender.sync="form.criteria.gender"
-                  :housing.sync="form.criteria.housing"
-                  :income.sync="form.criteria.income"
-                  :language.sync="form.criteria.language"
-                  :other.sync="form.criteria.other"
+                  :benefits.sync="form.criteria.benefits"
                 >
                   <gov-button @click="onNext" start>Next</gov-button>
                 </who-for-tab>
@@ -256,14 +253,21 @@ export default {
         referral_email: this.service.referral_email || "",
         referral_url: this.service.referral_url || "",
         criteria: {
-          age_group: this.service.criteria.age_group || "",
-          disability: this.service.criteria.disability || "",
-          employment: this.service.criteria.employment || "",
-          gender: this.service.criteria.gender || "",
-          housing: this.service.criteria.housing || "",
-          income: this.service.criteria.income || "",
-          language: this.service.criteria.language || "",
-          other: this.service.criteria.other || ""
+          age_group: this.service.criteria.age_group
+            ? this.service.criteria.age_group.split(", ")
+            : [],
+          disability: this.service.criteria.disability
+            ? this.service.criteria.disability.split(", ")
+            : [],
+          employment: this.service.criteria.employment
+            ? this.service.criteria.employment.split(", ")
+            : [],
+          gender: this.service.criteria.gender
+            ? this.service.criteria.gender.split(", ")
+            : [],
+          benefits: this.service.criteria.benefits
+            ? this.service.criteria.benefits.split(", ")
+            : []
         },
         useful_infos: this.service.useful_infos,
         offerings: this.service.offerings,
@@ -386,17 +390,8 @@ export default {
         if (data.criteria.gender === (this.service.criteria.gender || "")) {
           delete data.criteria.gender;
         }
-        if (data.criteria.housing === (this.service.criteria.housing || "")) {
-          delete data.criteria.housing;
-        }
-        if (data.criteria.income === (this.service.criteria.income || "")) {
-          delete data.criteria.income;
-        }
-        if (data.criteria.language === (this.service.criteria.language || "")) {
-          delete data.criteria.language;
-        }
-        if (data.criteria.other === (this.service.criteria.other || "")) {
-          delete data.criteria.other;
+        if (data.criteria.benefits === (this.service.criteria.benefits || "")) {
+          delete data.criteria.benefits;
         }
         if (Object.keys(data.criteria).length === 0) {
           delete data.criteria;

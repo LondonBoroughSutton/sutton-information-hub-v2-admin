@@ -4,9 +4,7 @@
     <gov-grid-row>
       <gov-grid-column width="one-half">
         <gov-body>
-          Use this section to help indicate who should be using your
-          {{ service.type }}. If any of these criteria do not apply, please
-          leave them blank.
+          Only select options that are essential for describing the target audience (clicking more options will reduce your search prominence).
         </gov-body>
 
         <gov-section-break size="l" />
@@ -14,114 +12,92 @@
         <!-- Age group -->
         <criteria-input
           :value="service.criteria.age_group"
-          @input="
+          :options="ageGroupOptions"
+          :maxSelections="3"
+          @update:age_group="
             $emit('input', {
               field: 'criteria',
               value: Object.assign(service.criteria, { age_group: $event })
             })
           "
           :error="errors.get('service.criteria.age_group')"
-          id="criteria.age_group"
-          label="Age of support listing user (if applicable)"
-          :hint="`E.g “This ${service.type} is for people 16+” or “This ${service.type} is aimed at people nearing retirement”`"
+          id="age_group"
+          label="Target age group (required)"
+          hint="Select up to 3"
         />
         <!-- /Age group -->
 
         <!-- Disability -->
         <criteria-input
           :value="service.criteria.disability"
-          @input="
+          :options="disabilityOptions"
+          :maxSelections="3"
+          @update:disability="
             $emit('input', {
               field: 'criteria',
               value: Object.assign(service.criteria, { disability: $event })
             })
           "
           :error="errors.get('service.criteria.disability')"
-          id="criteria.disability"
-          label="Disability Requirements / Restrictions (if applicable)"
-          :hint='`e.g. "This ${service.type} is for those with MS and their carers", or "For all people with disabilities and their carers"`'
+          id="disability"
+          label="Disabilities (if applicable)"
+          hint='Select up to 3'
         />
         <!-- /Disability -->
 
         <!-- Gender -->
         <criteria-input
           :value="service.criteria.gender"
-          @input="
+          :options="genderOptions"
+          :maxSelections="3"
+          @update:gender="
             $emit('input', {
               field: 'criteria',
               value: Object.assign(service.criteria, { gender: $event })
             })
           "
           :error="errors.get('service.criteria.gender')"
-          id="criteria.gender"
-          label="Gender Specific (if applicable)"
-          hint='e.g. "Women only"'
+          id="gender"
+          label="Gender (if applicable)"
+          hint='Select up to 3'
         />
         <!-- /Gender -->
 
-        <!-- Housing -->
+        <!-- Benefits -->
         <criteria-input
-          :value="service.criteria.housing"
-          @input="
+          :value="service.criteria.benefits"
+          :options="benefitOptions"
+          :maxSelections="3"
+          @update:benefits="
             $emit('input', {
               field: 'criteria',
-              value: Object.assign(service.criteria, { housing: $event })
+              value: Object.assign(service.criteria, { benefits: $event })
             })
           "
-          :error="errors.get('service.criteria.housing')"
-          id="criteria.housing"
-          label="Specific Housing status/needs (if applicable)"
-          hint='e.g. "For people who are homeless or at risk of homelessness"'
+          :error="errors.get('service.criteria.benefits')"
+          id="benefits"
+          label="Benefit Status (if applicable)"
+          hint="Select up to 3"
         />
-        <!-- /Housing -->
+        <!-- /Benefits -->
 
-        <!-- Income -->
+        <!-- Employment -->
         <criteria-input
-          :value="service.criteria.income"
-          @input="
+          :value="service.criteria.employment"
+          :options="employmentOptions"
+          :maxSelections="3"
+          @update:employment="
             $emit('input', {
               field: 'criteria',
-              value: Object.assign(service.criteria, { income: $event })
+              value: Object.assign(service.criteria, { employment: $event })
             })
           "
-          :error="errors.get('service.criteria.income')"
-          id="criteria.income"
-          label="Income level (if applicable)"
-          :hint='`e.g. "This ${service.type} is aimed at people claiming benefits or with Income support"`'
+          :error="errors.get('service.criteria.employment')"
+          id="employment"
+          label="Employment Status (if applicable)"
+          hint="Select up to 3"
         />
-        <!-- /Income -->
-
-        <!-- Language -->
-        <criteria-input
-          :value="service.criteria.language"
-          @input="
-            $emit('input', {
-              field: 'criteria',
-              value: Object.assign(service.criteria, { language: $event })
-            })
-          "
-          :error="errors.get('service.criteria.language')"
-          id="criteria.language"
-          label="Language accessability (if applicable)"
-          :hint="`E.g. “Instructors speak English, but open to all”, or “This ${service.type} is available in a number of languages - please contact for more information”`"
-        />
-        <!-- /Language -->
-
-        <!-- Other -->
-        <criteria-input
-          :value="service.criteria.other"
-          @input="
-            $emit('input', {
-              field: 'criteria',
-              value: Object.assign(service.criteria, { other: $event })
-            })
-          "
-          :error="errors.get('service.criteria.other')"
-          id="criteria.other"
-          :label="`Any other notes as to who the ${service.type} is aimed at/not appropriate for?`"
-          :hint="`E.g. “This ${service.type} is open to all”, or “This ${service.type} is aimed at people living in Chessington”`"
-        />
-        <!-- /Other -->
+        <!-- /Employment -->
 
         <slot />
       </gov-grid-column>
@@ -147,6 +123,53 @@ export default {
       type: Object,
       required: true
     }
+  },
+  data() {
+    return {
+      ageGroupOptions: [
+        "Under 16",
+        "16 to 24",
+        "25 to 64",
+        "65 to 84",
+        "65 and over",
+        "85 and over"
+      ],
+      disabilityOptions: [
+        "Autistic",
+        "Blind or partially sighted",
+        "Deaf blind",
+        "Learning disability",
+        "Physically disabled",
+        "Severely or profoundly deaf",
+        "Wheelchair user",
+        "Without speech"
+      ],
+      genderOptions: ["Female", "Male", "Non-binary", "Other", "Transgender"],
+      benefitOptions: [
+        "Housing Benefits and Council Tax Benefits",
+        "Council Tax Benefits",
+        "Council Tax Benefits only",
+        "Employment and Support Allowance or incapacity benefit",
+        "Housing Benefits",
+        "Housing Benefits only",
+        "Jobseeker's Allowance",
+        "Lone Parent"
+      ],
+      employmentOptions: [
+        "Employed full-time",
+        "Employed part-time",
+        "Full-time student",
+        "In employment",
+        "Long term sick or disabled",
+        "Looking after home or family",
+        "Not in employment",
+        "Other",
+        "Retired",
+        "Self employed",
+        "Severe long term sick or disabled",
+        "Student (including full time students)"
+      ]
+    };
   }
 };
 </script>

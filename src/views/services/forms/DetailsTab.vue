@@ -1,13 +1,13 @@
 <template>
   <div>
-    <gov-heading size="l">{{ type | ucfirst }} details</gov-heading>
+    <gov-heading size="l">Step 3: add a Support listing</gov-heading>
     <gov-grid-row>
       <gov-grid-column width="one-half">
 
         <gov-body>
-          General details about the {{ type }}. (We use {{ type }} in the
-          broadcast sense, This could be counciling or weekly yoga classes).
+          You can create a listing for different types of support including: apps / digital, services, information (e.g. videos), groups, clubs, activities, help lines and advice
         </gov-body>
+        <gov-body>You can then select a more specific description of your support offer.</gov-body>
 
         <gov-section-break size="l" />
 
@@ -15,8 +15,8 @@
           :value="type"
           @input="$emit('update:type', $event); $emit('clear', 'type')"
           id="type"
-          label="What is it?"
-          :hint="`This option changes how your page is described on ${appName}`"
+          label="Type of support"
+          hint="Choose one type of support"
           :options="typeOptions"
           :error="errors.get('type')"
         />
@@ -25,9 +25,10 @@
           :value="name"
           @input="onNameInput($event)"
           id="name"
-          :label="`What is the name of your ${type}?`"
+          :label="`What is the name of your ${type}? (required)`"
           type="text"
           :error="errors.get('name')"
+          placeholder="Dare2Care"
         />
 
         <ck-text-input
@@ -63,7 +64,7 @@
           :value="url"
           @input="$emit('update:url', $event); $emit('clear', 'url')"
           id="url"
-          :label="`What is the web address of your ${type}?`"
+          :label="`What is the web address of your ${type}? (optional)`"
           :hint="`This must start with ‘http://’ or ‘https://’. You can use your organisation’s website address if the ${type} doesn’t have its own.`"
           type="url"
           :error="errors.get('url')"
@@ -263,7 +264,7 @@ export default {
   },
   computed: {
     logoHelpHref() {
-      const to = "info@connectedtogether.org.uk";
+      const to = this.contactEmail;
       const subject = "Help uploading support listing logo";
 
       return `mailto:${to}?subject=${encodeURIComponent(subject)}`;

@@ -12,8 +12,8 @@
           <gov-body size="l">
             From here, you can add and edit your pages on {{appName}}, as
             well as manage referrals into your support listing. For any support, contact
-            <gov-link href="mailto:info@connectedtogether.org.uk">
-              info@connectedtogether.org.uk
+            <gov-link :href="'mailto:' + this.contactEmail">
+              {{ this.contactEmail }}
             </gov-link>
           </gov-body>
         </gov-grid-column>
@@ -31,7 +31,7 @@
           <gov-section-break size="m" />
         </gov-grid-column>
 
-        <gov-grid-column width="one-half">
+        <gov-grid-column width="one-half" v-if="!auth.isLocalAdmin">
           <gov-heading size="l">Locations</gov-heading>
           <gov-body>View and edit support listing locations in the Borough.</gov-body>
           <gov-button start :to="{ name: 'locations-index' }">
@@ -40,7 +40,7 @@
           <gov-section-break size="m" />
         </gov-grid-column>
 
-        <gov-grid-column width="one-half">
+        <gov-grid-column width="one-half" v-if="!auth.isLocalAdmin">
           <gov-heading size="l">Referrals</gov-heading>
           <gov-body>View and respond to referrals to your support listing(s).</gov-body>
           <gov-button start :to="{ name: 'referrals-index' }">
@@ -49,16 +49,16 @@
           <gov-section-break size="m" />
         </gov-grid-column>
 
-        <gov-grid-column width="one-half" v-if="auth.isGlobalAdmin">
+        <gov-grid-column width="one-half" v-if="auth.isGlobalAdmin || auth.isLocalAdmin">
           <gov-heading size="l">Organisations</gov-heading>
-          <gov-body>Add or edit organisations on {{appName}}.</gov-body>
+          <gov-body>{{ auth.isLocalAdmin? 'Add name of organisation, post code and email address to invite an org to add their support and take responsibility for keeping it up to date.' : `Add or edit organisations on ${appName}.`}}</gov-body>
           <gov-button start :to="{ name: 'organisations-index' }">
             Go to organisations
           </gov-button>
           <gov-section-break size="m" />
         </gov-grid-column>
 
-        <gov-grid-column width="one-half">
+        <gov-grid-column width="one-half" v-if="!auth.isLocalAdmin">
           <gov-heading size="l">Users</gov-heading>
           <gov-body>View, add and edit users in your organisation.</gov-body>
           <gov-button start :to="{ name: 'users-index' }">
