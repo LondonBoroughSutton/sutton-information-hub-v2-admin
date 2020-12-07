@@ -126,7 +126,7 @@
           @input="$emit('update:is_national', $event); $emit('clear', 'is_national')"
           id="is_national"
           label="National?"
-          hint="Details if the service is only available at specific locations or can be accessed nationwide, e.g. via web or phone."
+          hint="Details if the support listing is only available at specific locations or can be accessed nationwide, e.g. via web or phone."
           :options="isNationalOptions"
           :error="errors.get('is_national')"
         />
@@ -265,7 +265,7 @@ export default {
   computed: {
     logoHelpHref() {
       const to = this.contactEmail;
-      const subject = "Help uploading service logo";
+      const subject = "Help uploading support listing logo";
 
       return `mailto:${to}?subject=${encodeURIComponent(subject)}`;
     },

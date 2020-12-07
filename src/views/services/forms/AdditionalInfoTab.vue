@@ -43,7 +43,7 @@
           <template slot="hint">
             <gov-hint for="is_free">
               Indicates whether your {{ type }} is completely free, or if some
-              elements of the service must be paid for. Users can filter their
+              elements of the support listing must be paid for. Users can filter their
               searches based on the answer you provide.
             </gov-hint>
             <gov-hint for="is_free">
@@ -88,7 +88,7 @@
         >
           <template slot="hint">
               <gov-hint for="testimonial">
-                Please enter a quote from a service user highlighting a positive outcome to
+                Please enter a quote from a support listing user highlighting a positive outcome to
                 help promote your good work. For example:
               </gov-hint>
           </template>

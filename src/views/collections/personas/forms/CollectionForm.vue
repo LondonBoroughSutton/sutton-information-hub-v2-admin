@@ -25,7 +25,7 @@
       @input="$emit('update:intro', $event); $emit('clear', 'intro')"
       id="intro"
       label="Description of category"
-      hint="A short summary detailing what type of services the persona includes."
+      hint="A short summary detailing what type of support listings the persona includes."
       :maxlength="150"
       :error="errors.get('intro')"
     />

@@ -17,7 +17,7 @@
           </gov-body>
 
           <gov-body>
-            This service is completely free, will improve your organisation's
+            This support listing is completely free, will improve your organisation's
             profile, give you access to new funding opportunities and help
             improve people's access to the support you offer.
           </gov-body>
@@ -29,7 +29,7 @@
           <gov-list type="ordered" number>
             <li>Create an account</li>
             <li>Review your data</li>
-            <li>Adding service(s)</li>
+            <li>Adding support listing(s)</li>
             <li>Manage account</li>
           </gov-list>
 

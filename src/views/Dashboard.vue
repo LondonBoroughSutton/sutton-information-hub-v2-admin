@@ -11,7 +11,7 @@
 
           <gov-body size="l">
             From here, you can add and edit your pages on {{appName}}, as
-            well as manage referrals into your service. For any support, contact
+            well as manage referrals into your support listing. For any support, contact
             <gov-link :href="'mailto:' + this.contactEmail">
               {{ this.contactEmail }}
             </gov-link>
@@ -23,17 +23,17 @@
 
       <gov-grid-row>
         <gov-grid-column width="one-half">
-          <gov-heading size="l">{{ auth.isLocalAdmin? 'Support offers' : 'Services' }}</gov-heading>
-          <gov-body>{{ auth.isLocalAdmin? 'Add details of support offers that are priorities for your users' : `Add or edit your pages on ${appName}.`}}</gov-body>
+          <gov-heading size="l">Support Listings</gov-heading>
+          <gov-body>Add or edit your pages on {{appName}}.</gov-body>
           <gov-button start :to="{ name: 'services-index' }">
-            Go to services
+            Go to support listings
           </gov-button>
           <gov-section-break size="m" />
         </gov-grid-column>
 
         <gov-grid-column width="one-half" v-if="!auth.isLocalAdmin">
           <gov-heading size="l">Locations</gov-heading>
-          <gov-body>View and edit service locations in the Borough.</gov-body>
+          <gov-body>View and edit support listing locations in the Borough.</gov-body>
           <gov-button start :to="{ name: 'locations-index' }">
             Go to locations
           </gov-button>
@@ -42,7 +42,7 @@
 
         <gov-grid-column width="one-half" v-if="!auth.isLocalAdmin">
           <gov-heading size="l">Referrals</gov-heading>
-          <gov-body>View and respond to referrals to your service(s).</gov-body>
+          <gov-body>View and respond to referrals to your support listing(s).</gov-body>
           <gov-button start :to="{ name: 'referrals-index' }">
             Go to referrals
           </gov-button>

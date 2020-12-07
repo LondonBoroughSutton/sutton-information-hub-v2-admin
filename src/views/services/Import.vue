@@ -1,15 +1,15 @@
 <template>
     <gov-width-container>
-        <vue-headful :title="`${appName} - Import Services`" />
+        <vue-headful :title="`${appName} - Import Support listings`" />
 
         <gov-back-link :to="{ name: 'dashboard' }">Back to dashboard</gov-back-link>
         <gov-main-wrapper>
         <gov-grid-row>
             <gov-grid-column width="full">
 
-                <gov-heading size="xl">Bulk upload services</gov-heading>
+                <gov-heading size="xl">Bulk upload support listings</gov-heading>
                 <gov-body>
-                    <p>This tool allows you to upload the details of more than one service into the platform. You can add up to 5000 services in a single document.</p>
+                    <p>This tool allows you to upload the details of more than one support listing into the platform. You can add up to 5000 support listings in a single document.</p>
 
                     <p>The import tool requires all documents to be either in the .xls or .xlsx format. Please note that .csv files are not supported.</p>
 
@@ -20,7 +20,7 @@
 
                 <organisation-select-form
                   filter="is_admin"
-                  label="Select the Organisation to assign the Services to"
+                  label="Select the Organisation to assign the Support listings to"
                   v-model="organisationId"
                 />
 
@@ -118,7 +118,7 @@ export default {
       return this.uploadRows
         ? "Imported " +
             this.uploadRows +
-            (this.uploadRows === 1 ? " Service" : " Services")
+            (this.uploadRows === 1 ? " Support listing" : " Support listings")
         : null;
     },
     exampleSpreadsheetDownloadLink() {

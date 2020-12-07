@@ -8,7 +8,7 @@
         <gov-grid-column width="one-half">
           <gov-heading size="xl">Organisations</gov-heading>
           <gov-heading size="m">Add organisation</gov-heading>
-          <gov-body>General details about the organisation. To be found when searching or linked from a service page.</gov-body>
+          <gov-body>General details about the organisation. To be found when searching or linked from a support listing page.</gov-body>
 
           <organisation-form
             :errors="form.$errors"

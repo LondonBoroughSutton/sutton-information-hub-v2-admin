@@ -73,14 +73,14 @@
     <gov-list bullet>
       <li>
         <strong>Organisation admins:</strong>
-        Add services, add users, edit services, edit users, manage referrals
+        Add support listings, add users, edit support listings, edit users, manage referrals
       </li>
       <li>
-        <strong>Service admins:</strong>
-        Edit services, manage referrals
+        <strong>Support listing admins:</strong>
+        Edit support listings, manage referrals
       </li>
       <li>
-        <strong>Service workers:</strong>
+        <strong>Support listing workers:</strong>
         Manage referrals
       </li>
     </gov-list>

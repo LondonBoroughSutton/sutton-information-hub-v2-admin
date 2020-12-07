@@ -4,12 +4,12 @@
     <template v-else>
       <vue-headful :title="`${appName} - Add Service Location for: ${service.name}`" />
 
-      <gov-back-link :to="{ name: 'services-show-locations', params: { service: service.id } }">Back to service</gov-back-link>
+      <gov-back-link :to="{ name: 'services-show-locations', params: { service: service.id } }">Back to support listing</gov-back-link>
       <gov-main-wrapper>
         <gov-grid-row>
           <gov-grid-column width="one-half">
-            <gov-heading size="xl">Service locations</gov-heading>
-            <gov-heading size="m">Add service location</gov-heading>
+            <gov-heading size="xl">Support listing locations</gov-heading>
+            <gov-heading size="m">Add support listing location</gov-heading>
 
             <service-location-form
               :errors="form.$errors"
@@ -102,7 +102,7 @@ export default {
           this.form.location_id = location.id;
         }
 
-        // Post the service location.
+        // Post the support listing location.
         const { data: service } = await this.form.post("/service-locations");
         this.$router.push({
           name: "service-locations-show",

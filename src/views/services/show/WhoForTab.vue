@@ -4,7 +4,7 @@
     <gov-table>
       <template slot="body">
         <gov-table-row>
-          <gov-table-header scope="row" top>Age of service user</gov-table-header>
+          <gov-table-header scope="row" top>Age of support listing user</gov-table-header>
           <gov-table-cell>
             <gov-list v-if="serviceCriteria.age_group.length" type="unordered" :bullet="true">
               <li v-for="(item, index) in serviceCriteria.age_group" :key="`service.criteria.age_group.${index}`">{{ item }}</li>

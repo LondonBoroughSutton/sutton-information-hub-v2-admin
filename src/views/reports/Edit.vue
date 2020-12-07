@@ -90,9 +90,9 @@ export default {
         },
         {
           type: "Locations Export",
-          description: `Generate a report with all the locations of services on ${
+          description: `Generate a report with all the locations of support listings on ${
             process.env.VUE_APP_NAME
-          }, and the number of services delivered at each.`,
+          }, and the number of support listings delivered at each.`,
           scheduleForm: new Form({
             report_type: "Locations Export",
             repeat_type: null
@@ -107,7 +107,7 @@ export default {
           type: "Organisations Export",
           description: `Generate a report of all the organisations on ${
             process.env.VUE_APP_NAME
-          } with the number of services and attributed accounts.`,
+          } with the number of support listings and attributed accounts.`,
           scheduleForm: new Form({
             report_type: "Organisations Export",
             repeat_type: null
@@ -151,7 +151,7 @@ export default {
         {
           type: "Services Export",
           description:
-            "Generate a list of all services, including contact " +
+            "Generate a list of all support listings, including contact " +
             "details, whether they have referrals enabled, the last time " +
             "updated, contact details etc.",
           scheduleForm: new Form({

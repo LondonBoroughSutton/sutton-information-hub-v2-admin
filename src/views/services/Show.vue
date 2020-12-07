@@ -1,6 +1,6 @@
 <template>
   <gov-width-container>
-    <gov-back-link :to="{ name: 'services-index' }">Back to services</gov-back-link>
+    <gov-back-link :to="{ name: 'services-index' }">Back to support listings</gov-back-link>
     <gov-main-wrapper>
       <ck-loader v-if="loading" />
       <gov-grid-row v-else>

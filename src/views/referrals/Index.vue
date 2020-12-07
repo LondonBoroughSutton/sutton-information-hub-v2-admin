@@ -18,7 +18,7 @@
 
                 <template slot="extra-filters">
                   <gov-form-group>
-                    <gov-label for="filter[service_name]">Service name</gov-label>
+                    <gov-label for="filter[service_name]">Support listing name</gov-label>
                     <gov-input v-model="filters.service_name" id="filter[service_name]" name="filter[service_name]" type="search"/>
                   </gov-form-group>
 
@@ -52,7 +52,7 @@
             default-sort="-created_at"
             :columns="[
               { heading: 'Reference no.', sort: 'reference' },
-              { heading: 'Service', sort: 'service_name' },
+              { heading: 'Support listing', sort: 'service_name' },
               { heading: 'Referred by' },
               { heading: 'Status' },
               { heading: 'Date submitted', sort: 'created_at' },

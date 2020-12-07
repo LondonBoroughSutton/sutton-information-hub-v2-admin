@@ -29,12 +29,12 @@
           <gov-body>
             Once you've confirmed you email address, you'll be able to claim
             your listing and be able to start editing your organisation details
-            and adding services that your organisation offers. This can take up
+            and adding support listings that your organisation offers. This can take up
             to 20 minutes.
           </gov-body>
 
           <gov-body>
-            Once you have added one service, your listing will be visible for
+            Once you have added one support listing, your listing will be visible for
             anyone to see.
           </gov-body>
 
