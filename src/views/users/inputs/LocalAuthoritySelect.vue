@@ -9,6 +9,11 @@
       @input="$emit(`update:local_authority_id`, $event.value)"
       @remove="$emit('update:local_authority_id', null)"
     />
+    <gov-error-message
+      v-if="errors.has('local_authority_id')"
+      v-text="errors.get('local_authority_id')"
+      for="local_authorities"
+    />
   </div>
 </template>
 
@@ -24,6 +29,10 @@ export default {
     local_authority_id: {
       type: String,
       default: null
+    },
+    errors: {
+      required: true,
+      type: Object
     }
   },
   data() {
