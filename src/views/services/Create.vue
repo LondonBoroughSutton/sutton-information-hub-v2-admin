@@ -181,7 +181,7 @@ export default {
         name: "",
         slug: "",
         type: "service",
-        score: 0,
+        score: "",
         status: "inactive",
         is_national: true,
         intro: "",

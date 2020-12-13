@@ -230,7 +230,7 @@ export default {
         name: this.service.name,
         slug: this.service.slug,
         type: this.service.type,
-        score: this.service.score,
+        score: this.service.score || "",
         status: this.service.status,
         is_national: this.service.is_national,
         intro: this.service.intro,
