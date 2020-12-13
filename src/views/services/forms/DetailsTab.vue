@@ -216,8 +216,7 @@ export default {
       required: true
     },
     score: {
-      type: Number,
-      default: 0
+      required: true
     },
     status: {
       required: true
@@ -253,7 +252,7 @@ export default {
       androidAppStoreHelpUrl:
         "https://support.google.com/admob/answer/3086746?hl=en",
       scoreOptions: [
-        { text: "Unrated", value: 0 },
+        { text: "Unrated", value: "" },
         { text: "Poor", value: 1 },
         { text: "Below Average", value: 2 },
         { text: "Average", value: 3 },
