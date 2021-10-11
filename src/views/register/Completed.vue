@@ -5,7 +5,7 @@
     </gov-heading>
 
     <gov-body>
-      Thank you for registering on Hounslow Connect.
+      Thank you for registering on Help Yourself Sutton.
     </gov-body>
 
     <gov-body>
@@ -23,8 +23,8 @@
     <gov-body>
       If you haven't heard back from us within 5 working days please email the
       team at
-      <gov-link href="mailto:onehounslowconnect@hounslow.gov.uk"
-        >onehounslowconnect@hounslow.gov.uk</gov-link
+      <gov-link href="mailto:contact@helpyourselfsutton.org"
+        >contact@helpyourselfsutton.org</gov-link
       >
     </gov-body>
 

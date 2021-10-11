@@ -1,19 +1,19 @@
 <template>
   <gov-width-container>
-    <vue-headful title="Hounslow Connect - Dashboard" />
+    <vue-headful title="Help Yourself Sutton - Dashboard" />
 
     <gov-main-wrapper>
       <gov-grid-row>
         <gov-grid-column width="two-thirds">
           <gov-heading size="xl">
-            Welcome to the Hounslow Connect admin portal
+            Welcome to the Help Yourself Sutton admin portal
           </gov-heading>
 
           <gov-body size="l">
-            From here, you can add and edit your pages on Hounslow Connect, as
+            From here, you can add and edit your pages on Help Yourself Sutton, as
             well as manage referrals into your service. For any support, contact
-            <gov-link href="mailto:onehounslowconnect@hounslow.gov.uk">
-              onehounslowconnect@hounslow.gov.uk
+            <gov-link href="mailto:contact@helpyourselfsutton.org">
+              contact@helpyourselfsutton.org
             </gov-link>
             or view our
             <gov-link :to="{ name: 'help-index' }">help videos</gov-link>
@@ -26,7 +26,7 @@
       <gov-grid-row>
         <gov-grid-column width="one-half">
           <gov-heading size="l">Services</gov-heading>
-          <gov-body>Add or edit your pages on Hounslow Connect.</gov-body>
+          <gov-body>Add or edit your pages on Help Yourself Sutton.</gov-body>
           <gov-button start :to="{ name: 'services-index' }">
             Go to services
           </gov-button>
@@ -53,7 +53,7 @@
 
         <gov-grid-column width="one-half" v-if="auth.isGlobalAdmin">
           <gov-heading size="l">Organisations</gov-heading>
-          <gov-body>Add or edit organisations on Hounslow Connect.</gov-body>
+          <gov-body>Add or edit organisations on Help Yourself Sutton.</gov-body>
           <gov-button start :to="{ name: 'organisations-index' }">
             Go to organisations
           </gov-button>
@@ -72,7 +72,7 @@
         <gov-grid-column width="one-half" v-if="auth.isGlobalAdmin">
           <gov-heading size="l">Reports</gov-heading>
           <gov-body>
-            Download reports of activity on Hounslow Connect.
+            Download reports of activity on Help Yourself Sutton.
           </gov-body>
           <gov-button start :to="{ name: 'reports-index' }">
             Go to reports

@@ -11,7 +11,7 @@ import uuid
 # Template details.
 # ==================================================
 template = Template(
-    'Create the infrastructure needed to run the One Hounslow Connect Backend')
+    'Create the infrastructure needed to run the Help Yourself Sutton Backend')
 template.add_version('2010-09-09')
 
 # ==================================================

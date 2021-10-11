@@ -18,7 +18,7 @@
           "
           id="type"
           label="What is it?"
-          hint="This option changes how your page is described on Hounslow Connect"
+          hint="This option changes how your page is described on Help Yourself Sutton"
           :options="typeOptions"
           :error="errors.get('type')"
         />
@@ -205,7 +205,7 @@ export default {
   },
   computed: {
     logoHelpHref() {
-      const to = "onehounslowconnect@hounslow.gov.uk";
+      const to = "contact@helpyourselfsutton.org";
       const subject = "Help uploading service logo";
 
       return `mailto:${to}?subject=${encodeURIComponent(subject)}`;

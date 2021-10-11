@@ -8,7 +8,7 @@
       <gov-grid-row v-else>
         <vue-headful
           :title="
-            `Hounslow Connect - Page Feedback: ${pageFeedback.feedback.substr(
+            `Help Yourself Sutton - Page Feedback: ${pageFeedback.feedback.substr(
               0,
               10
             )}...`

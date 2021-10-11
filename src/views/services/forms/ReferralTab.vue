@@ -4,8 +4,7 @@
     <gov-grid-row>
       <gov-grid-column width="one-half">
         <gov-body>
-          Your {{ type }} can be set up to accept referrals through One Hounslow
-          Connect. These referrals directly connect your {{ type }} to
+          Your {{ type }} can be set up to accept referrals through Help Yourself Sutton. These referrals directly connect your {{ type }} to
           residents.
         </gov-body>
         <gov-body>
@@ -53,7 +52,7 @@
               for="referral_button_text"
               v-if="referral_method === 'internal'"
             >
-              By enabling referrals through Hounslow Connect, a button will be
+              By enabling referrals through Help Yourself Sutton, a button will be
               added to your page which will link to the referral form.
             </gov-hint>
             <gov-hint
@@ -162,7 +161,7 @@ export default {
     referralMethodOptions() {
       return [
         { text: "Please select", value: null, disabled: true },
-        { text: "Yes - Through Hounslow Connect", value: "internal" },
+        { text: "Yes - Through Help Yourself Sutton", value: "internal" },
         { text: "Yes - Through an external form", value: "external" },
         {
           text: `No - This ${this.type} doesn’t accept referrals`,
@@ -174,11 +173,11 @@ export default {
       return this.referral_method !== null && this.referral_method !== "none";
     },
     contactAdminTeamEmail() {
-      const to = "onehounslowconnect@hounslow.gov.uk";
+      const to = "contact@helpyourselfsutton.org";
       const subject = `Turn referrals on for my ${this.type}`;
       const body = `${this.$options.filters.ucfirst(
         this.type
-      )} Name: XXX\n\nWe are interested in finding out more about accepting referrals through Hounslow Connect.`;
+      )} Name: XXX\n\nWe are interested in finding out more about accepting referrals through Help Yourself Sutton.`;
 
       return `mailto:${to}?subject=${encodeURIComponent(
         subject

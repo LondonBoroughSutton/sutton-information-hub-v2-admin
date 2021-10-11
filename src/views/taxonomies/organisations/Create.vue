@@ -1,6 +1,6 @@
 <template>
   <gov-width-container>
-    <vue-headful title="Hounslow Connect - Add Taxonomy Organisation" />
+    <vue-headful title="Help Yourself Sutton - Add Taxonomy Organisation" />
 
     <gov-back-link :to="{ name: 'admin-index-taxonomies-organisations' }"
       >Back to taxonomy organisations</gov-back-link

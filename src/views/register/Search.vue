@@ -13,7 +13,7 @@
     </gov-heading>
 
     <gov-body>
-      Before you register an account on Hounslow Connect, we need to check if
+      Before you register an account on Help Yourself Sutton, we need to check if
       your organisation is already registered in our database.
     </gov-body>
     <gov-body

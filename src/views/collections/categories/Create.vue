@@ -1,6 +1,6 @@
 <template>
   <gov-width-container>
-    <vue-headful title="Hounslow Connect - Add Collection Category" />
+    <vue-headful title="Help Yourself Sutton - Add Collection Category" />
 
     <gov-back-link :to="{ name: 'admin-index-collections' }"
       >Back to collection categories</gov-back-link

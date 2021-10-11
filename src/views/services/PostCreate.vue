@@ -1,6 +1,6 @@
 <template>
   <gov-width-container>
-    <vue-headful title="Hounslow Connect - Add Service" />
+    <vue-headful title="Help Yourself Sutton - Add Service" />
 
     <gov-back-link
       :to="{

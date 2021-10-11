@@ -26,7 +26,7 @@
       <gov-hint slot="hint" for="name">
         The name of your organisation must be unique. The URL of your page will
         be: <br />
-        onehounslowconnect.london/organisations/{{ form.organisation.slug }}
+        helpyourselfsutton.org/organisations/{{ form.organisation.slug }}
       </gov-hint>
     </ck-text-input>
 

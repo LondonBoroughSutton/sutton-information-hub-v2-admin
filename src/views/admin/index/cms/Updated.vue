@@ -1,6 +1,6 @@
 <template>
   <gov-width-container>
-    <vue-headful :title="`Hounslow Connect - Admin: CMS Updated`" />
+    <vue-headful :title="`Help Yourself Sutton - Admin: CMS Updated`" />
 
     <gov-main-wrapper>
       <gov-grid-row>

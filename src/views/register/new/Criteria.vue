@@ -9,7 +9,7 @@
     </gov-back-link>
 
     <gov-heading size="l">
-      Is your organisation right for Hounslow Connect?
+      Is your organisation right for Help Yourself Sutton?
     </gov-heading>
 
     <gov-body>
@@ -19,7 +19,7 @@
     <gov-form-group>
       <gov-label>
         <strong>
-          The organisation that you want to be listed on Hounslow Connect is:
+          The organisation that you want to be listed on Help Yourself Sutton is:
         </strong>
       </gov-label>
 
@@ -40,7 +40,7 @@
           :value="form.organisation_types.includes('council')"
           id="organisation_types.council"
           name="organisation_types"
-          label="A Council or other statutory service, e.g. services delivered by the NHS or Hounslow CCG)"
+          label="A Council or other statutory service, e.g. services delivered by the NHS or Sutton CCG)"
           @input="onInput('council')"
         />
 
@@ -48,7 +48,7 @@
           :value="form.organisation_types.includes('commercial')"
           id="organisation_types.commercial"
           name="organisation_types"
-          label="A commercial provider offering services to Hounslow residents that support health, wellbeing and/or community for free or a reasonable charge"
+          label="A commercial provider offering services to Sutton residents that support health, wellbeing and/or community for free or a reasonable charge"
           @input="onInput('commercial')"
         />
 
@@ -56,7 +56,7 @@
           :value="form.organisation_types.includes('commercial_contracted')"
           id="organisation_types.commercial_contracted"
           name="organisation_types"
-          label="A commercial service that is contracted or spot purchased under a commissioning arrangement with Hounslow Council, intended to improve the health, wellbeing or independence of Hounslow residents"
+          label="A commercial service that is contracted or spot purchased under a commissioning arrangement with Sutton Council, intended to improve the health, wellbeing or independence of Sutton residents"
           @input="onInput('commercial_contracted')"
         />
       </gov-checkboxes>

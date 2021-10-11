@@ -1,6 +1,6 @@
 <template>
   <div>
-    <vue-headful title="Hounslow Connect - Admin: CMS" />
+    <vue-headful title="Help Yourself Sutton - Admin: CMS" />
 
     <gov-heading size="l">Frontend</gov-heading>
 

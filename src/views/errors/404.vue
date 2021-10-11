@@ -1,6 +1,6 @@
 <template>
   <gov-width-container>
-    <vue-headful title="Hounslow Connect - Page Not Found" />
+    <vue-headful title="Help Yourself Sutton - Page Not Found" />
 
     <gov-main-wrapper>
       <gov-grid-row>

@@ -1,6 +1,6 @@
 <template>
   <gov-width-container>
-    <vue-headful title="Hounslow Connect - Add Service" />
+    <vue-headful title="Help Yourself Sutton - Add Service" />
 
     <gov-back-link :to="{ name: 'services-index' }"
       >Back to services</gov-back-link
@@ -29,9 +29,9 @@
               <li>You can return to edit this {{ form.type }} at any time.</li>
               <li>
                 If you would like your service to accept referrals through One
-                Hounslow Connect, please contact the team at
-                <gov-link href="mailto:onehounslowconnect@hounslow.gov.uk"
-                  >onehounslowconnect@hounslow.gov.uk</gov-link
+                Help Yourself Sutton, please contact the team at
+                <gov-link href="mailto:contact@helpyourselfsutton.org"
+                  >contact@helpyourselfsutton.org</gov-link
                 >
               </li>
             </gov-list>
