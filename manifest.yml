@@ -1,0 +1,9 @@
+---
+applications:
+- name: helpyourselfsutton-admin
+  memory: 64M
+  instances: ((instances))
+  routes:
+  - route: ((route))
+  buildpacks:
+  - staticfile_buildpack

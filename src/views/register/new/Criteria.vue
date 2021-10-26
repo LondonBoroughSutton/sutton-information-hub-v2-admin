@@ -19,7 +19,8 @@
     <gov-form-group>
       <gov-label>
         <strong>
-          The organisation that you want to be listed on Help Yourself Sutton is:
+          The organisation that you want to be listed on Help Yourself Sutton
+          is:
         </strong>
       </gov-label>
 

@@ -11,7 +11,9 @@
           <gov-heading size="m">Add user</gov-heading>
 
           <gov-body
-            >Create users to be able to acces the back-end of the Help Yourself Sutton service (deciding their permissions in what they have access to)</gov-body
+            >Create users to be able to acces the back-end of the Help Yourself
+            Sutton service (deciding their permissions in what they have access
+            to)</gov-body
           >
 
           <user-form

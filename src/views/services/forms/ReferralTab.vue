@@ -4,7 +4,8 @@
     <gov-grid-row>
       <gov-grid-column width="one-half">
         <gov-body>
-          Your {{ type }} can be set up to accept referrals through Help Yourself Sutton. These referrals directly connect your {{ type }} to
+          Your {{ type }} can be set up to accept referrals through Help
+          Yourself Sutton. These referrals directly connect your {{ type }} to
           residents.
         </gov-body>
         <gov-body>
@@ -52,8 +53,8 @@
               for="referral_button_text"
               v-if="referral_method === 'internal'"
             >
-              By enabling referrals through Help Yourself Sutton, a button will be
-              added to your page which will link to the referral form.
+              By enabling referrals through Help Yourself Sutton, a button will
+              be added to your page which will link to the referral form.
             </gov-hint>
             <gov-hint
               for="referral_button_text"
