@@ -25,7 +25,7 @@ install:
 script:
   - echo "No tests ran"
 
-before_deploy:
+before_deploy: |
   if ! [[ ${HAS_RAN_BEFORE_DEPLOY} ]]; then
     export HAS_RAN_BEFORE_DEPLOY="TRUE"
 
