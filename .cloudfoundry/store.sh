@@ -8,8 +8,8 @@
 # ================================
 
 # Requires the following environment variables:
-# CF_SECRET_SERVICE
-# CF_SECRET_SERVICE_KEY
+# CF_ENV_SERVICE
+# CF_ENV_SERVICE_KEY
 
 # Bail out on first error.
 set -e
@@ -22,7 +22,7 @@ BLUE='\e[1;34m'
 GREEN='\e[1;32m'
 ENDCOLOUR='\e[1;m'
 
-if [ -z "$CF_SECRET_SERVICE" ] || [ -z "$CF_SECRET_SERVICE_KEY" ]; then
+if [ -z "$CF_ENV_SERVICE" ] || [ -z "$CF_ENV_SERVICE_KEY" ]; then
     echo -e "${RED}Missing variables for cf service-key${ENDCOLOUR}"
     exit
 fi
@@ -89,7 +89,7 @@ fi
 cf login -a $CF_API -u $CF_USERNAME -p $CF_PASSWORD -o $CF_ORGANISATION -s $CF_SPACE
 
 # Get the .env file from the secret S3 bucket
-cf service-key $CF_SECRET_SERVICE $CF_SECRET_SERVICE_KEY | sed -n '/{/,/}/p' | jq . > secret_access.json
+cf service-key $CF_ENV_SERVICE $CF_ENV_SERVICE_KEY | sed -n '/{/,/}/p' | jq . > secret_access.json
 
 # Export the AWS S3 access credentials for use by the AWS CLI
 export AWS_ACCESS_KEY_ID=`jq -r .aws_access_key_id secret_access.json`
