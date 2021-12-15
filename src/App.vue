@@ -59,6 +59,7 @@ export default {
         { text: "Locations", to: { name: "locations-index" } },
         { text: "Referrals", to: { name: "referrals-index" } },
         { text: "Organisations", to: { name: "organisations-index" } },
+        { text: "Pages", to: { name: "information-pages-index" } },
         {
           text: "Users",
           to: { name: "users-index" }
