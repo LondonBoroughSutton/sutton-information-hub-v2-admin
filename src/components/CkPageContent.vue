@@ -19,9 +19,9 @@
         :id="`${sectionId}-copy-${index}`"
         :label="section.label"
         :hint="section.hint"
-        :error="errors.get(`content_${sectionId}_title`)"
+        :error="errors.get(`content_${sectionId}_copy_${index}`)"
         large
-        :maxlength="3000"
+        :maxlength="60000"
       />
     </div>
   </div>
