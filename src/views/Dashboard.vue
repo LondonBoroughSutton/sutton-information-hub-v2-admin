@@ -13,8 +13,8 @@
             From here, you can add and edit your pages on Help Yourself Sutton,
             as well as manage referrals into your service. For any support,
             contact
-            <gov-link href="mailto:contact@helpyourselfsutton.org">
-              contact@helpyourselfsutton.org
+            <gov-link :href="`mailto:${contactEmail}`">
+              {{ contactEmail }}
             </gov-link>
             or view our
             <gov-link :to="{ name: 'help-index' }">help videos</gov-link>

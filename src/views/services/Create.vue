@@ -30,9 +30,9 @@
               <li>
                 If you would like your service to accept referrals through One
                 Help Yourself Sutton, please contact the team at
-                <gov-link href="mailto:contact@helpyourselfsutton.org"
-                  >contact@helpyourselfsutton.org</gov-link
-                >
+                <gov-link :href="`mailto:${contactEmail}`">{{
+                  contactEmail
+                }}</gov-link>
               </li>
             </gov-list>
 

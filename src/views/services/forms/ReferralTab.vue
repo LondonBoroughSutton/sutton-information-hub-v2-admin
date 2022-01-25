@@ -174,7 +174,7 @@ export default {
       return this.referral_method !== null && this.referral_method !== "none";
     },
     contactAdminTeamEmail() {
-      const to = "contact@helpyourselfsutton.org";
+      const to = this.contactEmail;
       const subject = `Turn referrals on for my ${this.type}`;
       const body = `${this.$options.filters.ucfirst(
         this.type
