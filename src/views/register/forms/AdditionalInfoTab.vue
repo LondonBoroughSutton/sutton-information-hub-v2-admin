@@ -262,7 +262,7 @@ export default {
     },
 
     videoEmbedHelpHref() {
-      const to = "contact@helpyourselfsutton.org";
+      const to = this.contactEmail;
       const subject = `Make a video for my ${this.service.type}`;
       const body = `My ${this.service.type} is: xxx\n\nI am interested in making a video for my ${this.service.type} page on Help Yourself Sutton.`;
 
