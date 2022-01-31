@@ -116,7 +116,7 @@ export default {
           type: "Locations Export",
           description:
             "Generate a report with all the locations of services on " +
-            "Help Yourself Sutton, and the number of services delivered at each.",
+            "Sutton Information Hub, and the number of services delivered at each.",
           scheduleForm: new Form({
             report_type: "Locations Export",
             repeat_type: null
@@ -130,7 +130,7 @@ export default {
         {
           type: "Organisations Export",
           description:
-            "Generate a report of all the organisations on Help Yourself Sutton " +
+            "Generate a report of all the organisations on Sutton Information Hub " +
             "with the number of services and attributed accounts.",
           scheduleForm: new Form({
             report_type: "Organisations Export",

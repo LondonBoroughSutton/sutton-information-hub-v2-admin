@@ -1,6 +1,6 @@
 <template>
   <gov-width-container>
-    <vue-headful title="Help Yourself Sutton - Login" />
+    <vue-headful title="Sutton Information Hub - Login" />
 
     <gov-back-link :to="{ name: 'dashboard' }">Back to dashboard</gov-back-link>
     <gov-main-wrapper>
@@ -10,7 +10,7 @@
 
           <template v-if="!validateRequest">
             <gov-body size="l">
-              Click below to login to the Help Yourself Sutton admin portal:
+              Click below to login to the Sutton Information Hub admin portal:
             </gov-body>
 
             <gov-button :href="loginUrl">Login</gov-button>

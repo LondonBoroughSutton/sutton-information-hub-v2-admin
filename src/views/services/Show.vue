@@ -7,7 +7,7 @@
       <ck-loader v-if="loading" />
       <gov-grid-row v-else>
         <vue-headful
-          :title="`Help Yourself Sutton - Service: ${service.name}`"
+          :title="`Sutton Information Hub - Service: ${service.name}`"
         />
 
         <gov-grid-column width="full">

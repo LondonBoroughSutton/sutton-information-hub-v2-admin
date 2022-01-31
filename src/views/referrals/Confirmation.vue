@@ -1,6 +1,6 @@
 <template>
   <gov-width-container>
-    <vue-headful title="Help Yourself Sutton - View Referral" />
+    <vue-headful title="Sutton Information Hub - View Referral" />
 
     <gov-back-link :to="{ name: 'referrals-index' }"
       >Back to referrals</gov-back-link

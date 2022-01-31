@@ -4,7 +4,7 @@
     <template v-else>
       <vue-headful
         :title="
-          `Help Yourself Sutton - Organisation Updated: ${organisation.name}`
+          `Sutton Information Hub - Organisation Updated: ${organisation.name}`
         "
       />
 

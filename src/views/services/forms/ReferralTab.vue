@@ -53,8 +53,8 @@
               for="referral_button_text"
               v-if="referral_method === 'internal'"
             >
-              By enabling referrals through Help Yourself Sutton, a button will
-              be added to your page which will link to the referral form.
+              By enabling referrals through Sutton Information Hub, a button
+              will be added to your page which will link to the referral form.
             </gov-hint>
             <gov-hint
               for="referral_button_text"
@@ -162,7 +162,7 @@ export default {
     referralMethodOptions() {
       return [
         { text: "Please select", value: null, disabled: true },
-        { text: "Yes - Through Help Yourself Sutton", value: "internal" },
+        { text: "Yes - Through Sutton Information Hub", value: "internal" },
         { text: "Yes - Through an external form", value: "external" },
         {
           text: `No - This ${this.type} doesn’t accept referrals`,
@@ -178,7 +178,7 @@ export default {
       const subject = `Turn referrals on for my ${this.type}`;
       const body = `${this.$options.filters.ucfirst(
         this.type
-      )} Name: XXX\n\nWe are interested in finding out more about accepting referrals through Help Yourself Sutton.`;
+      )} Name: XXX\n\nWe are interested in finding out more about accepting referrals through Sutton Information Hub.`;
 
       return `mailto:${to}?subject=${encodeURIComponent(
         subject

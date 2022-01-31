@@ -1,6 +1,6 @@
 <template>
   <gov-width-container>
-    <vue-headful title="Help Yourself Sutton - Add Location" />
+    <vue-headful title="Sutton Information Hub - Add Location" />
 
     <gov-back-link :to="{ name: 'locations-index' }"
       >Back to locations</gov-back-link

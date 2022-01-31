@@ -5,7 +5,7 @@
       <gov-grid-column width="one-half">
         <gov-body>
           These sections should describe what your {{ type }} offers and is the
-          main body of content on your page on Help Yourself Sutton.
+          main body of content on your page on Sutton Information Hub.
         </gov-body>
 
         <gov-section-break size="l" />

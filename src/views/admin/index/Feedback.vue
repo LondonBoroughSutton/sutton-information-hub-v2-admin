@@ -1,6 +1,6 @@
 <template>
   <div>
-    <vue-headful title="Help Yourself Sutton - Admin: Page Feedback" />
+    <vue-headful title="Sutton Information Hub - Admin: Page Feedback" />
 
     <gov-heading size="l">Feedback</gov-heading>
 

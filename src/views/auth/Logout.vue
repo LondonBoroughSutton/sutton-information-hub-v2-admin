@@ -1,6 +1,6 @@
 <template>
   <gov-width-container>
-    <vue-headful title="Help Yourself Sutton - Logout" />
+    <vue-headful title="Sutton Information Hub - Logout" />
 
     <gov-main-wrapper>
       <gov-grid-row>

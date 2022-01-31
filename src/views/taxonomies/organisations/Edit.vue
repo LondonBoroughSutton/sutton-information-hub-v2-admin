@@ -4,7 +4,7 @@
     <template v-else>
       <vue-headful
         :title="
-          `Help Yourself Sutton - Edit Taxonomy Organisation: ${taxonomy.name}`
+          `Sutton Information Hub - Edit Taxonomy Organisation: ${taxonomy.name}`
         "
       />
 

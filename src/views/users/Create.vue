@@ -1,6 +1,6 @@
 <template>
   <gov-width-container>
-    <vue-headful title="Help Yourself Sutton - Add User" />
+    <vue-headful title="Sutton Information Hub - Add User" />
 
     <gov-back-link :to="{ name: 'users-index' }">Back to users</gov-back-link>
     <gov-main-wrapper>

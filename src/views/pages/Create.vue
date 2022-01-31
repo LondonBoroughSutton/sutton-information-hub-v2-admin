@@ -1,6 +1,6 @@
 <template>
   <gov-width-container>
-    <vue-headful title="Help Yourself Sutton - Add Page" />
+    <vue-headful title="Sutton Information Hub - Add Page" />
 
     <gov-back-link :to="{ name: 'pages-index' }">Back to pages</gov-back-link>
     <gov-main-wrapper>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <vue-headful title="Help Yourself Sutton - Admin: Collections" />
+    <vue-headful title="Sutton Information Hub - Admin: Collections" />
 
     <gov-tabs :tabs="tabs">
       <router-view />

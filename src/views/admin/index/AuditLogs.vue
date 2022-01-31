@@ -1,6 +1,6 @@
 <template>
   <div>
-    <vue-headful title="Help Yourself Sutton - Admin: Audits" />
+    <vue-headful title="Sutton Information Hub - Admin: Audits" />
 
     <gov-heading size="l">Audit logs</gov-heading>
 

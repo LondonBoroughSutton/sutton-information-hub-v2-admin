@@ -7,7 +7,7 @@
       <ck-loader v-if="loadingReferral" />
       <template v-else>
         <vue-headful
-          :title="`Help Yourself Sutton - Referral: ${referral.name}`"
+          :title="`Sutton Information Hub - Referral: ${referral.name}`"
         />
 
         <gov-grid-row>
