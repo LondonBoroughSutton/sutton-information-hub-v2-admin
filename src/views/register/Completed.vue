@@ -5,7 +5,7 @@
     </gov-heading>
 
     <gov-body>
-      Thank you for registering on Help Yourself Sutton.
+      Thank you for registering on Sutton Information Hub.
     </gov-body>
 
     <gov-body>

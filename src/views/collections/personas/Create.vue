@@ -1,6 +1,6 @@
 <template>
   <gov-width-container>
-    <vue-headful title="Help Yourself Sutton - Add Collection Persona" />
+    <vue-headful title="Sutton Information Hub - Add Collection Persona" />
 
     <gov-back-link :to="{ name: 'admin-index-collections-personas' }"
       >Back to collection personas</gov-back-link

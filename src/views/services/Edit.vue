@@ -3,7 +3,7 @@
     <ck-loader v-if="loading" />
     <template v-else>
       <vue-headful
-        :title="`Help Yourself Sutton - Edit Service: ${service.name}`"
+        :title="`Sutton Information Hub - Edit Service: ${service.name}`"
       />
 
       <!-- Edit form -->

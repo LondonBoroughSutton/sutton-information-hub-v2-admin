@@ -1,6 +1,6 @@
 <template>
   <gov-width-container>
-    <vue-headful title="Help Yourself Sutton - Edit Thesaurus" />
+    <vue-headful title="Sutton Information Hub - Edit Thesaurus" />
 
     <gov-back-link :to="{ name: 'admin-index-search-engine' }"
       >Back to thesaurus</gov-back-link

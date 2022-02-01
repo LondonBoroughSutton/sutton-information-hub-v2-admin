@@ -1,6 +1,6 @@
 <template>
   <gov-width-container>
-    <vue-headful title="Help Yourself Sutton - Add Service" />
+    <vue-headful title="Sutton Information Hub - Add Service" />
 
     <gov-back-link :to="{ name: 'services-index' }"
       >Back to services</gov-back-link
@@ -29,7 +29,7 @@
               <li>You can return to edit this {{ form.type }} at any time.</li>
               <li>
                 If you would like your service to accept referrals through One
-                Help Yourself Sutton, please contact the team at
+                Sutton Information Hub, please contact the team at
                 <gov-link :href="`mailto:${contactEmail}`">{{
                   contactEmail
                 }}</gov-link>

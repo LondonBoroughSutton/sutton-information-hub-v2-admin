@@ -273,7 +273,7 @@ export default {
     videoEmbedHelpHref() {
       const to = this.contactEmail;
       const subject = `Make a video for my ${this.type}`;
-      const body = `My ${this.type} is: xxx\n\nI am interested in making a video for my ${this.type} page on Help Yourself Sutton.`;
+      const body = `My ${this.type} is: xxx\n\nI am interested in making a video for my ${this.type} page on Sutton Information Hub.`;
 
       return `mailto:${to}?subject=${encodeURIComponent(
         subject

@@ -4,7 +4,7 @@
     <template v-else>
       <vue-headful
         :title="
-          `Help Yourself Sutton - Edit Collection Persona: ${collection.name}`
+          `Sutton Information Hub - Edit Collection Persona: ${collection.name}`
         "
       />
 

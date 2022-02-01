@@ -1,6 +1,6 @@
 <template>
   <gov-width-container>
-    <vue-headful title="Help Yourself Sutton - Add Service Eligibility" />
+    <vue-headful title="Sutton Information Hub - Add Service Eligibility" />
 
     <gov-back-link
       :to="{ name: 'admin-index-taxonomies-service-eligibilities' }"

@@ -1,6 +1,6 @@
 <template>
   <gov-width-container>
-    <vue-headful title="Help Yourself Sutton - View Update Request" />
+    <vue-headful title="Sutton Information Hub - View Update Request" />
 
     <gov-back-link :to="{ name: 'update-requests-index' }"
       >Back to update requests</gov-back-link

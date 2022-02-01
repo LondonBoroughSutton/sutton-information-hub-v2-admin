@@ -1,14 +1,14 @@
 <template>
   <div id="app">
     <vue-headful
-      title="Help Yourself Sutton"
+      title="Sutton Information Hub"
       :head="headAttributes"
       :html="htmlAttributes"
     />
 
     <gov-skip-link href="#main-content">Skip to main content</gov-skip-link>
 
-    <gov-header service-name="Help Yourself Sutton" :navigation="headerNav" />
+    <gov-header service-name="Sutton Information Hub" :navigation="headerNav" />
 
     <div class="govuk-width-container">
       <main

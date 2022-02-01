@@ -18,7 +18,7 @@
           "
           id="type"
           label="What is it?"
-          hint="This option changes how your page is described on Help Yourself Sutton"
+          hint="This option changes how your page is described on Sutton Information Hub"
           :options="typeOptions"
           :error="errors.get('type')"
         />

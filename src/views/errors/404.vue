@@ -1,6 +1,6 @@
 <template>
   <gov-width-container>
-    <vue-headful title="Help Yourself Sutton - Page Not Found" />
+    <vue-headful title="Sutton Information Hub - Page Not Found" />
 
     <gov-main-wrapper>
       <gov-grid-row>

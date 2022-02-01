@@ -9,7 +9,7 @@
     </gov-back-link>
 
     <gov-heading size="l">
-      Is your organisation right for Help Yourself Sutton?
+      Is your organisation right for Sutton Information Hub?
     </gov-heading>
 
     <gov-body>
@@ -19,7 +19,7 @@
     <gov-form-group>
       <gov-label>
         <strong>
-          The organisation that you want to be listed on Help Yourself Sutton
+          The organisation that you want to be listed on Sutton Information Hub
           is:
         </strong>
       </gov-label>

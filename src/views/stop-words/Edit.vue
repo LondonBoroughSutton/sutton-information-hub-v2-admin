@@ -1,6 +1,6 @@
 <template>
   <gov-width-container>
-    <vue-headful title="Help Yourself Sutton - Edit Stop Words" />
+    <vue-headful title="Sutton Information Hub - Edit Stop Words" />
 
     <gov-back-link :to="{ name: 'admin-index-search-engine-stop-words' }"
       >Back to stop words</gov-back-link

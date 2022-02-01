@@ -1,6 +1,6 @@
 <template>
   <div>
-    <vue-headful title="Help Yourself Sutton - Pages" />
+    <vue-headful title="Sutton Information Hub - Pages" />
 
     <gov-grid-row>
       <gov-grid-column width="two-thirds">
