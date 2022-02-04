@@ -80,6 +80,7 @@
                 @update:logo_file_id="form.logo_file_id = $event"
                 :status.sync="form.status"
                 :gallery_items.sync="form.gallery_items"
+                :tags.sync="form.tags"
               >
                 <gov-button @click="onNext" start>Next</gov-button>
               </details-tab>
@@ -258,6 +259,7 @@ export default {
         ],
         offerings: [],
         gallery_items: [],
+        tags: [],
         category_taxonomies: [],
         eligibility_types: {
           taxonomies: [],
