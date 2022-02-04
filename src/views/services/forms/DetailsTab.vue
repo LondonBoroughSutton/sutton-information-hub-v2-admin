@@ -139,6 +139,17 @@
           :errors="errors"
         />
 
+        <gov-heading size="m">Tags</gov-heading>
+
+        <gov-body> Select tags to help users find the {{ type }}. </gov-body>
+
+        <tag-input
+          :service-tags="tags"
+          @input="$emit('update:tags', $event)"
+          @clear="$emit('clear', $event)"
+          :errors="errors"
+        />
+
         <slot />
       </gov-grid-column>
     </gov-grid-row>
@@ -148,10 +159,11 @@
 <script>
 import CkImageInput from "@/components/Ck/CkImageInput";
 import CkGalleryItemsInput from "@/views/services/inputs/GalleryItemsInput";
+import TagInput from "@/views/services/inputs/TagInput";
 
 export default {
   name: "DetailsTab",
-  components: { CkImageInput, CkGalleryItemsInput },
+  components: { CkImageInput, CkGalleryItemsInput, TagInput },
   props: {
     errors: {
       required: true
@@ -180,6 +192,9 @@ export default {
       required: true
     },
     gallery_items: {
+      required: true
+    },
+    tags: {
       required: true
     },
     id: {
