@@ -3,13 +3,23 @@
 # ================================
 # Stores an object in the AWS S3 Secrets Bucket
 # This script will install the AWS CLI and the CF CLI
-# If you don't want these on your system, install using the docker helper script:
-# ./develop bash cloudfoundry/store_env.sh
+# If you don't want these on your system, install using the docker helper script.
+# First, if you have an environment file, set the environment variables:
+# source .cloudfoundry/environment.[environment]
+# export CF_USERNAME CF_PASSWORD CF_ORGANISATION CF_SPACE CF_ENV_SERVICE CF_ENV_SERVICE_KEY
+# Then run the helper script:
+# ./develop store
 # ================================
 
 # Requires the following environment variables:
-# CF_ENV_SERVICE
-# CF_ENV_SERVICE_KEY
+# $CF_ENV_SERVICE = The name of the S3 bucket to store the files
+# $CF_ENV_SERVICE_KEY = The name of the service key that holds the access credentials
+
+# Can accept the following environment variables
+# $CF_USERNAME = The Cloud Foundry username.
+# $CF_PASSWORD = The Cloud Foundry password.
+# $CF_ORGANISATION = The Cloud Foundry organisation.
+# $CF_SPACE = The Cloud Foundry space.
 
 # Bail out on first error.
 set -e
@@ -21,11 +31,6 @@ RED='\e[1;31m'
 BLUE='\e[1;34m'
 GREEN='\e[1;32m'
 ENDCOLOUR='\e[1;m'
-
-if [ -z "$CF_ENV_SERVICE" ] || [ -z "$CF_ENV_SERVICE_KEY" ]; then
-    echo -e "${RED}Missing variables for cf service-key${ENDCOLOUR}"
-    exit
-fi
 
 # Get the Cloud Foundry details
 if [ -z "$CF_USERNAME" ]; then
@@ -86,8 +91,6 @@ export AWS_BUCKET_NAME=`jq -r .bucket_name secret_access.json`
 export AWS_DEFAULT_OUTPUT=json
 
 rm secret_access.json
-
-aws s3api put-object --bucket ${AWS_BUCKET_NAME} --key "$ENV_SECRET_FILE" --body "$APPROOT/$FILE_PATH"
 
 # Select what operation to perform
 read -p '(L)ist, (G)et, (P)ut or (D)elete an object: ' ACTION
