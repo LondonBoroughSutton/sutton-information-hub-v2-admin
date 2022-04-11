@@ -1,6 +1,6 @@
 <template>
   <div>
-    <vue-headful title="Hounslow Connect - Admin: Taxonomies" />
+    <vue-headful title="Sutton Information Hub - Admin: Taxonomies" />
 
     <gov-tabs :tabs="tabs">
       <router-view />

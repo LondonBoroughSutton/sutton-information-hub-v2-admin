@@ -3,7 +3,7 @@
     <ck-loader v-if="loading" />
     <template v-else>
       <vue-headful
-        :title="`Hounslow Connect - Edit Service: ${service.name}`"
+        :title="`Sutton Information Hub - Edit Service: ${service.name}`"
       />
 
       <!-- Edit form -->
@@ -53,6 +53,7 @@
                   @update:logo="form.logo = $event"
                   :status.sync="form.status"
                   :gallery_items.sync="form.gallery_items"
+                  :tags.sync="form.tags"
                   :id="service.id"
                 >
                   <gov-button @click="onNext" start>Next</gov-button>
@@ -75,6 +76,7 @@
                   :contact_name.sync="form.contact_name"
                   :contact_phone.sync="form.contact_phone"
                   :contact_email.sync="form.contact_email"
+                  :cqc_location_id.sync="form.cqc_location_id"
                 >
                   <gov-button @click="onNext" start>Next</gov-button>
                 </additional-info-tab>
@@ -305,6 +307,7 @@ export default {
         contact_name: this.service.contact_name || "",
         contact_phone: this.service.contact_phone || "",
         contact_email: this.service.contact_email || "",
+        cqc_location_id: this.service.cqc_location_id || "",
         show_referral_disclaimer: this.service.show_referral_disclaimer,
         referral_method: this.service.referral_method,
         referral_button_text: this.service.referral_button_text || "",
@@ -316,6 +319,7 @@ export default {
           file_id: galleryItem.file_id,
           image: null
         })),
+        tags: this.service.tags,
         category_taxonomies: this.service.category_taxonomies.map(
           taxonomy => taxonomy.id
         ),
@@ -386,6 +390,9 @@ export default {
           }
           if (data.contact_email === (this.service.contact_email || "")) {
             delete data.contact_email;
+          }
+          if (data.cqc_location_id === (this.service.cqc_location_id || "")) {
+            delete data.cqc_location_id;
           }
           if (
             data.show_referral_disclaimer ===

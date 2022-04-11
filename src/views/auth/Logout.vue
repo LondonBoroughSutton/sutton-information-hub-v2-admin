@@ -1,6 +1,6 @@
 <template>
   <gov-width-container>
-    <vue-headful title="Hounslow Connect - Logout" />
+    <vue-headful title="Sutton Information Hub - Logout" />
 
     <gov-main-wrapper>
       <gov-grid-row>

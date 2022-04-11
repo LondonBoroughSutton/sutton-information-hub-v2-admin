@@ -1,6 +1,6 @@
 <template>
   <gov-width-container>
-    <vue-headful title="Hounslow Connect - Register" />
+    <vue-headful title="Sutton Information Hub - Register" />
 
     <gov-error-summary v-if="form.$errors.any()" title="Check for errors">
       <gov-list>

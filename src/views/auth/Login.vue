@@ -1,6 +1,6 @@
 <template>
   <gov-width-container>
-    <vue-headful title="Hounslow Connect - Login" />
+    <vue-headful title="Sutton Information Hub - Login" />
 
     <gov-back-link :to="{ name: 'dashboard' }">Back to dashboard</gov-back-link>
     <gov-main-wrapper>
@@ -10,14 +10,14 @@
 
           <template v-if="!validateRequest">
             <gov-body size="l">
-              Click below to login to the Hounslow Connect admin portal:
+              Click below to login to the Sutton Information Hub admin portal:
             </gov-body>
 
             <gov-button :href="loginUrl">Login</gov-button>
 
             <gov-body size="s">
               For security reasons, you will be automatically logged out after
-              20 minutes.
+              {{ sessionMinutes }} minutes.
             </gov-body>
           </template>
         </gov-grid-column>

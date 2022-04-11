@@ -1,6 +1,6 @@
 <template>
   <gov-width-container>
-    <vue-headful title="Hounslow Connect - Add Service" />
+    <vue-headful title="Sutton Information Hub - Add Service" />
 
     <gov-back-link :to="{ name: 'services-index' }">
       Back to services
@@ -12,8 +12,8 @@
           <gov-heading size="xl">Add a new Service Page</gov-heading>
 
           <gov-body>
-            You’re about to add a service/club/activity/group to One Hounslow
-            Connect. Here are some things you should know:
+            You’re about to add a service/club/activity/group to Help Youself
+            Sutton. Here are some things you should know:
           </gov-body>
 
           <gov-list bullet>

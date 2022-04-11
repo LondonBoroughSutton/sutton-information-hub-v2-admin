@@ -16,7 +16,7 @@
           @input="$emit('input', { field: 'type', value: $event })"
           id="type"
           label="What is it?"
-          hint="This option changes how your page is described on Hounslow Connect"
+          hint="This option changes how your page is described on Sutton Information Hub"
           :options="typeOptions"
           :error="errors.get('service.type')"
         />
@@ -32,7 +32,7 @@
           <gov-hint slot="hint" for="name">
             The name of your {{ service.type }} must be unique. The URL of your
             page will be: <br />
-            onehounslowconnect.london/services/{{ service.slug }}
+            suttoninformationhub.org.uk/services/{{ service.slug }}
           </gov-hint>
         </ck-text-input>
 

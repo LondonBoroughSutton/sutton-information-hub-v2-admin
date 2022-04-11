@@ -321,6 +321,14 @@
           <gov-table-cell>{{ service.contact_phone }}</gov-table-cell>
         </gov-table-row>
 
+        <gov-table-row v-if="service.hasOwnProperty('cqc_location_id')">
+          <gov-table-header top scope="row">CQC Location ID</gov-table-header>
+          <gov-table-cell v-if="original">{{
+            original.cqc_location_id | originalExists
+          }}</gov-table-cell>
+          <gov-table-cell>{{ service.cqc_location_id }}</gov-table-cell>
+        </gov-table-row>
+
         <gov-table-row v-if="service.hasOwnProperty('social_medias')">
           <gov-table-header top scope="row">Social medias</gov-table-header>
           <gov-table-cell break v-if="original">
@@ -374,6 +382,37 @@
           <gov-table-cell>{{
             service.referral_method | referralMethod
           }}</gov-table-cell>
+        </gov-table-row>
+
+        <gov-table-row v-if="service.hasOwnProperty('tags')">
+          <gov-table-header top scope="row">Tags</gov-table-header>
+          <gov-table-cell v-if="original">
+            <gov-list
+              v-if="
+                original.hasOwnProperty('tags') && Array.isArray(original.tags)
+              "
+              bullet
+            >
+              <li
+                v-for="(tag, index) in original.tags"
+                :key="`ServiceTag::Original::${index}`"
+              >
+                {{ tag.label }}
+              </li>
+            </gov-list>
+            <template v-else>None</template>
+          </gov-table-cell>
+          <gov-table-cell>
+            <gov-list v-if="Array.isArray(service.tags)" bullet>
+              <li
+                v-for="(tag, index) in service.tags"
+                :key="`ServiceTag::New::${index}`"
+              >
+                {{ tag.label }}
+              </li>
+            </gov-list>
+            <template v-else>None</template>
+          </gov-table-cell>
         </gov-table-row>
 
         <gov-table-row v-if="service.hasOwnProperty('category_taxonomies')">

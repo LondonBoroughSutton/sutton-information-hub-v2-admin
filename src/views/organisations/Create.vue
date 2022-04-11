@@ -1,6 +1,6 @@
 <template>
   <gov-width-container>
-    <vue-headful title="Hounslow Connect - Add Organisation" />
+    <vue-headful title="Sutton Information Hub - Add Organisation" />
 
     <gov-back-link :to="{ name: 'organisations-index' }"
       >Back to organisations</gov-back-link

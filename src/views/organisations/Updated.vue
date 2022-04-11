@@ -3,7 +3,9 @@
     <ck-loader v-if="loading" />
     <template v-else>
       <vue-headful
-        :title="`Hounslow Connect - Organisation Updated: ${organisation.name}`"
+        :title="
+          `Sutton Information Hub - Organisation Updated: ${organisation.name}`
+        "
       />
 
       <gov-back-link

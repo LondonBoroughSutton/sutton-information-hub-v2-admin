@@ -5,7 +5,7 @@
     </gov-heading>
 
     <gov-body>
-      Thank you for registering on Hounslow Connect.
+      Thank you for registering on Sutton Information Hub.
     </gov-body>
 
     <gov-body>
@@ -23,9 +23,7 @@
     <gov-body>
       If you haven't heard back from us within 5 working days please email the
       team at
-      <gov-link href="mailto:onehounslowconnect@hounslow.gov.uk"
-        >onehounslowconnect@hounslow.gov.uk</gov-link
-      >
+      <gov-link :href="`mailto:${contactEmail}`">{{ contactEmail }}</gov-link>
     </gov-body>
 
     <gov-button :to="{ name: 'dashboard' }" start>Home</gov-button>

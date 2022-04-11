@@ -18,7 +18,7 @@
           "
           id="type"
           label="What is it?"
-          hint="This option changes how your page is described on Hounslow Connect"
+          hint="This option changes how your page is described on Sutton Information Hub"
           :options="typeOptions"
           :error="errors.get('type')"
         />
@@ -139,6 +139,17 @@
           :errors="errors"
         />
 
+        <gov-heading size="m">Tags</gov-heading>
+
+        <gov-body> Select tags to help users find the {{ type }}. </gov-body>
+
+        <tag-input
+          :service-tags="tags"
+          @input="$emit('update:tags', $event)"
+          @clear="$emit('clear', $event)"
+          :errors="errors"
+        />
+
         <slot />
       </gov-grid-column>
     </gov-grid-row>
@@ -148,10 +159,11 @@
 <script>
 import CkImageInput from "@/components/Ck/CkImageInput";
 import CkGalleryItemsInput from "@/views/services/inputs/GalleryItemsInput";
+import TagInput from "@/views/services/inputs/TagInput";
 
 export default {
   name: "DetailsTab",
-  components: { CkImageInput, CkGalleryItemsInput },
+  components: { CkImageInput, CkGalleryItemsInput, TagInput },
   props: {
     errors: {
       required: true
@@ -182,6 +194,9 @@ export default {
     gallery_items: {
       required: true
     },
+    tags: {
+      required: true
+    },
     id: {
       required: false,
       type: String
@@ -205,7 +220,7 @@ export default {
   },
   computed: {
     logoHelpHref() {
-      const to = "onehounslowconnect@hounslow.gov.uk";
+      const to = this.contactEmail;
       const subject = "Help uploading service logo";
 
       return `mailto:${to}?subject=${encodeURIComponent(subject)}`;

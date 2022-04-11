@@ -3,7 +3,9 @@
     <ck-loader v-if="loading" />
     <template v-else>
       <vue-headful
-        :title="`Hounslow Connect - Add Service Location for: ${service.name}`"
+        :title="
+          `Sutton Information Hub - Add Service Location for: ${service.name}`
+        "
       />
 
       <gov-back-link

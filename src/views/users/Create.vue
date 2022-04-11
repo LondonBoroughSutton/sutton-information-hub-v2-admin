@@ -1,6 +1,6 @@
 <template>
   <gov-width-container>
-    <vue-headful title="Hounslow Connect - Add User" />
+    <vue-headful title="Sutton Information Hub - Add User" />
 
     <gov-back-link :to="{ name: 'users-index' }">Back to users</gov-back-link>
     <gov-main-wrapper>
@@ -11,8 +11,8 @@
           <gov-heading size="m">Add user</gov-heading>
 
           <gov-body
-            >Create users to be able to acces the back-end of the One Hounslow
-            Connect service (deciding their permissions in what they have access
+            >Create users to be able to acces the back-end of the Help Yourself
+            Sutton service (deciding their permissions in what they have access
             to)</gov-body
           >
 

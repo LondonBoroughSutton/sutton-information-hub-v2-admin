@@ -4,7 +4,7 @@
     <template v-else>
       <vue-headful
         :title="
-          `Hounslow Connect - Edit Collection Category: ${collection.name}`
+          `Sutton Information Hub - Edit Collection Category: ${collection.name}`
         "
       />
 
@@ -32,6 +32,7 @@
               :icon.sync="form.icon"
               :order.sync="form.order"
               :enabled.sync="form.enabled"
+              :homepage.sync="form.homepage"
               :sideboxes.sync="form.sideboxes"
               :category_taxonomies.sync="form.category_taxonomies"
               @clear="form.$errors.clear($event)"
@@ -88,6 +89,7 @@ export default {
         icon: this.collection.icon,
         order: this.collection.order,
         enabled: this.collection.enabled,
+        homepage: this.collection.homepage,
         sideboxes: this.collection.sideboxes,
         category_taxonomies: this.collection.category_taxonomies.map(
           taxonomy => taxonomy.id

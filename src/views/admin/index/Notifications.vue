@@ -1,6 +1,6 @@
 <template>
   <div>
-    <vue-headful title="Hounslow Connect - Admin: Notifications" />
+    <vue-headful title="Sutton Information Hub - Admin: Notifications" />
 
     <gov-heading size="l">Notifications</gov-heading>
     <ck-loader v-if="loading" />

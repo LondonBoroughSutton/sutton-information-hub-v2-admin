@@ -1,14 +1,14 @@
 <template>
   <div id="app">
     <vue-headful
-      title="Hounslow Connect"
+      title="Sutton Information Hub"
       :head="headAttributes"
       :html="htmlAttributes"
     />
 
     <gov-skip-link href="#main-content">Skip to main content</gov-skip-link>
 
-    <gov-header service-name="Hounslow Connect" :navigation="headerNav" />
+    <gov-header service-name="Sutton Information Hub" :navigation="headerNav" />
 
     <div class="govuk-width-container">
       <main
@@ -59,6 +59,7 @@ export default {
         { text: "Locations", to: { name: "locations-index" } },
         { text: "Referrals", to: { name: "referrals-index" } },
         { text: "Organisations", to: { name: "organisations-index" } },
+        { text: "Pages", to: { name: "pages-index" } },
         {
           text: "Users",
           to: { name: "users-index" }
