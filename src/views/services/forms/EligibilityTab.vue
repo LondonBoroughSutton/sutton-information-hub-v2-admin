@@ -33,80 +33,80 @@
 </template>
 
 <script>
-import http from "@/http";
-import ServiceEligibilityInput from "../inputs/ServiceEligibilityInput";
+import http from '@/http'
+import ServiceEligibilityInput from '../inputs/ServiceEligibilityInput'
 
 export default {
-  name: "EligibilityTab",
+  name: 'EligibilityTab',
   components: { ServiceEligibilityInput },
 
   props: {
     serviceEligibilityTypes: {
       required: true,
-      type: Object
+      type: Object,
     },
     type: {
       required: true,
-      type: String
+      type: String,
     },
     errors: {
-      required: true
-    }
+      required: true,
+    },
   },
 
   data() {
     return {
       loading: false,
-      eligibilityTypes: []
-    };
+      eligibilityTypes: [],
+    }
   },
 
   methods: {
     async fetchServiceEligibilites() {
-      this.loading = true;
+      this.loading = true
       const { data: eligibilityTypes } = await http.get(
-        "/taxonomies/service-eligibilities"
-      );
-      this.eligibilityTypes = eligibilityTypes.data;
-      this.loading = false;
+        '/taxonomies/service-eligibilities'
+      )
+      this.eligibilityTypes = eligibilityTypes.data
+      this.loading = false
     },
     updateServiceEligibilityTaxonomies({ taxonomy, enabled }) {
       const updatedServiceEligibilityTypes = {
-        ...this.serviceEligibilityTypes
-      };
+        ...this.serviceEligibilityTypes,
+      }
 
       if (enabled) {
         if (!updatedServiceEligibilityTypes.taxonomies.includes(taxonomy.id)) {
-          updatedServiceEligibilityTypes.taxonomies.push(taxonomy.id);
+          updatedServiceEligibilityTypes.taxonomies.push(taxonomy.id)
         }
       } else if (
         updatedServiceEligibilityTypes.taxonomies.includes(taxonomy.id)
       ) {
         const index = updatedServiceEligibilityTypes.taxonomies.indexOf(
           taxonomy.id
-        );
-        updatedServiceEligibilityTypes.taxonomies.splice(index, 1);
+        )
+        updatedServiceEligibilityTypes.taxonomies.splice(index, 1)
       }
 
       this.$emit(
-        "update:serviceEligibilityTypes",
+        'update:serviceEligibilityTypes',
         updatedServiceEligibilityTypes
-      );
+      )
     },
     updateServiceEligibilityCustom({ customTaxonomy, customValue }) {
       const updatedServiceEligibilityTypes = {
-        ...this.serviceEligibilityTypes
-      };
-      updatedServiceEligibilityTypes.custom[customTaxonomy] = customValue;
+        ...this.serviceEligibilityTypes,
+      }
+      updatedServiceEligibilityTypes.custom[customTaxonomy] = customValue
       this.$emit(
-        "update:serviceEligibilityTypes",
+        'update:serviceEligibilityTypes',
         updatedServiceEligibilityTypes
-      );
-    }
+      )
+    },
   },
 
   created() {
-    this.fetchServiceEligibilites();
-  }
-};
+    this.fetchServiceEligibilites()
+  },
+}
 </script>

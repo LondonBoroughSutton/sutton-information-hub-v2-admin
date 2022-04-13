@@ -23,64 +23,64 @@
 </template>
 
 <script>
-import http from "@/http";
+import http from '@/http'
 
 export default {
-  name: "TaxonomyForm",
+  name: 'TaxonomyForm',
   props: {
     errors: {
       required: true,
-      type: Object
+      type: Object,
     },
     parent_id: {
-      required: true
+      required: true,
     },
     name: {
-      required: true
+      required: true,
     },
     order: {
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
       loading: false,
       taxonomies: [],
-      taxonomyOptions: []
-    };
+      taxonomyOptions: [],
+    }
   },
   methods: {
     onInput(field, value) {
-      this.$emit(`update:${field}`, value);
-      this.$emit("clear", field);
+      this.$emit(`update:${field}`, value)
+      this.$emit('clear', field)
     },
     async fetchTaxonomies() {
-      this.loading = true;
+      this.loading = true
 
-      const { data } = await http.get("/taxonomies/categories");
-      this.taxonomies = data.data;
+      const { data } = await http.get('/taxonomies/categories')
+      this.taxonomies = data.data
       this.taxonomyOptions = [
-        { text: "No parent (top level)", value: null },
-        ...this.parseTaxonomies(this.taxonomies)
-      ];
+        { text: 'No parent (top level)', value: null },
+        ...this.parseTaxonomies(this.taxonomies),
+      ]
 
-      this.loading = false;
+      this.loading = false
     },
     parseTaxonomies(taxonomies, parsed = [], depth = 0) {
       taxonomies.forEach(taxonomy => {
-        const text = "-".repeat(depth) + " " + taxonomy.name;
-        parsed.push({ text, value: taxonomy.id });
+        const text = '-'.repeat(depth) + ' ' + taxonomy.name
+        parsed.push({ text, value: taxonomy.id })
 
         if (taxonomy.children.length > 0 && depth < 4) {
-          parsed = this.parseTaxonomies(taxonomy.children, parsed, depth + 1);
+          parsed = this.parseTaxonomies(taxonomy.children, parsed, depth + 1)
         }
-      });
+      })
 
-      return parsed;
-    }
+      return parsed
+    },
   },
   created() {
-    this.fetchTaxonomies();
-  }
-};
+    this.fetchTaxonomies()
+  },
+}
 </script>

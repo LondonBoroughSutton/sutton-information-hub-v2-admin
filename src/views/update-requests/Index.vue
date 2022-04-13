@@ -35,31 +35,31 @@
                 render: updateRequest =>
                   updateRequest.user
                     ? `${updateRequest.user.first_name} ${updateRequest.user.last_name}`
-                    : 'N/A'
+                    : 'N/A',
               },
               {
                 heading: 'Type',
                 render: updateRequest =>
-                  displayType(updateRequest.updateable_type)
+                  displayType(updateRequest.updateable_type),
               },
               {
                 heading: 'Entry',
                 sort: 'entry',
-                render: updateRequest => updateRequest.entry
+                render: updateRequest => updateRequest.entry,
               },
               {
                 heading: 'Date / Time',
                 sort: 'created_at',
                 render: updateRequest =>
-                  formatDateTime(updateRequest.created_at)
-              }
+                  formatDateTime(updateRequest.created_at),
+              },
             ]"
             :view-route="
               updateRequest => {
                 return {
                   name: 'update-requests-show',
-                  params: { updateRequest: updateRequest.id }
-                };
+                  params: { updateRequest: updateRequest.id },
+                }
               }
             "
           />
@@ -70,55 +70,55 @@
 </template>
 
 <script>
-import CkResourceListingTable from "@/components/Ck/CkResourceListingTable.vue";
-import CkTableFilters from "@/components/Ck/CkTableFilters.vue";
+import CkResourceListingTable from '@/components/Ck/CkResourceListingTable.vue'
+import CkTableFilters from '@/components/Ck/CkTableFilters.vue'
 
 export default {
-  name: "ListUpdateRequests",
+  name: 'ListUpdateRequests',
   components: { CkResourceListingTable, CkTableFilters },
   data() {
     return {
       filters: {
-        entry: ""
-      }
-    };
+        entry: '',
+      },
+    }
   },
   computed: {
     params() {
       const params = {
-        include: "user"
-      };
-
-      if (this.filters.entry !== "") {
-        params["filter[entry]"] = this.filters.entry;
+        include: 'user',
       }
 
-      return params;
-    }
+      if (this.filters.entry !== '') {
+        params['filter[entry]'] = this.filters.entry
+      }
+
+      return params
+    },
   },
   methods: {
     onSearch() {
-      this.$refs.updateRequestsTable.currentPage = 1;
-      this.$refs.updateRequestsTable.fetchResources();
+      this.$refs.updateRequestsTable.currentPage = 1
+      this.$refs.updateRequestsTable.fetchResources()
     },
     displayType(type) {
       switch (type) {
-        case "services":
-          return "Service";
-        case "organisations":
-          return "Organisation";
-        case "locations":
-          return "Location";
-        case "service_locations":
-          return "Service location";
-        case "organisation_sign_up_form":
-          return "Organisation sign up form";
-        case "new_service_created_by_org_admin":
-          return "New Service";
+        case 'services':
+          return 'Service'
+        case 'organisations':
+          return 'Organisation'
+        case 'locations':
+          return 'Location'
+        case 'service_locations':
+          return 'Service location'
+        case 'organisation_sign_up_form':
+          return 'Organisation sign up form'
+        case 'new_service_created_by_org_admin':
+          return 'New Service'
         default:
-          return "Invalid type";
+          return 'Invalid type'
       }
-    }
-  }
-};
+    },
+  },
+}
 </script>

@@ -59,52 +59,52 @@
 </template>
 
 <script>
-import http from "@/http";
-import Form from "@/classes/Form";
-import ServiceEligibilityForm from "./forms/ServiceEligibilityForm";
+import http from '@/http'
+import Form from '@/classes/Form'
+import ServiceEligibilityForm from './forms/ServiceEligibilityForm'
 
 export default {
-  name: "EditTaxonomyServiceEligibility",
+  name: 'EditTaxonomyServiceEligibility',
   components: { ServiceEligibilityForm },
   data() {
     return {
       loading: false,
       serviceEligibility: null,
-      form: null
-    };
+      form: null,
+    }
   },
   methods: {
     async fetchServiceEligibility() {
-      this.loading = true;
+      this.loading = true
 
       const response = await http.get(
         `/taxonomies/service-eligibilities/${this.$route.params.taxonomy}`
-      );
-      this.serviceEligibility = response.data.data;
+      )
+      this.serviceEligibility = response.data.data
       this.form = new Form({
         parent_id: this.serviceEligibility.parent_id,
         name: this.serviceEligibility.name,
-        order: this.serviceEligibility.order
-      });
+        order: this.serviceEligibility.order,
+      })
 
-      this.loading = false;
+      this.loading = false
     },
     async onSubmit() {
       await this.form.put(
         `/taxonomies/service-eligibilities/${this.serviceEligibility.id}`
-      );
+      )
       this.$router.push({
-        name: "admin-index-taxonomies-service-eligibilities"
-      });
+        name: 'admin-index-taxonomies-service-eligibilities',
+      })
     },
     onDelete() {
       this.$router.push({
-        name: "admin-index-taxonomies-service-eligibilities"
-      });
-    }
+        name: 'admin-index-taxonomies-service-eligibilities',
+      })
+    },
   },
   created() {
-    this.fetchServiceEligibility();
-  }
-};
+    this.fetchServiceEligibility()
+  },
+}
 </script>

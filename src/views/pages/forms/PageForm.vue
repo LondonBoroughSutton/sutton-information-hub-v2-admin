@@ -60,51 +60,51 @@
 </template>
 
 <script>
-import http from "@/http";
-import CkCollectionInput from "@/components/Ck/CkCollectionInput";
-import CkImageInput from "@/components/Ck/CkImageInput";
-import CkPageContent from "@/components/CkPageContent";
+import http from '@/http'
+import CkCollectionInput from '@/components/Ck/CkCollectionInput'
+import CkImageInput from '@/components/Ck/CkImageInput'
+import CkPageContent from '@/components/CkPageContent'
 
 export default {
-  name: "PageForm",
+  name: 'PageForm',
 
   components: {
     CkImageInput,
     CkPageContent,
-    CkCollectionInput
+    CkCollectionInput,
   },
 
   props: {
     errors: {
       type: Object,
-      required: true
+      required: true,
     },
     parent_id: {
-      required: true
+      required: true,
     },
     title: {
       type: String,
-      required: true
+      required: true,
     },
     content: {
       type: Object,
-      required: true
+      required: true,
     },
     enabled: {
       type: Boolean,
-      required: true
+      required: true,
     },
     page_type: {
       type: String,
-      default: "information"
+      default: 'information',
     },
     page: {
       type: Object,
-      default: null
+      default: null,
     },
     image_file_id: {
-      default: null
-    }
+      default: null,
+    },
   },
 
   data() {
@@ -112,53 +112,53 @@ export default {
       loading: false,
       pages: [],
       enabledOptions: [
-        { label: "Enabled", value: true },
-        { label: "Disabled", value: false }
+        { label: 'Enabled', value: true },
+        { label: 'Disabled', value: false },
       ],
       pageTypes: {
-        information: "Information page",
-        landing: "Landing page"
-      }
-    };
+        information: 'Information page',
+        landing: 'Landing page',
+      },
+    }
   },
 
   computed: {
     parentOptions() {
       return [
-        { text: "No parent (top level)", value: null },
+        { text: 'No parent (top level)', value: null },
         ...this.parsePages(
           this.pages.filter(page => {
-            return !page.parent;
+            return !page.parent
           })
-        )
-      ];
+        ),
+      ]
     },
     imageFileSuffix() {
       return this.page.image
         ? {
-            "image/jpeg": "jpg",
-            "image/png": "png",
-            "image/svg+xml": "svg"
+            'image/jpeg': 'jpg',
+            'image/png': 'png',
+            'image/svg+xml': 'svg',
           }[this.page.image.mime_type]
-        : null;
+        : null
     },
     existingImageUrl() {
       return this.page && this.page.image
         ? this.apiUrl(
             `/pages/${this.page.id}/image.${this.imageFileSuffix}?v=${this.now}`
           )
-        : undefined;
+        : undefined
     },
     contentErrors() {
-      let errors = {};
+      let errors = {}
       Object.keys(this.errors)
         .filter(key => {
-          return key.startsWith("content_");
+          return key.startsWith('content_')
         })
         .forEach(errorKey => {
-          errors[errorKey] = this.errors[errorKey];
-        });
-      return errors;
+          errors[errorKey] = this.errors[errorKey]
+        })
+      return errors
     },
     pageCollectionIds() {
       return this.page
@@ -167,45 +167,45 @@ export default {
             .concat(
               this.page.collection_personas.map(collection => collection.id)
             )
-        : [];
-    }
+        : []
+    },
   },
 
   methods: {
     onInput(field, value) {
-      this.$emit(`update:${field}`, value);
-      this.$emit("clear", field);
+      this.$emit(`update:${field}`, value)
+      this.$emit('clear', field)
     },
     async fetchPages() {
-      this.loading = true;
+      this.loading = true
 
-      const { data } = await http.get("/pages/index");
-      this.pages = data.data;
+      const { data } = await http.get('/pages/index')
+      this.pages = data.data
 
-      this.loading = false;
+      this.loading = false
     },
     parsePages(pages, parsed = [], depth = 0) {
       pages
         .filter(page => !this.page || page.id !== this.page.id)
         .forEach(page => {
-          const text = "-".repeat(depth) + " " + page.title;
-          parsed.push({ text, value: page.id });
+          const text = '-'.repeat(depth) + ' ' + page.title
+          parsed.push({ text, value: page.id })
           const children = this.pages.filter(
             child => child.parent && child.parent.id === page.id
-          );
+          )
           if (children.length > 0 && depth < 4) {
-            parsed = this.parsePages(children, parsed, depth + 1);
+            parsed = this.parsePages(children, parsed, depth + 1)
           }
-        });
+        })
 
-      return parsed;
-    }
+      return parsed
+    },
   },
 
   created() {
-    this.fetchPages();
-  }
-};
+    this.fetchPages()
+  },
+}
 </script>
 
 <style lang="scss" scoped></style>

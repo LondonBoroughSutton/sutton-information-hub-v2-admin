@@ -6,13 +6,13 @@
 
 <script>
 export default {
-  name: "GovRadios",
+  name: 'GovRadios',
   props: {
     inline: {
       required: false,
       type: Boolean,
-      default: false
-    }
-  }
-};
+      default: false,
+    },
+  },
+}
 </script>

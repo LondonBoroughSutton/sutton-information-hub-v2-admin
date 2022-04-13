@@ -38,94 +38,94 @@
 </template>
 
 <script>
-import CkTaxonomyTree from "@/components/Ck/CkTaxonomyTree";
+import CkTaxonomyTree from '@/components/Ck/CkTaxonomyTree'
 
 export default {
   components: {
-    CkTaxonomyTree
+    CkTaxonomyTree,
   },
 
   data() {
     return {
-      access: "all",
+      access: 'all',
       accessOptions: [
-        { label: "Access for all", value: "all" },
-        { label: "Access for some", value: "some" }
-      ]
-    };
+        { label: 'Access for all', value: 'all' },
+        { label: 'Access for some', value: 'some' },
+      ],
+    }
   },
 
   props: {
     eligibilityTaxonomy: {
       required: true,
-      type: Object
+      type: Object,
     },
     serviceEligibilityTypes: {
       required: true,
-      type: Object
+      type: Object,
     },
     customEligibility: {
       type: String,
-      default: ""
+      default: '',
     },
     errors: {
-      required: true
-    }
+      required: true,
+    },
   },
 
   computed: {
     customEligibilitySlug() {
       // @todo This should not be guessed, it should be supplied by the API
-      return this.eligibilityTaxonomy.name.toLowerCase().replaceAll(" ", "_");
+      return this.eligibilityTaxonomy.name.toLowerCase().replaceAll(' ', '_')
     },
     customEligibilityValue() {
       return (
-        this.serviceEligibilityTypes.custom[this.customEligibilitySlug] || ""
-      );
+        this.serviceEligibilityTypes.custom[this.customEligibilitySlug] || ''
+      )
     },
     checkedEligibilities() {
       return this.eligibilityTaxonomy.children.filter(taxonomy => {
-        return this.serviceEligibilityTypes.taxonomies.includes(taxonomy.id);
-      });
-    }
+        return this.serviceEligibilityTypes.taxonomies.includes(taxonomy.id)
+      })
+    },
   },
 
   methods: {
     onUpdateTaxonomies({ taxonomy, enabled }) {
-      this.$emit("update:taxonomies", { taxonomy, enabled });
-      this.$emit("clear");
+      this.$emit('update:taxonomies', { taxonomy, enabled })
+      this.$emit('clear')
     },
 
     onUpdateCustom(customEligibity) {
-      this.$emit("update:custom", {
+      this.$emit('update:custom', {
         customTaxonomy: this.customEligibilitySlug,
-        customValue: customEligibity
-      });
-      this.$emit("clear");
+        customValue: customEligibity,
+      })
+      this.$emit('clear')
     },
     onUpdateAccess(access) {
-      this.access = access;
+      this.access = access
 
-      if (this.access === "all") {
+      if (this.access === 'all') {
         this.checkedEligibilities.forEach(taxonomy => {
-          this.$emit("update:taxonomies", { taxonomy, enabled: false });
-          this.$emit("update:custom", {
+          this.$emit('update:taxonomies', { taxonomy, enabled: false })
+          this.$emit('update:custom', {
             customTaxonomy: this.customEligibilitySlug,
-            customValue: null
-          });
-          this.$emit("clear");
-        });
+            customValue: null,
+          })
+          this.$emit('clear')
+        })
       }
-    }
+    },
   },
   created() {
-    this.serviceEligibilityTaxonomies = this.serviceEligibilityTypes.taxonomies.slice();
+    this.serviceEligibilityTaxonomies = this.serviceEligibilityTypes.taxonomies.slice()
     this.access =
       this.checkedEligibilities.length || this.customEligibilityValue
-        ? "some"
-        : "all";
-  }
-};
+        ? 'some'
+        : 'all'
+  },
+}
 </script>
 
 <style lang="scss" scoped></style>

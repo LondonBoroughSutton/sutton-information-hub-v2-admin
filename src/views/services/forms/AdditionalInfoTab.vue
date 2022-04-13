@@ -13,8 +13,8 @@
         <ck-select-input
           :value="wait_time"
           @input="
-            $emit('update:wait_time', $event);
-            $emit('clear', 'wait_time');
+            $emit('update:wait_time', $event)
+            $emit('clear', 'wait_time')
           "
           id="wait_time"
           label="Usual wait time (if applicable)"
@@ -37,8 +37,8 @@
         <ck-radio-input
           :value="is_free"
           @input="
-            $emit('update:is_free', $event);
-            $emit('clear', 'is_free');
+            $emit('update:is_free', $event)
+            $emit('clear', 'is_free')
           "
           id="is_free"
           :label="`Is the ${type} free?`"
@@ -63,8 +63,8 @@
           <ck-text-input
             :value="fees_text"
             @input="
-              $emit('update:fees_text', $event);
-              $emit('clear', 'fees_text');
+              $emit('update:fees_text', $event)
+              $emit('clear', 'fees_text')
             "
             id="fees_text"
             label="How much does it cost? (if applicable)"
@@ -79,8 +79,8 @@
           <ck-text-input
             :value="fees_url"
             @input="
-              $emit('update:fees_url', $event);
-              $emit('clear', 'fees_url');
+              $emit('update:fees_url', $event)
+              $emit('clear', 'fees_url')
             "
             id="fees_url"
             label="Please provide a link to full pricing table (if applicable)"
@@ -93,8 +93,8 @@
         <ck-text-input
           :value="cqc_location_id"
           @input="
-            $emit('update:cqc_location_id', $event);
-            $emit('clear', 'cqc_location_id');
+            $emit('update:cqc_location_id', $event)
+            $emit('clear', 'cqc_location_id')
           "
           id="cqc_location_id"
           label="CQC Location ID number"
@@ -113,8 +113,8 @@
         <ck-textarea-input
           :value="testimonial"
           @input="
-            $emit('update:testimonial', $event);
-            $emit('clear', 'testimonial');
+            $emit('update:testimonial', $event)
+            $emit('clear', 'testimonial')
           "
           id="testimonial"
           label="Quote from a satisfied user, client, beneficiary or customer"
@@ -135,8 +135,8 @@
         <ck-text-input
           :value="video_embed"
           @input="
-            $emit('update:video_embed', $event);
-            $emit('clear', 'video_embed');
+            $emit('update:video_embed', $event)
+            $emit('clear', 'video_embed')
           "
           id="video_embed"
           :label="`${$options.filters.ucfirst(type)} video`"
@@ -177,8 +177,8 @@
         <ck-text-input
           :value="contact_name"
           @input="
-            $emit('update:contact_name', $event);
-            $emit('clear', 'contact_name');
+            $emit('update:contact_name', $event)
+            $emit('clear', 'contact_name')
           "
           id="contact_name"
           label="Contact name"
@@ -192,8 +192,8 @@
         <ck-text-input
           :value="contact_phone"
           @input="
-            $emit('update:contact_phone', $event);
-            $emit('clear', 'contact_phone');
+            $emit('update:contact_phone', $event)
+            $emit('clear', 'contact_phone')
           "
           id="contact_phone"
           label="Contact phone number"
@@ -216,8 +216,8 @@
         <ck-text-input
           :value="contact_email"
           @input="
-            $emit('update:contact_email', $event);
-            $emit('clear', 'contact_email');
+            $emit('update:contact_email', $event)
+            $emit('clear', 'contact_email')
           "
           id="contact_email"
           :label="`Public ${type} email address`"
@@ -234,82 +234,82 @@
 
 <script>
 export default {
-  name: "AdditionalInfoTab",
+  name: 'AdditionalInfoTab',
   props: {
     errors: {
-      required: true
+      required: true,
     },
     type: {
-      required: true
+      required: true,
     },
     wait_time: {
-      required: true
+      required: true,
     },
     is_free: {
-      required: true
+      required: true,
     },
     fees_text: {
-      required: true
+      required: true,
     },
     fees_url: {
-      required: true
+      required: true,
     },
     testimonial: {
-      required: true
+      required: true,
     },
     video_embed: {
-      required: true
+      required: true,
     },
     contact_name: {
-      required: true
+      required: true,
     },
     contact_phone: {
-      required: true
+      required: true,
     },
     contact_email: {
-      required: true
+      required: true,
     },
     cqc_location_id: {
-      required: true
-    }
+      required: true,
+    },
   },
   computed: {
     waitTimeOptions() {
       return [
         { text: `Not applicable for this ${this.type}`, value: null },
-        { text: "One week", value: "one_week" },
-        { text: "Two weeks", value: "two_weeks" },
-        { text: "Three weeks", value: "three_weeks" },
-        { text: "One month", value: "month" },
-        { text: "Longer than a month", value: "longer" }
-      ];
+        { text: 'One week', value: 'one_week' },
+        { text: 'Two weeks', value: 'two_weeks' },
+        { text: 'Three weeks', value: 'three_weeks' },
+        { text: 'One month', value: 'month' },
+        { text: 'Longer than a month', value: 'longer' },
+      ]
     },
     isFreeOptions() {
       return [
         { value: true, label: `Yes - The ${this.type} is free` },
         {
           value: false,
-          label: `No - there are elements of this ${this.type} that must be paid for`
-        }
-      ];
+          label: `No - there are elements of this ${this.type} that must be paid for`,
+        },
+      ]
     },
     videoEmbedHelpHref() {
-      const to = this.contactEmail;
-      const subject = `Make a video for my ${this.type}`;
-      const body = `My ${this.type} is: xxx\n\nI am interested in making a video for my ${this.type} page on Sutton Information Hub.`;
+      const to = this.contactEmail
+      const subject = `Make a video for my ${this.type}`
+      const body = `My ${this.type} is: xxx\n\nI am interested in making a video for my ${this.type} page on Sutton Information Hub.`
 
       return `mailto:${to}?subject=${encodeURIComponent(
         subject
-      )}&body=${encodeURIComponent(body)}`;
-    }
+      )}&body=${encodeURIComponent(body)}`
+    },
   },
   watch: {
     is_free(newIsFree) {
       if (newIsFree) {
-        this.$emit("update:fees_text", "");
-        this.$emit("update:fees_url", "");
+        this.$emit('update:fees_text', '')
+        this.$emit('update:fees_url', '')
       }
-    }
-  }
-};
+    },
+  },
+}
 </script>

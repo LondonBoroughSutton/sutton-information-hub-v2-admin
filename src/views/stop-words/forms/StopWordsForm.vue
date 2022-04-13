@@ -11,24 +11,24 @@
 
 <script>
 export default {
-  name: "StopWordsForm",
+  name: 'StopWordsForm',
 
   props: {
     errors: {
       required: true,
-      type: Object
+      type: Object,
     },
 
     stopWords: {
-      required: true
-    }
+      required: true,
+    },
   },
 
   methods: {
     onInput(field, value) {
-      this.$emit(`update:${field}`, value);
-      this.$emit("clear", field);
-    }
-  }
-};
+      this.$emit(`update:${field}`, value)
+      this.$emit('clear', field)
+    },
+  },
+}
 </script>

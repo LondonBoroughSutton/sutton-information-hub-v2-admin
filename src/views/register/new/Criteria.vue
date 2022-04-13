@@ -76,18 +76,18 @@
 <script>
 export default {
   model: {
-    prop: "form",
-    event: "update"
+    prop: 'form',
+    event: 'update',
   },
   props: {
     form: {
       type: Object,
-      required: true
+      required: true,
     },
     errors: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
 
   methods: {
@@ -95,13 +95,13 @@ export default {
       if (this.form.organisation_types.includes(organisationType)) {
         this.form.organisation_types = this.form.organisation_types.filter(
           type => type !== organisationType
-        );
+        )
       } else {
-        const organisationTypes = this.form.organisation_types.slice();
-        organisationTypes.push(organisationType);
-        this.form.organisation_types = organisationTypes;
+        const organisationTypes = this.form.organisation_types.slice()
+        organisationTypes.push(organisationType)
+        this.form.organisation_types = organisationTypes
       }
-    }
-  }
-};
+    },
+  },
+}
 </script>

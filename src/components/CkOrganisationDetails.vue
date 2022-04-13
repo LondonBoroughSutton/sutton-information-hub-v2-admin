@@ -15,11 +15,11 @@
       </gov-table-row>
       <gov-table-row>
         <gov-table-header top scope="row">Phone number</gov-table-header>
-        <gov-table-cell>{{ organisation.phone || "-" }}</gov-table-cell>
+        <gov-table-cell>{{ organisation.phone || '-' }}</gov-table-cell>
       </gov-table-row>
       <gov-table-row>
         <gov-table-header top scope="row">Email</gov-table-header>
-        <gov-table-cell>{{ organisation.email || "-" }}</gov-table-cell>
+        <gov-table-cell>{{ organisation.email || '-' }}</gov-table-cell>
       </gov-table-row>
       <gov-table-row>
         <gov-table-header top scope="row">Logo</gov-table-header>
@@ -72,61 +72,61 @@
 </template>
 
 <script>
-import http from "@/http";
-import CkTaxonomyList from "@/components/Ck/CkTaxonomyList.vue";
+import http from '@/http'
+import CkTaxonomyList from '@/components/Ck/CkTaxonomyList.vue'
 
 export default {
-  name: "CkOrganisationDetails",
+  name: 'CkOrganisationDetails',
 
   components: {
-    CkTaxonomyList
+    CkTaxonomyList,
   },
 
   props: {
     organisation: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
 
   data() {
     return {
       loading: false,
-      taxonomies: []
-    };
+      taxonomies: [],
+    }
   },
 
   computed: {
     organisationTaxonomyIds() {
-      return this.organisation.category_taxonomies.map(taxonomy => taxonomy.id);
-    }
+      return this.organisation.category_taxonomies.map(taxonomy => taxonomy.id)
+    },
   },
 
   methods: {
     humanReadableSocialMedia(type) {
       switch (type) {
-        case "twitter":
-          return "Twitter";
-        case "facebook":
-          return "Facebook";
-        case "instagram":
-          return "Instagram";
-        case "youtube":
-          return "YouTube";
-        case "other":
-          return "Other";
+        case 'twitter':
+          return 'Twitter'
+        case 'facebook':
+          return 'Facebook'
+        case 'instagram':
+          return 'Instagram'
+        case 'youtube':
+          return 'YouTube'
+        case 'other':
+          return 'Other'
       }
     },
     async fetchTaxonomies() {
-      this.loading = true;
-      const { data: taxonomies } = await http.get("/taxonomies/categories");
-      this.taxonomies = taxonomies.data;
-      this.loading = false;
-    }
+      this.loading = true
+      const { data: taxonomies } = await http.get('/taxonomies/categories')
+      this.taxonomies = taxonomies.data
+      this.loading = false
+    },
   },
 
   created() {
-    this.fetchTaxonomies();
-  }
-};
+    this.fetchTaxonomies()
+  },
+}
 </script>

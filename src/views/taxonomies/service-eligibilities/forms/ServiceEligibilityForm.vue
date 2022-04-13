@@ -23,59 +23,59 @@
 </template>
 
 <script>
-import http from "@/http";
+import http from '@/http'
 
 export default {
-  name: "ServiceEligibilityForm",
+  name: 'ServiceEligibilityForm',
   props: {
     errors: {
       required: true,
-      type: Object
+      type: Object,
     },
     parent_id: {
-      required: true
+      required: true,
     },
     name: {
-      required: true
+      required: true,
     },
     order: {
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
       loading: false,
-      serviceEligibilities: []
-    };
+      serviceEligibilities: [],
+    }
   },
 
   computed: {
     topLevelServiceEligibilities() {
       return [
-        { text: "Select an eligibility type", value: null },
+        { text: 'Select an eligibility type', value: null },
         ...this.serviceEligibilities.map(eligibility => {
-          return { text: eligibility.name, value: eligibility.id };
-        })
-      ];
-    }
+          return { text: eligibility.name, value: eligibility.id }
+        }),
+      ]
+    },
   },
 
   methods: {
     onInput(field, value) {
-      this.$emit(`update:${field}`, value);
-      this.$emit("clear", field);
+      this.$emit(`update:${field}`, value)
+      this.$emit('clear', field)
     },
     async fetchServiceEligibilities() {
-      this.loading = true;
+      this.loading = true
 
-      const { data } = await http.get("/taxonomies/service-eligibilities");
-      this.serviceEligibilities = data.data;
+      const { data } = await http.get('/taxonomies/service-eligibilities')
+      this.serviceEligibilities = data.data
 
-      this.loading = false;
-    }
+      this.loading = false
+    },
   },
   created() {
-    this.fetchServiceEligibilities();
-  }
-};
+    this.fetchServiceEligibilities()
+  },
+}
 </script>

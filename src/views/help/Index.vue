@@ -36,13 +36,13 @@
 </template>
 
 <script>
-import VideoIframe from "./components/VideoIframe";
+import VideoIframe from './components/VideoIframe'
 
 export default {
-  name: "Help",
+  name: 'Help',
 
   components: {
-    VideoIframe
+    VideoIframe,
   },
 
   data() {
@@ -51,47 +51,48 @@ export default {
         {
           height: 315,
           width: 560,
-          src: "https://www.youtube.com/embed/HALo2I-gdXs",
-          title: "Introduction the to video training series"
+          src: 'https://www.youtube.com/embed/HALo2I-gdXs',
+          title: 'Introduction the to video training series',
         },
         {
           height: 315,
           width: 560,
-          src: "https://www.youtube.com/embed/RoeMDBZLJQc",
-          title: "How to sign up to the platform"
+          src: 'https://www.youtube.com/embed/RoeMDBZLJQc',
+          title: 'How to sign up to the platform',
         },
         {
           height: 315,
           width: 560,
-          src: "https://www.youtube.com/embed/p3-4mlY1pOQ",
-          title: "Your first login, managing your organisation and adding users"
+          src: 'https://www.youtube.com/embed/p3-4mlY1pOQ',
+          title:
+            'Your first login, managing your organisation and adding users',
         },
         {
           height: 315,
           width: 560,
-          src: "https://www.youtube.com/embed/Qf421buT6zs",
-          title: "Adding your service"
-        }
-      ]
-    };
+          src: 'https://www.youtube.com/embed/Qf421buT6zs',
+          title: 'Adding your service',
+        },
+      ],
+    }
   },
 
   computed: {
     pairedVideos() {
-      let pairedVideos = [];
+      let pairedVideos = []
       this.videos.forEach((video, index) => {
         if (index % 2 == 0) {
-          let videoPair = [video];
-          if (typeof this.videos[index + 1] !== "undefined") {
-            videoPair.push(this.videos[index + 1]);
+          let videoPair = [video]
+          if (typeof this.videos[index + 1] !== 'undefined') {
+            videoPair.push(this.videos[index + 1])
           }
-          pairedVideos.push(videoPair);
+          pairedVideos.push(videoPair)
         }
-      });
-      return pairedVideos;
-    }
-  }
-};
+      })
+      return pairedVideos
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped></style>

@@ -29,29 +29,29 @@
 
 <script>
 export default {
-  name: "CollectionHomepageInput",
+  name: 'CollectionHomepageInput',
 
   props: {
     value: {
-      required: true
+      required: true,
     },
     error: {
-      required: true
+      required: true,
     },
     id: {
       type: String,
-      required: true
+      required: true,
     },
     label: {
       required: true,
-      type: String
+      type: String,
     },
     hint: {
       required: false,
-      type: String
-    }
-  }
-};
+      type: String,
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped></style>

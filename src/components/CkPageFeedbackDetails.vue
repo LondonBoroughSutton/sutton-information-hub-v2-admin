@@ -40,23 +40,23 @@
 </template>
 
 <script>
-import moment from "moment";
+import moment from 'moment'
 
 export default {
-  name: "CkPageFeedbackDetails",
+  name: 'CkPageFeedbackDetails',
   props: {
     pageFeedback: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   methods: {
     autoDeleteDate(updated_at) {
       return moment(updated_at, moment.ISO_8601)
         .clone()
-        .add(6, "months")
-        .format("Y-MM-DD[T]HH:mm:ssZ");
-    }
-  }
-};
+        .add(6, 'months')
+        .format('Y-MM-DD[T]HH:mm:ssZ')
+    },
+  },
+}
 </script>

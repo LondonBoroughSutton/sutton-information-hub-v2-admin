@@ -28,34 +28,34 @@
 
 <script>
 export default {
-  name: "CmsFrontendPrivacyPolicy",
+  name: 'CmsFrontendPrivacyPolicy',
 
   model: {
-    prop: "frontend",
-    event: "input"
+    prop: 'frontend',
+    event: 'input',
   },
 
   props: {
     frontend: {
       type: Object,
-      required: true
+      required: true,
     },
 
     errors: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
 
   methods: {
     onInput({ field, value }) {
-      const frontend = { ...this.frontend };
+      const frontend = { ...this.frontend }
 
-      frontend.privacy_policy[field] = value;
+      frontend.privacy_policy[field] = value
 
-      this.$emit("input", frontend);
-      this.$emit("clear", `frontend.privacy_policy.${field}`);
-    }
-  }
-};
+      this.$emit('input', frontend)
+      this.$emit('clear', `frontend.privacy_policy.${field}`)
+    },
+  },
+}
 </script>

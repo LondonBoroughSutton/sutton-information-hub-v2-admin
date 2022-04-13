@@ -220,35 +220,35 @@
 </template>
 
 <script>
-import SocialMediasInput from "@/views/services/inputs/SocialMediasInput";
+import SocialMediasInput from '@/views/services/inputs/SocialMediasInput'
 
 export default {
   components: {
-    SocialMediasInput
+    SocialMediasInput,
   },
 
   props: {
     service: {
       type: Object,
-      required: true
+      required: true,
     },
 
     errors: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
 
   computed: {
     waitTimeOptions() {
       return [
         { text: `Not applicable for this ${this.service.type}`, value: null },
-        { text: "One week", value: "one_week" },
-        { text: "Two weeks", value: "two_weeks" },
-        { text: "Three weeks", value: "three_weeks" },
-        { text: "One month", value: "month" },
-        { text: "Longer than a month", value: "longer" }
-      ];
+        { text: 'One week', value: 'one_week' },
+        { text: 'Two weeks', value: 'two_weeks' },
+        { text: 'Three weeks', value: 'three_weeks' },
+        { text: 'One month', value: 'month' },
+        { text: 'Longer than a month', value: 'longer' },
+      ]
     },
 
     isFreeOptions() {
@@ -256,20 +256,20 @@ export default {
         { value: true, label: `Yes - The ${this.service.type} is free` },
         {
           value: false,
-          label: `No - there are elements of this ${this.service.type} that must be paid for`
-        }
-      ];
+          label: `No - there are elements of this ${this.service.type} that must be paid for`,
+        },
+      ]
     },
 
     videoEmbedHelpHref() {
-      const to = this.contactEmail;
-      const subject = `Make a video for my ${this.service.type}`;
-      const body = `My ${this.service.type} is: xxx\n\nI am interested in making a video for my ${this.service.type} page on Sutton Information Hub.`;
+      const to = this.contactEmail
+      const subject = `Make a video for my ${this.service.type}`
+      const body = `My ${this.service.type} is: xxx\n\nI am interested in making a video for my ${this.service.type} page on Sutton Information Hub.`
 
       return `mailto:${to}?subject=${encodeURIComponent(
         subject
-      )}&body=${encodeURIComponent(body)}`;
-    }
-  }
-};
+      )}&body=${encodeURIComponent(body)}`
+    },
+  },
+}
 </script>

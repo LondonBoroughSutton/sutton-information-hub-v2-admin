@@ -17,44 +17,44 @@
 </template>
 
 <script>
-import http from "@/http";
-import CkNotificationsTable from "@/components/CkNotificationsTable";
+import http from '@/http'
+import CkNotificationsTable from '@/components/CkNotificationsTable'
 
 export default {
-  name: "ListNotification",
+  name: 'ListNotification',
   components: { CkNotificationsTable },
   data() {
     return {
       loading: false,
       notifications: [],
       currentPage: 1,
-      lastPage: 1
-    };
+      lastPage: 1,
+    }
   },
   methods: {
     async fetchNotifications() {
-      this.loading = true;
+      this.loading = true
 
-      const { data } = await http.get("/notifications", {
-        params: { page: this.currentPage }
-      });
-      this.notifications = data.data;
-      this.currentPage = data.meta.current_page;
-      this.lastPage = data.meta.last_page;
+      const { data } = await http.get('/notifications', {
+        params: { page: this.currentPage },
+      })
+      this.notifications = data.data
+      this.currentPage = data.meta.current_page
+      this.lastPage = data.meta.last_page
 
-      this.loading = false;
+      this.loading = false
     },
     onNext() {
-      this.currentPage++;
-      this.fetchNotifications();
+      this.currentPage++
+      this.fetchNotifications()
     },
     onPrevious() {
-      this.currentPage--;
-      this.fetchNotifications();
-    }
+      this.currentPage--
+      this.fetchNotifications()
+    },
   },
   created() {
-    this.fetchNotifications();
-  }
-};
+    this.fetchNotifications()
+  },
+}
 </script>

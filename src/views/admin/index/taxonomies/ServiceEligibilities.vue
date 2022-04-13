@@ -48,51 +48,51 @@
 </template>
 
 <script>
-import http from "@/http";
-import CkTaxonomyList from "@/components/Ck/CkTaxonomyList";
+import http from '@/http'
+import CkTaxonomyList from '@/components/Ck/CkTaxonomyList'
 
 export default {
-  name: "ListTaxonomyServiceEligibilitied",
+  name: 'ListTaxonomyServiceEligibilitied',
 
   components: {
-    CkTaxonomyList
+    CkTaxonomyList,
   },
 
   data() {
     return {
       loading: false,
-      serviceEligibilities: []
-    };
+      serviceEligibilities: [],
+    }
   },
 
   methods: {
     async fetchServiceEligibilities() {
-      this.loading = true;
+      this.loading = true
 
-      const { data } = await http.get("/taxonomies/service-eligibilities");
-      this.serviceEligibilities = data.data;
+      const { data } = await http.get('/taxonomies/service-eligibilities')
+      this.serviceEligibilities = data.data
 
-      this.loading = false;
+      this.loading = false
     },
     async onMoveUp(taxonomy) {
-      taxonomy.order--;
+      taxonomy.order--
       await http.put(`/taxonomies/service-eligibilities/${taxonomy.id}`, {
-        ...taxonomy
-      });
-      this.fetchServiceEligibilities();
+        ...taxonomy,
+      })
+      this.fetchServiceEligibilities()
     },
     async onMoveDown(taxonomy) {
-      taxonomy.order++;
+      taxonomy.order++
       await http.put(`/taxonomies/service-eligibilities/${taxonomy.id}`, {
-        ...taxonomy
-      });
-      this.fetchServiceEligibilities();
-    }
+        ...taxonomy,
+      })
+      this.fetchServiceEligibilities()
+    },
   },
   created() {
-    this.fetchServiceEligibilities();
-  }
-};
+    this.fetchServiceEligibilities()
+  },
+}
 </script>
 
 <style lang="scss" scoped></style>

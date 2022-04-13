@@ -6,34 +6,34 @@
 
 <script>
 export default {
-  name: "GovTableCell",
+  name: 'GovTableCell',
   props: {
     center: {
       type: Boolean,
       required: false,
-      default: false
+      default: false,
     },
     right: {
       type: Boolean,
       required: false,
-      default: false
+      default: false,
     },
     break: {
       type: Boolean,
       required: false,
-      default: false
-    }
+      default: false,
+    },
   },
   computed: {
     computedClasses() {
       return {
-        "text-center": this.center,
-        "text-right": this.right,
-        "govuk-table__cell--break-word": this.break
-      };
-    }
-  }
-};
+        'text-center': this.center,
+        'text-right': this.right,
+        'govuk-table__cell--break-word': this.break,
+      }
+    },
+  },
+}
 </script>
 
 <style lang="scss">

@@ -36,41 +36,41 @@
   </div>
 </template>
 <script>
-import CkTaxonomyInput from "@/components/Ck/CkTaxonomyInput";
+import CkTaxonomyInput from '@/components/Ck/CkTaxonomyInput'
 
 export default {
-  name: "TaxonomiesTab",
+  name: 'TaxonomiesTab',
   components: { CkTaxonomyInput },
   props: {
     errors: {
-      required: true
+      required: true,
     },
     isGlobalAdmin: {
-      required: true
+      required: true,
     },
     type: {
       required: true,
-      type: String
+      type: String,
     },
     category_taxonomies: {
       required: true,
-      type: Array
-    }
+      type: Array,
+    },
   },
   computed: {
     contactAdminTeamEmail() {
-      const to = this.contactEmail;
-      const subject = `Incorrect taxonomies applied to ${this.type}`;
+      const to = this.contactEmail
+      const subject = `Incorrect taxonomies applied to ${this.type}`
       const body = `${this.$options.filters.ucfirst(
         this.type
       )} Name: XXX\n\nI believe that the tags applied to the above ${
         this.type
-      } are incorrect. The following changes should be made:`;
+      } are incorrect. The following changes should be made:`
 
       return `mailto:${to}?subject=${encodeURIComponent(
         subject
-      )}&body=${encodeURIComponent(body)}`;
-    }
-  }
-};
+      )}&body=${encodeURIComponent(body)}`
+    },
+  },
+}
 </script>

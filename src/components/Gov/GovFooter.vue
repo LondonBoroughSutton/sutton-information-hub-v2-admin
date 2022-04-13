@@ -13,8 +13,7 @@
             </h2>
             <ul class="govuk-footer__list" :class="listClasses(item)">
               <li
-                v-for="(item, key) in item.items"
-                v-if="item.href && item.text"
+                v-for="(item, key) in items.filter(i => i.href && i.text)"
                 :key="key"
                 class="govuk-footer__list-item"
               >
@@ -61,28 +60,28 @@
 
 <script>
 export default {
-  name: "GovFooter",
+  name: 'GovFooter',
   props: {
     containerClasses: {
       type: Array,
       required: false,
       default() {
-        return [];
-      }
+        return []
+      },
     },
     navigation: {
       type: Array,
-      required: false
+      required: false,
     },
     meta: {
       type: Object,
-      required: false
-    }
+      required: false,
+    },
   },
   methods: {
     listClasses(item) {
-      return item.items ? `govuk-footer__list--columns-${item.columns}` : null;
-    }
-  }
-};
+      return item.items ? `govuk-footer__list--columns-${item.columns}` : null
+    },
+  },
+}
 </script>

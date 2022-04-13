@@ -13,7 +13,7 @@
           :for="slotProps.node.id"
           v-if="taxonomyCollections[slotProps.node.id]"
           >Found in
-          {{ taxonomyCollections[slotProps.node.id].join(", ") }}</gov-hint
+          {{ taxonomyCollections[slotProps.node.id].join(', ') }}</gov-hint
         >
       </template>
     </ck-node-checkboxes>
@@ -21,44 +21,44 @@
 </template>
 
 <script>
-import CkNodeCheckboxes from "./CkNodeCheckboxes";
+import CkNodeCheckboxes from './CkNodeCheckboxes'
 export default {
-  name: "TaxonomyTree",
+  name: 'TaxonomyTree',
 
   components: {
-    CkNodeCheckboxes
+    CkNodeCheckboxes,
   },
 
   props: {
     taxonomies: {
       required: true,
-      type: Array
+      type: Array,
     },
     checked: {
       required: true,
-      type: Array
+      type: Array,
     },
     error: {
-      required: true
+      required: true,
     },
     filteredTaxonomyIds: {
       type: [Array, Boolean],
       default() {
-        return [];
-      }
+        return []
+      },
     },
     taxonomyCollections: {
       type: Object,
       default() {
-        return {};
-      }
+        return {}
+      },
     },
     disabled: {
       type: Boolean,
-      default: false
-    }
-  }
-};
+      default: false,
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped></style>

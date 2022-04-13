@@ -1,8 +1,7 @@
 <template>
   <div>
     <gov-checkbox
-      v-for="node in nodes"
-      v-if="showCheckBox(node)"
+      v-for="node in filteredNodes"
       :class="{ 'govuk-checkboxes__item--nested': nested }"
       :key="node.id"
       :value="checked.includes(node.id)"
@@ -38,52 +37,56 @@
 
 <script>
 export default {
-  name: "CkNodeCheckboxes",
+  name: 'CkNodeCheckboxes',
   props: {
     nodes: {
       required: true,
-      type: Array
+      type: Array,
     },
     checked: {
       required: true,
-      type: Array
+      type: Array,
     },
     filteredNodeIds: {
       type: [Array, Boolean],
       default() {
-        return [];
-      }
+        return []
+      },
     },
     disabled: {
       type: Boolean,
-      default: false
+      default: false,
     },
     nested: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
+  },
+
+  computed: {
+    filteredNodes() {
+      if (Array.isArray(this.filteredNodeIds)) {
+        return this.nodes.filter(node => this.filteredNodeIds.includes(node.id))
+      }
+      return this.filteredNodeIds ? this.nodes : []
+    },
   },
 
   methods: {
-    showCheckBox(node) {
-      return Array.isArray(this.filteredNodeIds)
-        ? this.filteredNodeIds.includes(node.id)
-        : this.filteredNodeIds;
-    },
     onUpdate({ node, enabled }) {
-      this.$emit("update", { node, enabled });
+      this.$emit('update', { node, enabled })
     },
     onChildUpdate({ node, enabled }) {
-      this.onUpdate({ node, enabled });
+      this.onUpdate({ node, enabled })
       if (node.parent_id) {
-        const parent = this.nodes.find(n => n.id === node.parent_id);
+        const parent = this.nodes.find(n => n.id === node.parent_id)
         if (parent) {
-          this.onUpdate({ node: parent, enabled });
+          this.onUpdate({ node: parent, enabled })
         }
       }
-    }
-  }
-};
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped></style>

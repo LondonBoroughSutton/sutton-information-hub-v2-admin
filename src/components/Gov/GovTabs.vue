@@ -13,7 +13,7 @@
           class="govuk-tabs__tab"
           :class="{
             'govuk-tabs__tab--active': tab.active,
-            'govuk-tabs__tab--bar': bar
+            'govuk-tabs__tab--bar': bar,
           }"
           href="javascript:;"
           v-text="tab.heading"
@@ -38,49 +38,49 @@
 
 <script>
 export default {
-  name: "GovTabs",
+  name: 'GovTabs',
   props: {
     tabs: {
       type: Array,
-      required: true
+      required: true,
     },
     title: {
       type: String,
       required: false,
-      default: "Contents"
+      default: 'Contents',
     },
     noRouter: {
       type: Boolean,
       required: false,
-      default: false
+      default: false,
     },
     bar: {
       type: Boolean,
       required: false,
-      default: false
+      default: false,
     },
     panel: {
       type: Boolean,
       required: false,
-      default: true
-    }
+      default: true,
+    },
   },
   methods: {
     onTabClick(tab, index) {
-      this.$emit("tab-changed", { index, tab });
-    }
-  }
-};
+      this.$emit('tab-changed', { index, tab })
+    },
+  },
+}
 </script>
 
 <style lang="scss">
-@import "@/scss/app.scss";
+@import '@/scss/app.scss';
 
 .govuk-tabs {
   .govuk-tabs__list {
     @media only screen and (min-width: map-get($govuk-breakpoints, tablet)) {
       &--bar {
-        background: govuk-colour("grey-4");
+        background: govuk-colour('grey-4');
         border: none !important;
       }
     }
@@ -88,7 +88,7 @@ export default {
 
   .govuk-tabs__tab {
     &--active {
-      @extend .govuk-tabs__tab[aria-selected="true"];
+      @extend .govuk-tabs__tab[aria-selected='true'];
     }
 
     @media only screen and (min-width: map-get($govuk-breakpoints, tablet)) {
@@ -104,7 +104,7 @@ export default {
         border-color: $govuk-link-colour;
         border-width: 0 0 5px;
         border-style: solid;
-        background: govuk-colour("grey-4");
+        background: govuk-colour('grey-4');
         padding-bottom: 5px !important;
       }
     }
