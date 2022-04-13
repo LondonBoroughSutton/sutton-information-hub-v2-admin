@@ -6,25 +6,25 @@
   >
     <slot />
   </ul>
-  <ol v-else-if="type === 'unordered'" class="govuk-list">
+  <ol v-else-if="type === 'ordered'" class="govuk-list">
     <slot />
   </ol>
 </template>
 
 <script>
 export default {
-  name: "GovList",
+  name: 'GovList',
   props: {
     type: {
       type: String,
       required: false,
-      default: "unordered"
+      default: 'unordered',
     },
     bullet: {
       required: false,
       type: Boolean,
-      default: false
-    }
-  }
-};
+      default: false,
+    },
+  },
+}
 </script>

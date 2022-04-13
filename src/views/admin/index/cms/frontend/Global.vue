@@ -61,34 +61,34 @@
 
 <script>
 export default {
-  name: "CmsFrontendGlobal",
+  name: 'CmsFrontendGlobal',
 
   model: {
-    prop: "frontend",
-    event: "input"
+    prop: 'frontend',
+    event: 'input',
   },
 
   props: {
     frontend: {
       type: Object,
-      required: true
+      required: true,
     },
 
     errors: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
 
   methods: {
     onInput({ field, value }) {
-      const frontend = { ...this.frontend };
+      const frontend = { ...this.frontend }
 
-      frontend.global[field] = value;
+      frontend.global[field] = value
 
-      this.$emit("input", frontend);
-      this.$emit("clear", `frontend.global.${field}`);
-    }
-  }
-};
+      this.$emit('input', frontend)
+      this.$emit('clear', `frontend.global.${field}`)
+    },
+  },
+}
 </script>

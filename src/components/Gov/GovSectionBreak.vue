@@ -4,30 +4,30 @@
 
 <script>
 export default {
-  name: "GovSectionBreak",
+  name: 'GovSectionBreak',
   props: {
     size: {
       type: String,
-      required: false
+      required: false,
     },
     visible: {
       type: Boolean,
       required: false,
-      default: false
-    }
+      default: false,
+    },
   },
   computed: {
     computedClasses() {
       let classes = {
-        "govuk-section-break--visible": this.visible
-      };
-
-      if (this.size) {
-        classes[`govuk-section-break--${this.size}`] = true;
+        'govuk-section-break--visible': this.visible,
       }
 
-      return classes;
-    }
-  }
-};
+      if (this.size) {
+        classes[`govuk-section-break--${this.size}`] = true
+      }
+
+      return classes
+    },
+  },
+}
 </script>

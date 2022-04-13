@@ -31,56 +31,56 @@
 </template>
 
 <script>
-import http from "@/http";
-import CkTextInput from "@/components/Ck/CkTextInput";
+import http from '@/http'
+import CkTextInput from '@/components/Ck/CkTextInput'
 
 export default {
   components: { CkTextInput },
-  name: "TagInput",
+  name: 'TagInput',
 
   props: {
     serviceTags: {
       type: Array,
-      required: true
-    }
+      required: true,
+    },
   },
 
   data() {
     return {
       tags: [],
       newTag: {
-        label: ""
+        label: '',
       },
-      newTagError: null
-    };
+      newTagError: null,
+    }
   },
 
   computed: {
     serviceTagSlugs() {
-      return this.serviceTags.map(tag => tag.slug);
+      return this.serviceTags.map(tag => tag.slug)
     },
     combinedTags() {
-      const tagSlugs = this.tags.map(tag => tag.slug);
+      const tagSlugs = this.tags.map(tag => tag.slug)
       const newTags = this.serviceTags.filter(
         tag => !tagSlugs.includes(tag.slug)
-      );
-      return this.tags.concat(newTags);
-    }
+      )
+      return this.tags.concat(newTags)
+    },
   },
 
   methods: {
     async fetchTags() {
-      this.loading = true;
-      const { data } = await http.get("/tags");
-      this.tags = data.data;
-      this.loading = false;
+      this.loading = true
+      const { data } = await http.get('/tags')
+      this.tags = data.data
+      this.loading = false
     },
     updateTags(update) {
-      let serviceTags = this.serviceTags.slice();
+      let serviceTags = this.serviceTags.slice()
       if (update.enabled === false) {
         serviceTags = this.serviceTags.filter(
           tag => tag.slug !== update.tag.slug
-        );
+        )
       } else {
         // If this is a new tag, check if it exists
         if (
@@ -89,24 +89,24 @@ export default {
             tag => tag.slug === this.slugify(update.tag.label)
           ).length
         ) {
-          this.newTagError = `Tag ${update.tag.label} already exists`;
-          this.newTag = { label: "" };
-          return;
+          this.newTagError = `Tag ${update.tag.label} already exists`
+          this.newTag = { label: '' }
+          return
         }
         serviceTags.push({
           slug: this.slugify(update.tag.label),
-          label: update.tag.label
-        });
-        this.newTag = { label: "" };
+          label: update.tag.label,
+        })
+        this.newTag = { label: '' }
       }
-      this.$emit("input", serviceTags);
-    }
+      this.$emit('input', serviceTags)
+    },
   },
 
   created() {
-    this.fetchTags();
-  }
-};
+    this.fetchTags()
+  },
+}
 </script>
 
 <style lang="scss" scoped></style>

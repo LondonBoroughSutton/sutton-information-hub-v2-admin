@@ -43,7 +43,7 @@
           <gov-button
             :to="{
               name: 'organisations-edit',
-              params: { organisation: organisation.id }
+              params: { organisation: organisation.id },
             }"
           >
             Edit organisation
@@ -55,34 +55,34 @@
 </template>
 
 <script>
-import http from "@/http";
+import http from '@/http'
 
 export default {
-  name: "ShowOrganisation",
+  name: 'ShowOrganisation',
   data() {
     return {
       loading: false,
       updated: false,
-      organisation: null
-    };
+      organisation: null,
+    }
   },
   methods: {
     fetchOrganisation() {
-      this.loading = true;
+      this.loading = true
       http
         .get(`/organisations/${this.$route.params.organisation}`)
         .then(({ data }) => {
-          this.organisation = data.data;
-          this.loading = false;
-        });
+          this.organisation = data.data
+          this.loading = false
+        })
     },
     onDelete() {
-      this.$router.push({ name: "organisations-index" });
-    }
+      this.$router.push({ name: 'organisations-index' })
+    },
   },
   created() {
-    this.updated = this.$route.query.updated || false;
-    this.fetchOrganisation();
-  }
-};
+    this.updated = this.$route.query.updated || false
+    this.fetchOrganisation()
+  },
+}
 </script>

@@ -37,7 +37,7 @@
           <gov-link
             :to="{
               name: 'notifications-show',
-              params: { notification: notification.id }
+              params: { notification: notification.id },
             }"
             >View</gov-link
           >
@@ -52,68 +52,68 @@
 
 <script>
 export default {
-  name: "CkNotificationsTable",
+  name: 'CkNotificationsTable',
   props: {
     notifications: {
       type: Array,
-      required: true
-    }
+      required: true,
+    },
   },
   methods: {
     formatStatus(notification) {
       if (notification.sent_at !== null) {
-        return "sent";
+        return 'sent'
       } else if (notification.failed_at !== null) {
-        return "failed";
+        return 'failed'
       } else {
-        return "sending";
+        return 'sending'
       }
     },
     formatType(type) {
       switch (type) {
-        case "users":
-          return "User";
-        case "referrals":
-          return "Referral";
-        case "services":
-          return "Service";
+        case 'users':
+          return 'User'
+        case 'referrals':
+          return 'Referral'
+        case 'services':
+          return 'Service'
         case null:
-          return "-";
+          return '-'
         default:
-          return "Unknown type";
+          return 'Unknown type'
       }
     },
     formatChannel(channel) {
       switch (channel) {
-        case "sms":
-          return "SMS";
-        case "email":
-          return "Email";
+        case 'sms':
+          return 'SMS'
+        case 'email':
+          return 'Email'
         default:
-          return "Unknown channel";
+          return 'Unknown channel'
       }
     },
     formatSentAt(notification) {
       if (notification.sent_at !== null) {
-        return this.formatDateTime(notification.sent_at);
+        return this.formatDateTime(notification.sent_at)
       } else if (notification.failed_at !== null) {
-        return this.formatDateTime(notification.failed_at);
+        return this.formatDateTime(notification.failed_at)
       } else {
-        return "Sending...";
+        return 'Sending...'
       }
-    }
-  }
-};
+    },
+  },
+}
 </script>
 
 <style lang="scss">
-@import "../scss/app.scss";
+@import '../scss/app.scss';
 
 .notification-status {
   text-transform: uppercase;
 
   &--sent {
-    background-color: govuk-colour("green") !important;
+    background-color: govuk-colour('green') !important;
   }
 
   &--failed {

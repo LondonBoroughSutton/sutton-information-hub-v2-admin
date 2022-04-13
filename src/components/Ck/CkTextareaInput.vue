@@ -31,41 +31,41 @@
 </template>
 
 <script>
-import CkCharacterCount from "@/components/Ck/CkCharacterCount.vue";
-import CkCharacterCountGroup from "@/components/Ck/CkCharacterCountGroup.vue";
+import CkCharacterCount from '@/components/Ck/CkCharacterCount.vue'
+import CkCharacterCountGroup from '@/components/Ck/CkCharacterCountGroup.vue'
 
 export default {
-  name: "CkTextareaInput",
+  name: 'CkTextareaInput',
   components: { CkCharacterCount, CkCharacterCountGroup },
   props: {
     value: {
       required: true,
-      type: String
+      type: String,
     },
     label: {
       required: true,
-      type: String
+      type: String,
     },
     hint: {
       required: false,
-      type: String
+      type: String,
     },
     error: {
-      required: true
+      required: true,
     },
     id: {
       required: true,
-      type: String
+      type: String,
     },
     rows: {
       required: false,
       type: Number,
-      default: 5
+      default: 5,
     },
     maxlength: {
       required: false,
-      type: Number
-    }
-  }
-};
+      type: Number,
+    },
+  },
+}
 </script>

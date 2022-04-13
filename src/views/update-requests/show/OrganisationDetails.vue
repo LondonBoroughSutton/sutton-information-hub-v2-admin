@@ -6,7 +6,7 @@
       <gov-link
         :to="{
           name: 'organisations-show',
-          params: { organisation: original.id }
+          params: { organisation: original.id },
         }"
         v-text="original.name"
       />.
@@ -40,14 +40,14 @@
 
         <gov-table-row v-if="organisation.hasOwnProperty('email')">
           <gov-table-header top scope="row">Email</gov-table-header>
-          <gov-table-cell>{{ original.email || "-" }}</gov-table-cell>
-          <gov-table-cell>{{ organisation.email || "-" }}</gov-table-cell>
+          <gov-table-cell>{{ original.email || '-' }}</gov-table-cell>
+          <gov-table-cell>{{ organisation.email || '-' }}</gov-table-cell>
         </gov-table-row>
 
         <gov-table-row v-if="organisation.hasOwnProperty('phone')">
           <gov-table-header top scope="row">Phone</gov-table-header>
-          <gov-table-cell>{{ original.phone || "-" }}</gov-table-cell>
-          <gov-table-cell>{{ organisation.phone || "-" }}</gov-table-cell>
+          <gov-table-cell>{{ original.phone || '-' }}</gov-table-cell>
+          <gov-table-cell>{{ organisation.phone || '-' }}</gov-table-cell>
         </gov-table-row>
 
         <gov-table-row v-if="organisation.hasOwnProperty('description')">
@@ -87,44 +87,44 @@
 </template>
 
 <script>
-import http from "@/http";
+import http from '@/http'
 
 export default {
-  name: "OrganisationDetails",
+  name: 'OrganisationDetails',
   props: {
     updateRequestId: {
       required: true,
-      type: String
+      type: String,
     },
 
     requestedAt: {
       required: true,
-      type: String
+      type: String,
     },
 
     organisation: {
       required: true,
-      type: Object
-    }
+      type: Object,
+    },
   },
   data() {
     return {
       loading: false,
-      original: null
-    };
+      original: null,
+    }
   },
   methods: {
     async fetchOriginal() {
-      this.loading = true;
+      this.loading = true
       const {
-        data: { data: original }
-      } = await http.get(`/organisations/${this.organisation.id}`);
-      this.original = original;
-      this.loading = false;
-    }
+        data: { data: original },
+      } = await http.get(`/organisations/${this.organisation.id}`)
+      this.original = original
+      this.loading = false
+    },
   },
   created() {
-    this.fetchOriginal();
-  }
-};
+    this.fetchOriginal()
+  },
+}
 </script>

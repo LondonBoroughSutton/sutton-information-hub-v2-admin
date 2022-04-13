@@ -40,28 +40,28 @@
 </template>
 
 <script>
-import ServiceEligibilityForm from "./forms/ServiceEligibilityForm";
-import Form from "@/classes/Form";
+import ServiceEligibilityForm from './forms/ServiceEligibilityForm'
+import Form from '@/classes/Form'
 
 export default {
-  name: "CreateTaxonomyServiceEligibility",
+  name: 'CreateTaxonomyServiceEligibility',
   components: { ServiceEligibilityForm },
   data() {
     return {
       form: new Form({
         parent_id: null,
-        name: "",
-        order: 1
-      })
-    };
+        name: '',
+        order: 1,
+      }),
+    }
   },
   methods: {
     async onSubmit() {
-      await this.form.post("/taxonomies/service-eligibilities");
+      await this.form.post('/taxonomies/service-eligibilities')
       this.$router.push({
-        name: "admin-index-taxonomies-service-eligibilities"
-      });
-    }
-  }
-};
+        name: 'admin-index-taxonomies-service-eligibilities',
+      })
+    },
+  },
+}
 </script>

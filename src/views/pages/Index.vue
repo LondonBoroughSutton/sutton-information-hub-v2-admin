@@ -18,8 +18,8 @@
 
 <script>
 export default {
-  name: "Pages"
-};
+  name: 'Pages',
+}
 </script>
 
 <style lang="scss" scoped></style>

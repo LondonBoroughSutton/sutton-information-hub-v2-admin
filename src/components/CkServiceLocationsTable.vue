@@ -14,7 +14,7 @@
         v-for="serviceLocation in serviceLocations"
         :key="serviceLocation.id"
       >
-        <gov-table-cell>{{ serviceLocation.name || "-" }}</gov-table-cell>
+        <gov-table-cell>{{ serviceLocation.name || '-' }}</gov-table-cell>
         <gov-table-cell>{{
           serviceLocation.location.address_line_1
         }}</gov-table-cell>
@@ -24,7 +24,7 @@
           <gov-link
             :to="{
               name: 'service-locations-show',
-              params: { serviceLocation: serviceLocation.id }
+              params: { serviceLocation: serviceLocation.id },
             }"
             >View</gov-link
           >
@@ -41,12 +41,12 @@
 
 <script>
 export default {
-  name: "CkServiceLocationsTable",
+  name: 'CkServiceLocationsTable',
   props: {
     serviceLocations: {
       type: Array,
-      required: true
-    }
-  }
-};
+      required: true,
+    },
+  },
+}
 </script>

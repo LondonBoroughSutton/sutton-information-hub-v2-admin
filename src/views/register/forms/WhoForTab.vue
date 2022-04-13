@@ -17,7 +17,7 @@
           @input="
             $emit('input', {
               field: 'criteria',
-              value: Object.assign(service.criteria, { age_group: $event })
+              value: Object.assign(service.criteria, { age_group: $event }),
             })
           "
           :error="errors.get('service.criteria.age_group')"
@@ -35,7 +35,7 @@
           @input="
             $emit('input', {
               field: 'criteria',
-              value: Object.assign(service.criteria, { disability: $event })
+              value: Object.assign(service.criteria, { disability: $event }),
             })
           "
           :error="errors.get('service.criteria.disability')"
@@ -53,7 +53,7 @@
           @input="
             $emit('input', {
               field: 'criteria',
-              value: Object.assign(service.criteria, { gender: $event })
+              value: Object.assign(service.criteria, { gender: $event }),
             })
           "
           :error="errors.get('service.criteria.gender')"
@@ -69,7 +69,7 @@
           @input="
             $emit('input', {
               field: 'criteria',
-              value: Object.assign(service.criteria, { housing: $event })
+              value: Object.assign(service.criteria, { housing: $event }),
             })
           "
           :error="errors.get('service.criteria.housing')"
@@ -85,7 +85,7 @@
           @input="
             $emit('input', {
               field: 'criteria',
-              value: Object.assign(service.criteria, { income: $event })
+              value: Object.assign(service.criteria, { income: $event }),
             })
           "
           :error="errors.get('service.criteria.income')"
@@ -103,7 +103,7 @@
           @input="
             $emit('input', {
               field: 'criteria',
-              value: Object.assign(service.criteria, { language: $event })
+              value: Object.assign(service.criteria, { language: $event }),
             })
           "
           :error="errors.get('service.criteria.language')"
@@ -121,7 +121,7 @@
           @input="
             $emit('input', {
               field: 'criteria',
-              value: Object.assign(service.criteria, { other: $event })
+              value: Object.assign(service.criteria, { other: $event }),
             })
           "
           :error="errors.get('service.criteria.other')"
@@ -142,23 +142,23 @@
 </template>
 
 <script>
-import CriteriaInput from "@/views/services/inputs/CriteriaInput";
+import CriteriaInput from '@/views/services/inputs/CriteriaInput'
 
 export default {
   components: {
-    CriteriaInput
+    CriteriaInput,
   },
 
   props: {
     service: {
       type: Object,
-      required: true
+      required: true,
     },
 
     errors: {
       type: Object,
-      required: true
-    }
-  }
-};
+      required: true,
+    },
+  },
+}
 </script>

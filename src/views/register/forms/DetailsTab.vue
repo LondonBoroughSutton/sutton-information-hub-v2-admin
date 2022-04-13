@@ -59,24 +59,24 @@ export default {
   props: {
     service: {
       type: Object,
-      required: true
+      required: true,
     },
 
     errors: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
 
   data() {
     return {
       typeOptions: [
-        { text: "It is a Service", value: "service" },
-        { text: "It is an Activity", value: "activity" },
-        { text: "It is a Club", value: "club" },
-        { text: "It is a Group", value: "group" }
-      ]
-    };
-  }
-};
+        { text: 'It is a Service', value: 'service' },
+        { text: 'It is an Activity', value: 'activity' },
+        { text: 'It is a Club', value: 'club' },
+        { text: 'It is a Group', value: 'group' },
+      ],
+    }
+  },
+}
 </script>

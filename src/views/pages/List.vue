@@ -62,7 +62,7 @@
               <gov-link
                 :to="{
                   name: 'pages-edit',
-                  params: { page: page.id }
+                  params: { page: page.id },
                 }"
               >
                 Edit </gov-link
@@ -89,7 +89,7 @@
             <gov-link
               :to="{
                 name: 'pages-edit',
-                params: { page: editProps.node.id }
+                params: { page: editProps.node.id },
               }"
             >
               Edit
@@ -110,15 +110,15 @@
 </template>
 
 <script>
-import http from "@/http";
-import CkTreeList from "@/components/Ck/CkTreeList";
-import CkTableFilters from "@/components/Ck/CkTableFilters";
+import http from '@/http'
+import CkTreeList from '@/components/Ck/CkTreeList'
+import CkTableFilters from '@/components/Ck/CkTableFilters'
 
 export default {
-  name: "ListPages",
+  name: 'ListPages',
   components: {
     CkTreeList,
-    CkTableFilters
+    CkTableFilters,
   },
   data() {
     return {
@@ -126,99 +126,99 @@ export default {
       searching: false,
       pages: [],
       filters: {
-        title: "",
-        page_type: null
+        title: '',
+        page_type: null,
       },
       minSearchPhraseLength: 3,
       pageTypes: [
-        { value: "", text: "All" },
-        { value: "information", text: "Information page" },
-        { value: "landing", text: "Landing page" }
-      ]
-    };
+        { value: '', text: 'All' },
+        { value: 'information', text: 'Information page' },
+        { value: 'landing', text: 'Landing page' },
+      ],
+    }
   },
   computed: {
     pagesTree() {
       return this.buildPagesTree(
         this.pages.filter(page => {
-          return !page.parent;
+          return !page.parent
         })
-      );
+      )
     },
     params() {
-      const params = {};
+      const params = {}
       if (this.filters.title.length > this.minSearchPhraseLength) {
-        params["filter[title]"] = this.filters.title;
+        params['filter[title]'] = this.filters.title
       }
       if (this.filters.page_type) {
-        params["filter[page_type]"] = this.filters.page_type;
+        params['filter[page_type]'] = this.filters.page_type
       }
-      return params;
-    }
+      return params
+    },
   },
   methods: {
     async fetchPages() {
-      this.loading = true;
-      this.searching = Object.keys(this.params).length > 0;
-      const { data } = await http.get("/pages/index", {
-        params: this.params
-      });
+      this.loading = true
+      this.searching = Object.keys(this.params).length > 0
+      const { data } = await http.get('/pages/index', {
+        params: this.params,
+      })
       this.pages = data.data.map(page => {
         return {
           label: page.title,
-          ...page
-        };
-      });
+          ...page,
+        }
+      })
 
-      this.loading = false;
+      this.loading = false
     },
     async onMoveUp(page) {
-      page.order--;
+      page.order--
       await http.put(`/pages/${page.id}`, {
-        ...page
-      });
-      this.fetchPages();
+        ...page,
+      })
+      this.fetchPages()
     },
     async onMoveDown(page) {
-      page.order++;
+      page.order++
       await http.put(`/pages/${page.id}`, {
-        ...page
-      });
-      this.fetchPages();
+        ...page,
+      })
+      this.fetchPages()
     },
     async onSearch() {
-      await this.fetchPages();
+      await this.fetchPages()
     },
     async clearSearch() {
-      this.filters.title = "";
-      await this.fetchPages();
+      this.filters.title = ''
+      await this.fetchPages()
     },
     buildPagesTree(pages, parsed = [], depth = 0) {
       pages
         .sort((page1, page2) => {
-          return page1.order - page2.order;
+          return page1.order - page2.order
         })
         .forEach(page => {
           page.children = this.pages.filter(
             child => child.parent && child.parent.id === page.id
-          );
+          )
 
           if (depth === 0) {
-            parsed.push(page);
+            parsed.push(page)
           }
 
           if (page.children.length > 0 && depth < 4) {
-            parsed = this.buildPagesTree(page.children, parsed, depth + 1);
+            parsed = this.buildPagesTree(page.children, parsed, depth + 1)
           }
-        });
+        })
 
-      return parsed;
-    }
+      return parsed
+    },
   },
   created() {
-    this.fetchPages();
-  }
-};
+    this.fetchPages()
+  },
+}
 </script>
 
 <style lang="scss" scoped></style>

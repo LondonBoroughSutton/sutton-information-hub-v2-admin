@@ -14,42 +14,42 @@
 
 <script>
 export default {
-  name: "GovInput",
+  name: 'GovInput',
   props: {
     value: {
       type: String,
-      required: true
+      required: true,
     },
     id: {
       type: String,
-      required: true
+      required: true,
     },
     name: {
       type: String,
-      required: true
+      required: true,
     },
     type: {
       type: String,
       required: false,
-      default: "text"
+      default: 'text',
     },
     width: {
       type: Number,
-      required: false
-    }
+      required: false,
+    },
   },
   computed: {
     computedClass() {
-      return this.width ? `govuk-input--width-${this.width}` : null;
+      return this.width ? `govuk-input--width-${this.width}` : null
     },
     ariaDescribedBy() {
-      return `${this.name}-hint`;
-    }
+      return `${this.name}-hint`
+    },
   },
   methods: {
     onEnter() {
-      this.$emit("enter");
-    }
-  }
-};
+      this.$emit('enter')
+    },
+  },
+}
 </script>

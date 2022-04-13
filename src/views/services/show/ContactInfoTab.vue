@@ -26,12 +26,12 @@
 
 <script>
 export default {
-  name: "ContactInfoTab",
+  name: 'ContactInfoTab',
   props: {
     service: {
       type: Object,
-      required: true
-    }
-  }
-};
+      required: true,
+    },
+  },
+}
 </script>

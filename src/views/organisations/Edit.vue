@@ -11,7 +11,7 @@
       <gov-back-link
         :to="{
           name: 'organisations-show',
-          params: { organisation: organisation.id }
+          params: { organisation: organisation.id },
         }"
         >Back to organisation</gov-back-link
       >
@@ -113,14 +113,14 @@
 </template>
 
 <script>
-import http from "@/http";
-import Form from "@/classes/Form";
-import OrganisationTab from "./OrganisationTab";
-import OrganisationForm from "./forms/OrganisationForm";
-import CkTaxonomyInput from "@/components/Ck/CkTaxonomyInput";
+import http from '@/http'
+import Form from '@/classes/Form'
+import OrganisationTab from './OrganisationTab'
+import OrganisationForm from './forms/OrganisationForm'
+import CkTaxonomyInput from '@/components/Ck/CkTaxonomyInput'
 
 export default {
-  name: "EditOrganisation",
+  name: 'EditOrganisation',
   components: { OrganisationForm, OrganisationTab, CkTaxonomyInput },
   data() {
     return {
@@ -128,39 +128,39 @@ export default {
       organisation: null,
       form: null,
       tabs: [
-        { id: "details", heading: "Details", active: true },
-        { id: "taxonomies", heading: "Taxonomies", active: false }
-      ]
-    };
+        { id: 'details', heading: 'Details', active: true },
+        { id: 'taxonomies', heading: 'Taxonomies', active: false },
+      ],
+    }
   },
   computed: {
     updateButtonText() {
-      return this.auth.isGlobalAdmin ? "Update" : "Request update";
-    }
+      return this.auth.isGlobalAdmin ? 'Update' : 'Request update'
+    },
   },
   methods: {
     async fetchOrganisation() {
-      this.loading = true;
+      this.loading = true
 
       const response = await http.get(
         `/organisations/${this.$route.params.organisation}`
-      );
-      this.organisation = response.data.data;
+      )
+      this.organisation = response.data.data
       this.form = new Form({
         name: this.organisation.name,
         slug: this.organisation.slug,
         description: this.organisation.description,
         url: this.organisation.url,
-        email: this.organisation.email || "",
-        phone: this.organisation.phone || "",
+        email: this.organisation.email || '',
+        phone: this.organisation.phone || '',
         logo_file_id: null,
         social_medias: this.organisation.social_medias,
         category_taxonomies: this.organisation.category_taxonomies.map(
           taxonomy => taxonomy.id
-        )
-      });
+        ),
+      })
 
-      this.loading = false;
+      this.loading = false
     },
     async onSubmit() {
       const response = await this.form.put(
@@ -168,36 +168,36 @@ export default {
         (config, data) => {
           // Remove any unchanged values.
           if (data.name === this.organisation.name) {
-            delete data.name;
+            delete data.name
           }
           if (data.slug === this.organisation.slug) {
-            delete data.slug;
+            delete data.slug
           }
           if (data.description === this.organisation.description) {
-            delete data.description;
+            delete data.description
           }
           if (data.url === this.organisation.url) {
-            delete data.url;
+            delete data.url
           }
-          if (data.email === (this.organisation.email || "-")) {
-            delete data.email;
+          if (data.email === (this.organisation.email || '-')) {
+            delete data.email
           }
-          if (data.phone === (this.organisation.phone || "-")) {
-            delete data.phone;
+          if (data.phone === (this.organisation.phone || '-')) {
+            delete data.phone
           }
 
           // Remove the logo from the request if null, or delete if false.
           if (data.logo_file_id === null) {
-            delete data.logo_file_id;
+            delete data.logo_file_id
           } else if (data.logo_file_id === false) {
-            data.logo_file_id = null;
+            data.logo_file_id = null
           }
 
           if (
             JSON.stringify(data.social_medias) ===
             JSON.stringify(this.organisation.social_medias)
           ) {
-            delete data.social_medias;
+            delete data.social_medias
           }
 
           if (
@@ -206,45 +206,43 @@ export default {
               this.organisation.category_taxonomies.map(taxonomy => taxonomy.id)
             )
           ) {
-            delete data.category_taxonomies;
+            delete data.category_taxonomies
           }
         }
-      );
-      const updateRequestId = response.id;
+      )
+      const updateRequestId = response.id
       let next = {
-        name: "organisations-updated",
-        params: { organisation: this.organisation.id }
-      };
+        name: 'organisations-updated',
+        params: { organisation: this.organisation.id },
+      }
 
       if (this.auth.isGlobalAdmin) {
         try {
-          const { data } = await http.get(
-            `/update-requests/${updateRequestId}`
-          );
+          const { data } = await http.get(`/update-requests/${updateRequestId}`)
 
           if (data.approved_at) {
-            next.name = "organisations-show";
-            next.query = { updated: true };
+            next.name = 'organisations-show'
+            next.query = { updated: true }
           }
         } catch (err) {
-          console.log(err);
+          console.log(err)
         }
       }
-      this.$router.push(next);
+      this.$router.push(next)
     },
     onTabChange({ index }) {
-      this.tabs.forEach(tab => (tab.active = false));
-      const tabId = this.tabs[index].id;
-      this.tabs.find(tab => tab.id === tabId).active = true;
+      this.tabs.forEach(tab => (tab.active = false))
+      const tabId = this.tabs[index].id
+      this.tabs.find(tab => tab.id === tabId).active = true
     },
     isTabActive(id) {
-      const tab = this.tabs.find(tab => tab.id === id);
+      const tab = this.tabs.find(tab => tab.id === id)
 
-      return tab === undefined ? false : tab.active;
-    }
+      return tab === undefined ? false : tab.active
+    },
   },
   created() {
-    this.fetchOrganisation();
-  }
-};
+    this.fetchOrganisation()
+  },
+}
 </script>

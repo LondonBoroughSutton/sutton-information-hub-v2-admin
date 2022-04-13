@@ -19,24 +19,24 @@
 </template>
 
 <script>
-import UsefulInfosInput from "@/views/services/inputs/UsefulInfosInput";
+import UsefulInfosInput from '@/views/services/inputs/UsefulInfosInput'
 
 export default {
-  name: "UsefulInfoTab",
+  name: 'UsefulInfoTab',
   components: { UsefulInfosInput },
   props: {
     errors: {
       required: true,
-      type: Object
+      type: Object,
     },
     type: {
       required: true,
-      type: String
+      type: String,
     },
     useful_infos: {
       type: Array,
-      required: true
-    }
-  }
-};
+      required: true,
+    },
+  },
+}
 </script>

@@ -28,62 +28,62 @@
 </template>
 
 <script>
-import http from "@/http";
-import CkTaxonomyList from "@/components/Ck/CkTaxonomyList.vue";
+import http from '@/http'
+import CkTaxonomyList from '@/components/Ck/CkTaxonomyList.vue'
 
 export default {
-  name: "EligibilityTab",
+  name: 'EligibilityTab',
 
   components: {
-    CkTaxonomyList
+    CkTaxonomyList,
   },
 
   props: {
     service: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
 
   data() {
     return {
       loading: false,
-      eligibilityTypes: []
-    };
+      eligibilityTypes: [],
+    }
   },
 
   methods: {
     async fetchServiceEligibilites() {
-      this.loading = true;
+      this.loading = true
       const { data: eligibilityTypes } = await http.get(
-        "/taxonomies/service-eligibilities"
-      );
-      this.eligibilityTypes = eligibilityTypes.data;
-      this.loading = false;
+        '/taxonomies/service-eligibilities'
+      )
+      this.eligibilityTypes = eligibilityTypes.data
+      this.loading = false
     },
     serviceEligibilityCustomValue(name) {
-      const nameSlug = this.slugify(name);
-      return this.service.eligibility_types.hasOwnProperty("custom") &&
+      const nameSlug = this.slugify(name)
+      return this.service.eligibility_types.hasOwnProperty('custom') &&
         null !== this.service.eligibility_types.custom[nameSlug]
         ? this.service.eligibility_types.custom[nameSlug]
-        : "";
+        : ''
     },
     serviceHasEligibilityCriteria(taxonomy) {
       return (
         taxonomy.children.some(childTaxonomy => {
           return this.service.eligibility_types.taxonomies.includes(
             childTaxonomy.id
-          );
-        }) || this.serviceEligibilityCustomValue(taxonomy.name) !== ""
-      );
+          )
+        }) || this.serviceEligibilityCustomValue(taxonomy.name) !== ''
+      )
     },
     slugify(name) {
-      return name.toLowerCase().replaceAll(" ", "_");
-    }
+      return name.toLowerCase().replaceAll(' ', '_')
+    },
   },
 
   created() {
-    this.fetchServiceEligibilites();
-  }
-};
+    this.fetchServiceEligibilites()
+  },
+}
 </script>

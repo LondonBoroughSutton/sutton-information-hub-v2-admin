@@ -55,16 +55,16 @@
 </template>
 
 <script>
-import CkImageInput from "./CkImageInput";
+import CkImageInput from './CkImageInput'
 
 export default {
   components: {
-    CkImageInput
+    CkImageInput,
   },
 
   model: {
-    prop: "banner",
-    event: "update"
+    prop: 'banner',
+    event: 'update',
   },
 
   props: {
@@ -72,36 +72,36 @@ export default {
       type: Object,
       default() {
         return {
-          title: "",
-          content: "",
-          button_text: "",
-          button_url: ""
-        };
-      }
+          title: '',
+          content: '',
+          button_text: '',
+          button_url: '',
+        }
+      },
     },
     errors: {
       type: Object,
       default() {
-        return {};
-      }
+        return {}
+      },
     },
     showImageInput: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
 
   methods: {
     onInput({ field, value }) {
-      const banner = { ...this.banner };
+      const banner = { ...this.banner }
 
-      banner[field] = value;
+      banner[field] = value
 
-      this.$emit("update", banner);
-      this.$emit("clear", `banner.${field}`);
-    }
-  }
-};
+      this.$emit('update', banner)
+      this.$emit('clear', `banner.${field}`)
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped></style>

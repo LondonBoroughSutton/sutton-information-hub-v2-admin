@@ -10,13 +10,13 @@
 
 <script>
 export default {
-  name: "CkThesaurusList",
+  name: 'CkThesaurusList',
 
   props: {
     synonyms: {
       required: true,
-      type: Array
-    }
-  }
-};
+      type: Array,
+    },
+  },
+}
 </script>

@@ -12,8 +12,8 @@
     <ck-textarea-input
       :value="subtitle"
       @input="
-        $emit('update:subtitle', $event);
-        $emit('clear', 'subtitle');
+        $emit('update:subtitle', $event)
+        $emit('clear', 'subtitle')
       "
       id="subtitle"
       label="Subtitle"
@@ -25,8 +25,8 @@
     <ck-textarea-input
       :value="intro"
       @input="
-        $emit('update:intro', $event);
-        $emit('clear', 'intro');
+        $emit('update:intro', $event)
+        $emit('clear', 'intro')
       "
       id="intro"
       label="Description of category"
@@ -91,58 +91,58 @@
 </template>
 
 <script>
-import CkImageInput from "@/components/Ck/CkImageInput";
-import CkTaxonomyInput from "@/components/Ck/CkTaxonomyInput";
-import CkSideboxesInput from "@/views/collections/inputs/SideboxesInput";
-import CollectionEnabledInput from "@/views/collections/inputs/CollectionEnabledInput";
-import CollectionHomepageInput from "@/views/collections/inputs/CollectionHomepageInput";
+import CkImageInput from '@/components/Ck/CkImageInput'
+import CkTaxonomyInput from '@/components/Ck/CkTaxonomyInput'
+import CkSideboxesInput from '@/views/collections/inputs/SideboxesInput'
+import CollectionEnabledInput from '@/views/collections/inputs/CollectionEnabledInput'
+import CollectionHomepageInput from '@/views/collections/inputs/CollectionHomepageInput'
 
 export default {
-  name: "CollectionForm",
+  name: 'CollectionForm',
 
   components: {
     CollectionEnabledInput,
     CollectionHomepageInput,
     CkImageInput,
     CkTaxonomyInput,
-    CkSideboxesInput
+    CkSideboxesInput,
   },
   props: {
     errors: {
       required: true,
-      type: Object
+      type: Object,
     },
     name: {
-      required: true
+      required: true,
     },
     intro: {
-      required: true
+      required: true,
     },
     subtitle: {
-      required: true
+      required: true,
     },
     order: {
-      required: true
+      required: true,
     },
     enabled: {
-      required: true
+      required: true,
     },
     sideboxes: {
-      required: true
+      required: true,
     },
     category_taxonomies: {
-      required: true
+      required: true,
     },
     id: {
       required: false,
-      type: String
-    }
+      type: String,
+    },
   },
   methods: {
     onInput(field, value) {
-      this.$emit(`update:${field}`, value);
-      this.$emit("clear", field);
-    }
-  }
-};
+      this.$emit(`update:${field}`, value)
+      this.$emit('clear', field)
+    },
+  },
+}
 </script>

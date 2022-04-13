@@ -6,13 +6,13 @@
 
 <script>
 export default {
-  name: "GovFormGroup",
+  name: 'GovFormGroup',
   props: {
     invalid: {
       type: Boolean,
       required: false,
-      default: false
-    }
-  }
-};
+      default: false,
+    },
+  },
+}
 </script>

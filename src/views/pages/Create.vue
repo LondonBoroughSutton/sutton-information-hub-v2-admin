@@ -28,88 +28,88 @@
 </template>
 
 <script>
-import PageForm from "./forms/PageForm";
-import Form from "@/classes/Form";
+import PageForm from './forms/PageForm'
+import Form from '@/classes/Form'
 
 export default {
-  name: "CreatePage",
+  name: 'CreatePage',
 
   components: {
-    PageForm
+    PageForm,
   },
 
   props: {
     type: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
 
   data() {
     return {
       form: new Form({
         parent_id: null,
-        title: "",
-        content: "",
+        title: '',
+        content: '',
         page_type: this.type,
         image_file_id: null,
         collections: [],
-        enabled: false
+        enabled: false,
       }),
 
       contentTypes: {
         landing: {
           introduction: {
             order: 1,
-            label: "Introduction",
-            hint: "",
-            copy: [""]
+            label: 'Introduction',
+            hint: '',
+            copy: [''],
           },
           about: {
             order: 2,
-            label: "About",
-            hint: "",
-            copy: ["", ""]
+            label: 'About',
+            hint: '',
+            copy: ['', ''],
           },
           info_pages: {
             order: 3,
-            label: "Information Pages",
-            hint: "",
-            title: "",
-            copy: [""]
+            label: 'Information Pages',
+            hint: '',
+            title: '',
+            copy: [''],
           },
           collections: {
             order: 4,
-            label: "Collections",
-            hint: "",
-            title: "",
-            copy: [""]
-          }
+            label: 'Collections',
+            hint: '',
+            title: '',
+            copy: [''],
+          },
         },
         information: {
           introduction: {
             order: 1,
-            label: "Page content",
+            label: 'Page content',
             hint:
-              "This is the largest content of the page. Use formatting to improve readability and impact.",
-            copy: [""]
-          }
-        }
-      }
-    };
+              'This is the largest content of the page. Use formatting to improve readability and impact.',
+            copy: [''],
+          },
+        },
+      },
+    }
   },
 
   methods: {
     async onSubmit() {
-      await this.form.post("/pages");
-      this.$router.push({ name: "pages-index" });
-    }
+      await this.form.post('/pages')
+      this.$router.push({ name: 'pages-index' })
+    },
   },
 
   created() {
-    this.form.content = this.contentTypes[this.form.page_type];
-  }
-};
+    this.form.content = this.contentTypes[this.form.page_type]
+  },
+}
 </script>
 
 <style lang="scss" scoped></style>

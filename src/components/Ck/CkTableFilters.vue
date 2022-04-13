@@ -25,20 +25,20 @@
 
 <script>
 export default {
-  name: "TableFilters",
+  name: 'TableFilters',
 
   props: {
     hideExtra: {
       required: false,
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
 
   data() {
     return {
-      showAll: false
-    };
-  }
-};
+      showAll: false,
+    }
+  },
+}
 </script>
