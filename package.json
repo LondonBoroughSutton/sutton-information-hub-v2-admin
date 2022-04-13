@@ -19,7 +19,7 @@
     "lodash": "^4.17.21",
     "moment": "^2.29.2",
     "node-sass": "^4.9.3",
-    "sass-loader": "^7.1.0",
+    "sass-loader": "^10.2.1",
     "showdown": "^1.8.6",
     "tiptap": "^1.32.2",
     "tiptap-extensions": "^1.35.2",
