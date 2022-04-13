@@ -93,7 +93,7 @@ export default {
       return {
         name: collection.name,
         intro: collection.intro,
-        icon: collection.icon,
+        homepage: collection.homepage,
         order: collection.order,
         enabled: collection.enabled,
         sideboxes: collection.sideboxes,
