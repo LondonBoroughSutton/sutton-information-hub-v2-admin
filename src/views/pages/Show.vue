@@ -9,15 +9,15 @@
 
 <script>
 export default {
-  name: "ShowPage",
+  name: 'ShowPage',
 
   props: {
     page: {
       type: Object,
-      required: true
-    }
-  }
-};
+      required: true,
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped></style>

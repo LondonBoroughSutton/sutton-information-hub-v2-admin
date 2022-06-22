@@ -29,36 +29,36 @@
 </template>
 
 <script>
-import http from "@/http";
-import CkNodeCheckboxes from "./CkNodeCheckboxes";
+import http from '@/http'
+import CkNodeCheckboxes from './CkNodeCheckboxes'
 
 export default {
-  name: "CollectionInput",
+  name: 'CollectionInput',
 
   components: {
-    CkNodeCheckboxes
+    CkNodeCheckboxes,
   },
 
   props: {
     value: {
       required: true,
-      type: Array
+      type: Array,
     },
     error: {
-      required: true
+      required: true,
     },
     disabled: {
       required: false,
       type: Boolean,
-      default: false
+      default: false,
     },
     root: {
       required: true,
       type: String,
       validator: function(value) {
-        return ["categories", "organisations"].indexOf(value) !== -1;
-      }
-    }
+        return ['categories', 'organisations'].indexOf(value) !== -1
+      },
+    },
   },
 
   data() {
@@ -67,9 +67,9 @@ export default {
       enabledCollections: [],
       loading: false,
       filters: {
-        name: ""
-      }
-    };
+        name: '',
+      },
+    }
   },
 
   computed: {
@@ -82,57 +82,57 @@ export default {
                 .toLowerCase()
                 .includes(this.filters.name.toLowerCase())
             ) {
-              filteredCollections.push(collection);
+              filteredCollections.push(collection)
             }
-            return filteredCollections;
+            return filteredCollections
           },
           []
-        );
-        return [...new Set(filteredCollections)];
+        )
+        return [...new Set(filteredCollections)]
       } else {
-        return this.collections;
+        return this.collections
       }
-    }
+    },
   },
 
   methods: {
     async fetchCollections() {
-      this.loading = true;
+      this.loading = true
       const { data: collections } = await http.get(
         `/collections/${this.root}/all`
-      );
-      this.collections = collections.data;
-      this.loading = false;
+      )
+      this.collections = collections.data
+      this.loading = false
     },
 
     onUpdate({ node: collection, enabled }) {
       if (enabled) {
-        this.onChecked(collection);
+        this.onChecked(collection)
       } else {
-        this.onUnchecked(collection);
+        this.onUnchecked(collection)
       }
 
-      this.$emit("input", this.enabledCollections);
-      this.$emit("clear");
+      this.$emit('input', this.enabledCollections)
+      this.$emit('clear')
     },
     onChecked(collection) {
       if (!this.enabledCollections.includes(collection.id)) {
-        this.enabledCollections.push(collection.id);
+        this.enabledCollections.push(collection.id)
       }
     },
     onUnchecked(collection) {
       if (this.enabledCollections.includes(collection.id)) {
-        const index = this.enabledCollections.indexOf(collection.id);
-        this.enabledCollections.splice(index, 1);
+        const index = this.enabledCollections.indexOf(collection.id)
+        this.enabledCollections.splice(index, 1)
       }
-    }
+    },
   },
 
   created() {
-    this.fetchCollections();
-    this.enabledCollections = this.value;
-  }
-};
+    this.fetchCollections()
+    this.enabledCollections = this.value
+  },
+}
 </script>
 
 <style lang="scss" scoped></style>

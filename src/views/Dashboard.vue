@@ -112,15 +112,15 @@
 </template>
 
 <script>
-import Auth from "@/classes/Auth";
+import Auth from '@/classes/Auth'
 
 export default {
-  name: "Dashboard",
+  name: 'Dashboard',
 
   data() {
     return {
-      auth: Auth
-    };
-  }
-};
+      auth: Auth,
+    }
+  },
+}
 </script>

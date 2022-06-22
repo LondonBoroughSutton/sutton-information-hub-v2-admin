@@ -15,11 +15,11 @@
 
 <script>
 export default {
-  name: "GovBackLink",
+  name: 'GovBackLink',
   props: {
     to: {
-      required: false
-    }
-  }
-};
+      required: false,
+    },
+  },
+}
 </script>

@@ -66,24 +66,24 @@ export default {
   props: {
     form: {
       type: Object,
-      required: true
+      required: true,
     },
 
     errors: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
 
   computed: {
     termsAndConditionsUrl() {
-      return `${process.env.VUE_APP_FRONTEND_URI}/terms-and-conditions`;
+      return `${process.env.VUE_APP_FRONTEND_URI}/terms-and-conditions`
     },
     privacyPolicyUrl() {
-      return `${process.env.VUE_APP_FRONTEND_URI}/privacy-policy`;
-    }
-  }
-};
+      return `${process.env.VUE_APP_FRONTEND_URI}/privacy-policy`
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped></style>

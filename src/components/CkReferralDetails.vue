@@ -18,12 +18,12 @@
 
       <gov-table-row>
         <gov-table-header top scope="row">Signposted Email</gov-table-header>
-        <gov-table-cell>{{ referral.email || "-" }}</gov-table-cell>
+        <gov-table-cell>{{ referral.email || '-' }}</gov-table-cell>
       </gov-table-row>
 
       <gov-table-row>
         <gov-table-header top scope="row">Signposted Phone</gov-table-header>
-        <gov-table-cell>{{ referral.phone || "-" }}</gov-table-cell>
+        <gov-table-cell>{{ referral.phone || '-' }}</gov-table-cell>
       </gov-table-row>
 
       <gov-table-row>
@@ -32,7 +32,7 @@
           <gov-link
             :to="{
               name: 'services-show',
-              params: { service: referral.service.id }
+              params: { service: referral.service.id },
             }"
           >
             {{ referral.service.name }}
@@ -48,7 +48,7 @@
             v-else
             :to="{
               name: 'organisations-show',
-              params: { organisation: organisation.id }
+              params: { organisation: organisation.id },
             }"
           >
             {{ organisation.name }}
@@ -69,12 +69,12 @@
 
         <gov-table-row>
           <gov-table-header top scope="row">Champion Email</gov-table-header>
-          <gov-table-cell>{{ referral.referee_email || "-" }}</gov-table-cell>
+          <gov-table-cell>{{ referral.referee_email || '-' }}</gov-table-cell>
         </gov-table-row>
 
         <gov-table-row>
           <gov-table-header top scope="row">Champion Phone</gov-table-header>
-          <gov-table-cell>{{ referral.referee_phone || "-" }}</gov-table-cell>
+          <gov-table-cell>{{ referral.referee_phone || '-' }}</gov-table-cell>
         </gov-table-row>
 
         <gov-table-row>
@@ -124,105 +124,105 @@
 </template>
 
 <script>
-import moment from "moment";
-import http from "@/http";
+import moment from 'moment'
+import http from '@/http'
 
 export default {
-  name: "CkReferralDetails",
+  name: 'CkReferralDetails',
   props: {
     referral: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
       loadingOrganisation: false,
-      organisation: null
-    };
+      organisation: null,
+    }
   },
   computed: {
     isSelfReferral() {
-      return this.referral.referee_name === null;
+      return this.referral.referee_name === null
     },
     type() {
       // Implies self-referral.
       if (this.isSelfReferral) {
-        return "Referred myself";
+        return 'Referred myself'
       }
 
-      return "Referred by someone else";
+      return 'Referred by someone else'
     },
     consented() {
-      return this.referral.referral_consented_at === null ? "No" : "Yes";
-    }
+      return this.referral.referral_consented_at === null ? 'No' : 'Yes'
+    },
   },
   created() {
-    this.fetchOrganisation();
+    this.fetchOrganisation()
   },
   methods: {
     autoDeleteDate(updated_at) {
       return moment(updated_at, moment.ISO_8601)
         .clone()
-        .add(6, "months")
-        .format("Y-MM-DD[T]HH:mm:ssZ");
+        .add(6, 'months')
+        .format('Y-MM-DD[T]HH:mm:ssZ')
     },
     diffInBusinessDays(date) {
-      const start = this.moment(date, this.moment.ISO_8601);
-      const end = this.moment();
-      const duration = end.diff(start, "days");
+      const start = this.moment(date, this.moment.ISO_8601)
+      const end = this.moment()
+      const duration = end.diff(start, 'days')
 
-      let businessDays = 0;
+      let businessDays = 0
       for (var i = 0; i < duration; i++) {
         const day = start
           .clone()
-          .add(i, "days")
-          .isoWeekday();
+          .add(i, 'days')
+          .isoWeekday()
 
         if (day < 6) {
-          businessDays += 1;
+          businessDays += 1
         }
       }
 
-      return businessDays;
+      return businessDays
     },
     statusLastUpdated(referral) {
-      if (!["new", "in_progress"].includes(referral.status)) {
-        return "N/A";
+      if (!['new', 'in_progress'].includes(referral.status)) {
+        return 'N/A'
       }
 
-      const workingDays = this.diffInBusinessDays(referral.created_at);
+      const workingDays = this.diffInBusinessDays(referral.created_at)
 
-      return workingDays >= 10 ? "Due" : 10 - workingDays;
+      return workingDays >= 10 ? 'Due' : 10 - workingDays
     },
     async fetchOrganisation() {
-      this.loadingOrganisation = true;
+      this.loadingOrganisation = true
 
       const {
-        data: { data: organisation }
+        data: { data: organisation },
       } = await http.get(
         `/organisations/${this.referral.service.organisation_id}`
-      );
-      this.organisation = organisation;
+      )
+      this.organisation = organisation
 
-      this.loadingOrganisation = false;
-    }
+      this.loadingOrganisation = false
+    },
   },
   filters: {
     status(status) {
       switch (status) {
-        case "new":
-          return "New";
-        case "in_progress":
-          return "In progress";
-        case "completed":
-          return "Completed";
-        case "incompleted":
-          return "Incomplete";
+        case 'new':
+          return 'New'
+        case 'in_progress':
+          return 'In progress'
+        case 'completed':
+          return 'Completed'
+        case 'incompleted':
+          return 'Incomplete'
         default:
-          return "Invalid status";
+          return 'Invalid status'
       }
-    }
-  }
-};
+    },
+  },
+}
 </script>

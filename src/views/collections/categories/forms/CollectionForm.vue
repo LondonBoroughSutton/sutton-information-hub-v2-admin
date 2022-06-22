@@ -12,8 +12,8 @@
     <ck-textarea-input
       :value="intro"
       @input="
-        $emit('update:intro', $event);
-        $emit('clear', 'intro');
+        $emit('update:intro', $event)
+        $emit('clear', 'intro')
       "
       id="intro"
       label="Description of category"
@@ -22,29 +22,25 @@
       :error="errors.get('intro')"
     />
 
-    <ck-select-input
-      :value="icon"
-      @input="onInput('icon', $event)"
-      id="icon"
-      label="Icon"
-      :error="errors.get('icon')"
-      has-icons
+    <ck-image-input
+      @input="onInput('image_file_id', $event.file_id)"
+      id="image"
+      label="Category image"
+      accept="image/x-svg"
+      :existing-url="
+        id
+          ? apiUrl(`/collections/categories/${id}/image.svg?v=${now}`)
+          : undefined
+      "
     >
-      <gov-hint slot="hint" for="icon">
-        If you're having trouble viewing the icons, refer to the
-        <gov-link href="https://fontawesome.com/icons" target="_blank"
-          >Font Awesome website</gov-link
-        >
-        (the font library used).
-      </gov-hint>
-      <option
-        v-for="(option, key) in icons"
-        :key="key"
-        :value="option.value"
-        :disabled="option.disabled"
-        v-html="option.text"
-      />
-    </ck-select-input>
+      <template slot="after-error-message">
+        <gov-error-message
+          v-if="errors.get('image_file_id')"
+          v-text="errors.get('image_file_id')"
+          for="image"
+        />
+      </template>
+    </ck-image-input>
 
     <collection-homepage-input
       :value="homepage"
@@ -90,63 +86,58 @@
 </template>
 
 <script>
-import icons from "@/storage/icons";
-import CkTaxonomyInput from "@/components/Ck/CkTaxonomyInput";
-import CkSideboxesInput from "@/views/collections/inputs/SideboxesInput";
-import CollectionEnabledInput from "@/views/collections/inputs/CollectionEnabledInput";
-import CollectionHomepageInput from "@/views/collections/inputs/CollectionHomepageInput";
+import CkImageInput from '@/components/Ck/CkImageInput'
+import CkTaxonomyInput from '@/components/Ck/CkTaxonomyInput'
+import CkSideboxesInput from '@/views/collections/inputs/SideboxesInput'
+import CollectionEnabledInput from '@/views/collections/inputs/CollectionEnabledInput'
+import CollectionHomepageInput from '@/views/collections/inputs/CollectionHomepageInput'
 
 export default {
-  name: "CollectionForm",
+  name: 'CollectionForm',
   components: {
     CollectionEnabledInput,
     CollectionHomepageInput,
+    CkImageInput,
+    CkSideboxesInput,
     CkTaxonomyInput,
-    CkSideboxesInput
   },
   props: {
     errors: {
       required: true,
-      type: Object
+      type: Object,
+    },
+    id: {
+      required: false,
+      type: String,
     },
     name: {
-      required: true
+      required: true,
     },
     intro: {
-      required: true
-    },
-    icon: {
-      required: true
+      required: true,
     },
     order: {
-      required: true
+      required: true,
     },
     enabled: {
-      required: true
+      required: true,
     },
     homepage: {
-      required: true
+      required: true,
     },
     sideboxes: {
-      required: true
+      required: true,
     },
     category_taxonomies: {
-      required: true
-    }
+      required: true,
+    },
   },
-  data() {
-    return {
-      icons: [
-        { text: "Please select...", value: null, disabled: true },
-        ...icons
-      ]
-    };
-  },
+
   methods: {
     onInput(field, value) {
-      this.$emit(`update:${field}`, value);
-      this.$emit("clear", field);
-    }
-  }
-};
+      this.$emit(`update:${field}`, value)
+      this.$emit('clear', field)
+    },
+  },
+}
 </script>

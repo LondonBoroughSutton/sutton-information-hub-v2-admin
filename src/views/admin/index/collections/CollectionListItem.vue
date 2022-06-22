@@ -8,7 +8,7 @@
       v-if="auth.isGlobalAdmin"
       :to="{
         name: editCollectionRoute,
-        params: { collection: collection.id }
+        params: { collection: collection.id },
       }"
     >
       Edit
@@ -30,29 +30,29 @@ export default {
   props: {
     collections: {
       type: Array,
-      required: true
+      required: true,
     },
     collection: {
       type: Object,
-      required: true
+      required: true,
     },
     type: {
       type: String,
       required: true,
       validator: function(value) {
-        return ["category", "persona"].indexOf(value) !== -1;
-      }
-    }
+        return ['category', 'persona'].indexOf(value) !== -1
+      },
+    },
   },
 
   computed: {
     editCollectionRoute() {
-      return this.type === "category"
-        ? "collections-categories-edit"
-        : "collections-personas-edit";
-    }
-  }
-};
+      return this.type === 'category'
+        ? 'collections-categories-edit'
+        : 'collections-personas-edit'
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped></style>

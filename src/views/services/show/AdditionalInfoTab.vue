@@ -15,16 +15,16 @@
         </gov-table-row>
         <gov-table-row>
           <gov-table-header scope="row" top>CQC Location ID</gov-table-header>
-          <gov-table-cell>{{ service.cqc_location_id || "-" }}</gov-table-cell>
+          <gov-table-cell>{{ service.cqc_location_id || '-' }}</gov-table-cell>
         </gov-table-row>
         <gov-table-row>
           <gov-table-header scope="row" top>Testimonial</gov-table-header>
-          <gov-table-cell>{{ service.testimonial || "-" }}</gov-table-cell>
+          <gov-table-cell>{{ service.testimonial || '-' }}</gov-table-cell>
         </gov-table-row>
         <gov-table-row>
           <gov-table-header scope="row" top>Video URL</gov-table-header>
           <gov-table-cell break>{{
-            service.video_embed || "-"
+            service.video_embed || '-'
           }}</gov-table-cell>
         </gov-table-row>
       </template>
@@ -34,34 +34,39 @@
 
 <script>
 export default {
-  name: "AdditionalInfoTab",
+  name: 'AdditionalInfoTab',
   props: {
     service: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   computed: {
     waitTime() {
+      let waitTime = ''
       switch (this.service.wait_time) {
-        case null:
-          return `Not applicable for this ${this.service.type}`;
-        case "one_week":
-        case "two_weeks":
-        case "three_weeks":
-          return (
+        case 'one_week':
+        case 'two_weeks':
+        case 'three_weeks':
+          waitTime =
             this.service.wait_time.charAt(0).toUpperCase() +
-            this.service.wait_time.replace("_", " ").substr(1)
-          );
-        case "month":
-          return "One month";
-        case "longer":
-          return "Longer than one month";
+            this.service.wait_time.replace('_', ' ').substr(1)
+          break
+        case 'month':
+          waitTime = 'One month'
+          break
+        case 'longer':
+          waitTime = 'Longer than one month'
+          break
+        default:
+          waitTime = `Not applicable for this ${this.service.type}`
+          break
       }
+      return waitTime
     },
     isFree() {
-      return this.service.is_free ? "Yes" : "No";
-    }
-  }
-};
+      return this.service.is_free ? 'Yes' : 'No'
+    },
+  },
+}
 </script>

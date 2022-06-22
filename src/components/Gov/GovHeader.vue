@@ -48,61 +48,72 @@
             :class="{ 'govuk-header__navigation--open': navExpanded }"
             aria-label="Top Level Navigation"
           >
-            <router-link
-              v-for="(item, key) in navigation"
-              :key="key"
-              v-if="item.to && !item.hide"
-              tag="li"
-              class="govuk-header__navigation-item"
-              active-class="govuk-header__navigation-item--active"
-              :to="item.to"
-            >
-              <a class="govuk-header__link" :href="item.to">
-                {{ item.text }}
-              </a>
-            </router-link>
-            <li v-else-if="item.href" class="govuk-header__navigation-item">
-              <a class="govuk-header__link" :href="item.href">
-                {{ item.text }}
-              </a>
-            </li>
+            <template v-for="(item, key) in navigation">
+              <router-link
+                v-if="item.to && !item.hide"
+                :key="key"
+                tag="li"
+                class="govuk-header__navigation-item"
+                active-class="govuk-header__navigation-item--active"
+                :to="item.to"
+              >
+                <a class="govuk-header__link" :href="item.to">
+                  {{ item.text }}
+                </a>
+              </router-link>
+              <li
+                v-else-if="item.href"
+                :key="key"
+                class="govuk-header__navigation-item"
+              >
+                <a class="govuk-header__link" :href="item.href">
+                  {{ item.text }}
+                </a>
+              </li>
+            </template>
           </ul>
         </nav>
       </div>
     </div>
+    <ck-environment-warning />
   </header>
 </template>
 
 <script>
+import CkEnvironmentWarning from '@/components/CkEnvironmentWarning'
+
 export default {
-  name: "GovHeader",
+  name: 'GovHeader',
   props: {
     serviceName: {
       type: String,
-      required: true
+      required: true,
     },
     navigation: {
       type: Array,
       required: false,
       default() {
-        return [];
-      }
-    }
+        return []
+      },
+    },
+  },
+  components: {
+    CkEnvironmentWarning,
   },
   data() {
     return {
-      navExpanded: false
-    };
+      navExpanded: false,
+    }
   },
   methods: {
     itemActiveClass(item) {
-      return item.active ? "govuk-header__navigation-item--active" : null;
+      return item.active ? 'govuk-header__navigation-item--active' : null
     },
     onToggleMenu() {
-      this.navExpanded = !this.navExpanded;
-    }
-  }
-};
+      this.navExpanded = !this.navExpanded
+    },
+  },
+}
 </script>
 
 <style lang="scss">

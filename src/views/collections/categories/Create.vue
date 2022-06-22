@@ -23,12 +23,12 @@
             :errors="form.$errors"
             :name.sync="form.name"
             :intro.sync="form.intro"
-            :icon.sync="form.icon"
             :order.sync="form.order"
             :enabled.sync="form.enabled"
             :homepage.sync="form.homepage"
             :sideboxes.sync="form.sideboxes"
             :category_taxonomies.sync="form.category_taxonomies"
+            @update:image_file_id="form.image_file_id = $event"
             @clear="form.$errors.clear($event)"
           />
 
@@ -44,31 +44,31 @@
 </template>
 
 <script>
-import CollectionForm from "@/views/collections/categories/forms/CollectionForm";
-import Form from "@/classes/Form";
+import CollectionForm from '@/views/collections/categories/forms/CollectionForm'
+import Form from '@/classes/Form'
 
 export default {
-  name: "CreateCollectionCategory",
+  name: 'CreateCollectionCategory',
   components: { CollectionForm },
   data() {
     return {
       form: new Form({
-        name: "",
-        intro: "",
-        icon: "",
+        name: '',
+        intro: '',
+        image_file_id: null,
         order: 1,
         enabled: true,
         homepage: false,
         sideboxes: [],
-        category_taxonomies: []
-      })
-    };
+        category_taxonomies: [],
+      }),
+    }
   },
   methods: {
     async onSubmit() {
-      await this.form.post("/collections/categories");
-      this.$router.push({ name: "admin-index-collections" });
-    }
-  }
-};
+      await this.form.post('/collections/categories')
+      this.$router.push({ name: 'admin-index-collections' })
+    },
+  },
+}
 </script>

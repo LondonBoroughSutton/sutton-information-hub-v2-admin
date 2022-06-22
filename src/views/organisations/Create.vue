@@ -90,57 +90,57 @@
 </template>
 
 <script>
-import Form from "@/classes/Form";
-import OrganisationTab from "./OrganisationTab";
-import OrganisationForm from "./forms/OrganisationForm";
-import CkTaxonomyInput from "@/components/Ck/CkTaxonomyInput";
+import Form from '@/classes/Form'
+import OrganisationTab from './OrganisationTab'
+import OrganisationForm from './forms/OrganisationForm'
+import CkTaxonomyInput from '@/components/Ck/CkTaxonomyInput'
 
 export default {
-  name: "CreateOrganisation",
+  name: 'CreateOrganisation',
   components: { OrganisationForm, OrganisationTab, CkTaxonomyInput },
   data() {
     return {
       form: new Form({
-        name: "",
-        slug: "",
-        description: "",
-        url: "",
-        email: "",
-        phone: "",
+        name: '',
+        slug: '',
+        description: '',
+        url: '',
+        email: '',
+        phone: '',
         logo_file_id: null,
         social_medias: [],
-        category_taxonomies: []
+        category_taxonomies: [],
       }),
       tabs: [
-        { id: "details", heading: "Details", active: true },
-        { id: "taxonomies", heading: "Taxonomies", active: false }
-      ]
-    };
+        { id: 'details', heading: 'Details', active: true },
+        { id: 'taxonomies', heading: 'Taxonomies', active: false },
+      ],
+    }
   },
   watch: {
-    ["form.name"](newName) {
-      this.form.slug = this.slugify(newName);
-    }
+    ['form.name'](newName) {
+      this.form.slug = this.slugify(newName)
+    },
   },
   methods: {
     async onSubmit() {
-      const response = await this.form.post("/organisations");
-      const organisationId = response.data.id;
+      const response = await this.form.post('/organisations')
+      const organisationId = response.data.id
       this.$router.push({
-        name: "organisations-show",
-        params: { organisation: organisationId }
-      });
+        name: 'organisations-show',
+        params: { organisation: organisationId },
+      })
     },
     onTabChange({ index }) {
-      this.tabs.forEach(tab => (tab.active = false));
-      const tabId = this.tabs[index].id;
-      this.tabs.find(tab => tab.id === tabId).active = true;
+      this.tabs.forEach(tab => (tab.active = false))
+      const tabId = this.tabs[index].id
+      this.tabs.find(tab => tab.id === tabId).active = true
     },
     isTabActive(id) {
-      const tab = this.tabs.find(tab => tab.id === id);
+      const tab = this.tabs.find(tab => tab.id === id)
 
-      return tab === undefined ? false : tab.active;
-    }
-  }
-};
+      return tab === undefined ? false : tab.active
+    },
+  },
+}
 </script>

@@ -38,41 +38,41 @@
 </template>
 
 <script>
-import http from "@/http";
-import CkTaxonomyTree from "./CkTaxonomyTree";
+import http from '@/http'
+import CkTaxonomyTree from './CkTaxonomyTree'
 
 export default {
-  name: "TaxonomyInput",
+  name: 'TaxonomyInput',
 
   components: {
-    CkTaxonomyTree
+    CkTaxonomyTree,
   },
 
   props: {
     value: {
       required: true,
-      type: Array
+      type: Array,
     },
     error: {
-      required: true
+      required: true,
     },
     root: {
       required: true,
       type: String,
       validator: function(value) {
-        return ["categories", "organisations"].indexOf(value) !== -1;
-      }
+        return ['categories', 'organisations'].indexOf(value) !== -1
+      },
     },
     disabled: {
       required: false,
       type: Boolean,
-      default: false
+      default: false,
     },
     hierarchy: {
       required: false,
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
   data() {
     return {
@@ -82,9 +82,9 @@ export default {
       loading: false,
       enabledTaxonomies: [],
       filters: {
-        name: ""
-      }
-    };
+        name: '',
+      },
+    }
   },
   computed: {
     filteredTaxonomyIds() {
@@ -98,95 +98,95 @@ export default {
             ) {
               filteredTaxonomies = filteredTaxonomies.concat(
                 this.getTaxonomyAndAncestorsIds(taxonomy)
-              );
+              )
             }
-            return filteredTaxonomies;
+            return filteredTaxonomies
           },
           []
-        );
-        return [...new Set(filteredTaxonomyIds)];
+        )
+        return [...new Set(filteredTaxonomyIds)]
       } else {
-        return this.flattenedTaxonomies.map(taxonomy => taxonomy.id);
+        return this.flattenedTaxonomies.map(taxonomy => taxonomy.id)
       }
-    }
+    },
   },
   methods: {
     async fetchTaxonomies() {
-      this.loading = true;
-      const { data: taxonomies } = await http.get(`/taxonomies/${this.root}`);
-      this.taxonomies = taxonomies.data;
+      this.loading = true
+      const { data: taxonomies } = await http.get(`/taxonomies/${this.root}`)
+      this.taxonomies = taxonomies.data
       const { data: collections } = await http.get(
         `/collections/${this.root}/all`
-      );
-      this.setFlattenedTaxonomies();
-      this.setTaxonomyCollections(collections.data);
-      this.loading = false;
+      )
+      this.setFlattenedTaxonomies()
+      this.setTaxonomyCollections(collections.data)
+      this.loading = false
     },
     setFlattenedTaxonomies(taxonomies = null) {
       if (taxonomies === null) {
-        this.flattenedTaxonomies = [];
-        taxonomies = this.taxonomies;
+        this.flattenedTaxonomies = []
+        taxonomies = this.taxonomies
       }
 
       taxonomies.forEach(taxonomy => {
-        this.flattenedTaxonomies.push(taxonomy);
+        this.flattenedTaxonomies.push(taxonomy)
 
         if (taxonomy.children.length > 0) {
-          this.setFlattenedTaxonomies(taxonomy.children);
+          this.setFlattenedTaxonomies(taxonomy.children)
         }
-      });
+      })
     },
     setTaxonomyCollections(collections) {
       collections.forEach(collection => {
         collection.category_taxonomies.forEach(taxonomy => {
           this.taxonomyCollections[taxonomy.id] =
-            this.taxonomyCollections[taxonomy.id] || [];
-          this.taxonomyCollections[taxonomy.id].push(collection.name);
-        });
-      });
+            this.taxonomyCollections[taxonomy.id] || []
+          this.taxonomyCollections[taxonomy.id].push(collection.name)
+        })
+      })
     },
     onUpdate({ node: taxonomy, enabled }) {
       if (enabled) {
-        this.onChecked(taxonomy);
+        this.onChecked(taxonomy)
       } else {
-        this.onUnchecked(taxonomy);
+        this.onUnchecked(taxonomy)
       }
 
-      this.$emit("input", this.enabledTaxonomies);
-      this.$emit("clear");
+      this.$emit('input', this.enabledTaxonomies)
+      this.$emit('clear')
     },
     onChecked(taxonomy) {
       if (!this.enabledTaxonomies.includes(taxonomy.id)) {
-        this.enabledTaxonomies.push(taxonomy.id);
+        this.enabledTaxonomies.push(taxonomy.id)
       }
     },
     onUnchecked(taxonomy) {
       if (this.enabledTaxonomies.includes(taxonomy.id)) {
-        const index = this.enabledTaxonomies.indexOf(taxonomy.id);
-        this.enabledTaxonomies.splice(index, 1);
+        const index = this.enabledTaxonomies.indexOf(taxonomy.id)
+        this.enabledTaxonomies.splice(index, 1)
       }
     },
     getTaxonomyAndAncestorsIds(taxonomy) {
-      let ids = [taxonomy.id];
+      let ids = [taxonomy.id]
       if (taxonomy.parent_id) {
         const parent = this.flattenedTaxonomies.find(
           tax => tax.id === taxonomy.parent_id
-        );
-        ids = ids.concat(this.getTaxonomyAndAncestorsIds(parent));
+        )
+        ids = ids.concat(this.getTaxonomyAndAncestorsIds(parent))
       }
-      return ids;
+      return ids
     },
     filteredTaxonomies(taxonomies) {
       return taxonomies.filter(taxonomy =>
         this.filteredTaxonomyIds.includes(taxonomy.id)
-      );
-    }
+      )
+    },
   },
   created() {
-    this.fetchTaxonomies();
-    this.enabledTaxonomies = this.value;
-  }
-};
+    this.fetchTaxonomies()
+    this.enabledTaxonomies = this.value
+  },
+}
 </script>
 
 <style lang="scss" scoped>

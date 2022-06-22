@@ -31,78 +31,78 @@
 </template>
 
 <script>
-import { Link } from "tiptap-extensions";
+import { Link } from 'tiptap-extensions'
 
 export default {
-  name: "SideboxesInput",
+  name: 'SideboxesInput',
 
   model: {
-    prop: "sideboxes",
-    event: "input"
+    prop: 'sideboxes',
+    event: 'input',
   },
 
   props: {
     sideboxes: {
       required: true,
-      type: Array
+      type: Array,
     },
 
     errors: {
       required: true,
-      type: Object
-    }
+      type: Object,
+    },
   },
 
   data() {
     return {
       index: 1,
-      extensions: [new Link()]
-    };
+      extensions: [new Link()],
+    }
   },
 
   methods: {
     clone() {
-      return this.sideboxes.map(sidebox => ({ ...sidebox }));
+      return this.sideboxes.map(sidebox => ({ ...sidebox }))
     },
 
     onAdd() {
-      let sideboxes = this.clone();
+      let sideboxes = this.clone()
       sideboxes.push({
-        title: "",
-        content: "",
-        index: this.index
-      });
+        title: '',
+        content: '',
+        index: this.index,
+      })
 
-      this.index++;
-      this.$emit("input", sideboxes);
+      this.index++
+      this.$emit('input', sideboxes)
     },
 
     onDelete(index) {
-      this.$emit("clear", `sideboxes.${index}.title`);
-      this.$emit("clear", `sideboxes.${index}.content`);
+      this.$emit('clear', `sideboxes.${index}.title`)
+      this.$emit('clear', `sideboxes.${index}.content`)
 
       // Also decrement the order for the other offerings.
-      let sideboxes = this.clone();
-      this.$delete(sideboxes, index);
+      let sideboxes = this.clone()
+      this.$delete(sideboxes, index)
 
-      this.$emit("input", sideboxes);
+      this.$emit('input', sideboxes)
     },
 
     onTitleInput({ index, title }) {
-      let sideboxes = this.clone();
-      sideboxes[index].title = title;
+      let sideboxes = this.clone()
+      sideboxes[index].title = title
 
-      this.$emit("input", sideboxes);
-      this.$emit("clear", `sideboxes.${index}.title`);
+      this.$emit('input', sideboxes)
+      this.$emit('clear', `sideboxes.${index}.title`)
     },
 
     onContentInput({ index, content }) {
-      let sideboxes = this.clone();
-      sideboxes[index].content = content;
+      let sideboxes = this.clone()
+      sideboxes[index].content = content
 
-      this.$emit("input", sideboxes);
-      this.$emit("clear", `sideboxes.${index}.content`);
-    }
-  }
-};
+      this.$emit('input', sideboxes)
+      this.$emit('clear', `sideboxes.${index}.content`)
+    },
+  },
+}
 </script>

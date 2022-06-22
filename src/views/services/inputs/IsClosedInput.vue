@@ -30,22 +30,22 @@
 
 <script>
 export default {
-  name: "IsClosedInput",
+  name: 'IsClosedInput',
   props: {
     value: {
-      required: true
+      required: true,
     },
     error: {
-      required: true
+      required: true,
     },
     id: {
       type: String,
-      required: true
+      required: true,
     },
     type: {
       type: String,
-      required: true
-    }
-  }
-};
+      required: true,
+    },
+  },
+}
 </script>

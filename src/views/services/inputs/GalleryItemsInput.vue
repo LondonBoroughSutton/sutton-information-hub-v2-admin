@@ -22,7 +22,7 @@
         v-text="
           errors.get([
             `gallery_items.${index}`,
-            `gallery_items.${index}.file_id`
+            `gallery_items.${index}.file_id`,
           ])
         "
         :for="galleryItem.$index"
@@ -41,67 +41,67 @@
 </template>
 
 <script>
-import CkImageInput from "@/components/Ck/CkImageInput";
+import CkImageInput from '@/components/Ck/CkImageInput'
 
 export default {
-  name: "GalleryItemsInput",
+  name: 'GalleryItemsInput',
 
   components: { CkImageInput },
 
   model: {
-    prop: "galleryItems",
-    event: "input"
+    prop: 'galleryItems',
+    event: 'input',
   },
 
   props: {
     galleryItems: {
       type: Array,
-      required: true
+      required: true,
     },
 
     errors: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
 
   data() {
     return {
-      index: 1
-    };
+      index: 1,
+    }
   },
 
   methods: {
     clone() {
-      return JSON.parse(JSON.stringify(this.galleryItems));
+      return JSON.parse(JSON.stringify(this.galleryItems))
     },
 
     onGalleryItemInput(event, index) {
-      const galleryItems = this.clone();
-      galleryItems[index].file_id = event.file_id;
-      galleryItems[index].image = event.iamge;
-      this.$emit("input", galleryItems);
+      const galleryItems = this.clone()
+      galleryItems[index].file_id = event.file_id
+      galleryItems[index].image = event.iamge
+      this.$emit('input', galleryItems)
     },
 
     onAddGalleryItem() {
-      const galleryItems = this.clone();
+      const galleryItems = this.clone()
       galleryItems.push({
         file_id: null,
         image: null,
-        $index: this.index
-      });
-      this.$emit("input", galleryItems);
+        $index: this.index,
+      })
+      this.$emit('input', galleryItems)
 
-      this.index++;
+      this.index++
     },
 
     onDeleteGalleryItem(deleteIndex) {
-      let galleryItems = this.clone();
-      this.$delete(galleryItems, deleteIndex);
-      this.$emit("input", galleryItems);
-      this.$emit("clear", `gallery_items.${deleteIndex}`);
-      this.$emit("clear", `gallery_items.${deleteIndex}.file_id`);
-    }
-  }
-};
+      let galleryItems = this.clone()
+      this.$delete(galleryItems, deleteIndex)
+      this.$emit('input', galleryItems)
+      this.$emit('clear', `gallery_items.${deleteIndex}`)
+      this.$emit('clear', `gallery_items.${deleteIndex}.file_id`)
+    },
+  },
+}
 </script>

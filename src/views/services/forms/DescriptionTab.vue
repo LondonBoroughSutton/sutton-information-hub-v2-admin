@@ -13,8 +13,8 @@
         <ck-textarea-input
           :value="intro"
           @input="
-            $emit('update:intro', $event);
-            $emit('clear', 'intro');
+            $emit('update:intro', $event)
+            $emit('clear', 'intro')
           "
           id="intro"
           :label="`Your ${type}, an overview?`"
@@ -43,8 +43,8 @@
         <ck-wysiwyg-input
           :value="description"
           @input="
-            $emit('update:description', $event);
-            $emit('clear', 'description');
+            $emit('update:description', $event)
+            $emit('clear', 'description')
           "
           id="description"
           label="Long description"
@@ -63,30 +63,30 @@
 </template>
 
 <script>
-import CkOfferingsInput from "@/views/services/inputs/OfferingsInput.vue";
+import CkOfferingsInput from '@/views/services/inputs/OfferingsInput.vue'
 
 export default {
-  name: "DescriptionTab",
+  name: 'DescriptionTab',
   components: {
-    CkOfferingsInput
+    CkOfferingsInput,
   },
   props: {
     errors: {
-      required: true
+      required: true,
     },
     type: {
       required: true,
-      type: String
+      type: String,
     },
     intro: {
-      required: true
+      required: true,
     },
     offerings: {
-      required: true
+      required: true,
     },
     description: {
-      required: true
-    }
-  }
-};
+      required: true,
+    },
+  },
+}
 </script>

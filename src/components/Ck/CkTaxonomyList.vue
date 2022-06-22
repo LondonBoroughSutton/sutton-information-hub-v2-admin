@@ -6,7 +6,7 @@
         <gov-link
           :to="{
             name: edit,
-            params: { taxonomy: taxonomy.id }
+            params: { taxonomy: taxonomy.id },
           }"
         >
           Edit </gov-link
@@ -21,7 +21,7 @@
         >
       </span>
       <gov-hint :for="taxonomy.id" v-if="taxonomyCollections[taxonomy.id]"
-        >Found in {{ taxonomyCollections[taxonomy.id].join(", ") }}</gov-hint
+        >Found in {{ taxonomyCollections[taxonomy.id].join(', ') }}</gov-hint
       >
       <ck-taxonomy-list
         v-if="taxonomy.children.length"
@@ -39,45 +39,45 @@
 
 <script>
 export default {
-  name: "CkTaxonomyList",
+  name: 'CkTaxonomyList',
 
   props: {
     taxonomies: {
       required: true,
-      type: Array
+      type: Array,
     },
     filteredTaxonomyIds: {
       type: [Array, Boolean],
       default() {
-        return [];
-      }
+        return []
+      },
     },
     taxonomyCollections: {
       type: Object,
       default() {
-        return {};
-      }
+        return {}
+      },
     },
     edit: {
       type: String,
-      default: ""
+      default: '',
     },
     bullet: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
 
   computed: {
     filteredTaxonomies() {
       return Array.isArray(this.filteredTaxonomyIds)
         ? this.taxonomies.filter(taxonomy => {
-            return this.filteredTaxonomyIds.includes(taxonomy.id);
+            return this.filteredTaxonomyIds.includes(taxonomy.id)
           })
-        : this.taxonomies;
-    }
-  }
-};
+        : this.taxonomies
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped></style>

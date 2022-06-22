@@ -13,8 +13,8 @@
         <ck-select-input
           :value="type"
           @input="
-            $emit('update:type', $event);
-            $emit('clear', 'type');
+            $emit('update:type', $event)
+            $emit('clear', 'type')
           "
           id="type"
           label="What is it?"
@@ -35,8 +35,8 @@
         <ck-text-input
           :value="slug"
           @input="
-            $emit('update:slug', $event);
-            $emit('clear', 'slug');
+            $emit('update:slug', $event)
+            $emit('clear', 'slug')
           "
           id="slug"
           label="Unique slug"
@@ -56,8 +56,8 @@
             v-else
             :value="organisation_id"
             @input="
-              $emit('update:organisation_id', $event);
-              $emit('clear', 'organisation_id');
+              $emit('update:organisation_id', $event)
+              $emit('clear', 'organisation_id')
             "
             id="organisation_id"
             label="Organisation"
@@ -70,8 +70,8 @@
         <ck-text-input
           :value="url"
           @input="
-            $emit('update:url', $event);
-            $emit('clear', 'url');
+            $emit('update:url', $event)
+            $emit('clear', 'url')
           "
           id="url"
           :label="`What is the web address of your ${type}?`"
@@ -84,8 +84,8 @@
 
         <ck-image-input
           @input="
-            $emit('update:logo_file_id', $event.file_id);
-            $emit('update:logo', $event.image);
+            $emit('update:logo_file_id', $event.file_id)
+            $emit('update:logo', $event.image)
           "
           id="logo"
           :label="`Upload your ${type} logo`"
@@ -111,8 +111,8 @@
         <ck-radio-input
           :value="status"
           @input="
-            $emit('update:status', $event);
-            $emit('clear', 'status');
+            $emit('update:status', $event)
+            $emit('clear', 'status')
           "
           id="status"
           :label="`Is the ${type} enabled`"
@@ -157,99 +157,99 @@
 </template>
 
 <script>
-import CkImageInput from "@/components/Ck/CkImageInput";
-import CkGalleryItemsInput from "@/views/services/inputs/GalleryItemsInput";
-import TagInput from "@/views/services/inputs/TagInput";
+import CkImageInput from '@/components/Ck/CkImageInput'
+import CkGalleryItemsInput from '@/views/services/inputs/GalleryItemsInput'
+import TagInput from '@/views/services/inputs/TagInput'
 
 export default {
-  name: "DetailsTab",
+  name: 'DetailsTab',
   components: { CkImageInput, CkGalleryItemsInput, TagInput },
   props: {
     errors: {
-      required: true
+      required: true,
     },
     isNew: {
       required: false,
       type: Boolean,
-      default: false
+      default: false,
     },
     name: {
-      required: true
+      required: true,
     },
     slug: {
-      required: true
+      required: true,
     },
     type: {
-      required: true
+      required: true,
     },
     organisation_id: {
-      required: false
+      required: false,
     },
     url: {
-      required: true
+      required: true,
     },
     status: {
-      required: true
+      required: true,
     },
     gallery_items: {
-      required: true
+      required: true,
     },
     tags: {
-      required: true
+      required: true,
     },
     id: {
       required: false,
-      type: String
-    }
+      type: String,
+    },
   },
   data() {
     return {
-      organisations: [{ text: "Please select", value: null, disabled: true }],
+      organisations: [{ text: 'Please select', value: null, disabled: true }],
       loading: false,
       typeOptions: [
-        { text: "It is a Service", value: "service" },
-        { text: "It is an Activity", value: "activity" },
-        { text: "It is a Club", value: "club" },
-        { text: "It is a Group", value: "group" }
+        { text: 'It is a Service', value: 'service' },
+        { text: 'It is an Activity', value: 'activity' },
+        { text: 'It is a Club', value: 'club' },
+        { text: 'It is a Group', value: 'group' },
       ],
       statusOptions: [
-        { label: "Enabled", value: "active" },
-        { label: "Disabled", value: "inactive" }
-      ]
-    };
+        { label: 'Enabled', value: 'active' },
+        { label: 'Disabled', value: 'inactive' },
+      ],
+    }
   },
   computed: {
     logoHelpHref() {
-      const to = this.contactEmail;
-      const subject = "Help uploading service logo";
+      const to = this.contactEmail
+      const subject = 'Help uploading service logo'
 
-      return `mailto:${to}?subject=${encodeURIComponent(subject)}`;
-    }
+      return `mailto:${to}?subject=${encodeURIComponent(subject)}`
+    },
   },
   methods: {
     async fetchOrganisations() {
-      this.loading = true;
-      let fetchedOrganisations = await this.fetchAll("/organisations", {
-        "filter[has_permission]": true
-      });
+      this.loading = true
+      let fetchedOrganisations = await this.fetchAll('/organisations', {
+        'filter[has_permission]': true,
+      })
       fetchedOrganisations = fetchedOrganisations.map(organisation => {
-        return { text: organisation.name, value: organisation.id };
-      });
-      this.organisations = [...this.organisations, ...fetchedOrganisations];
-      this.loading = false;
+        return { text: organisation.name, value: organisation.id }
+      })
+      this.organisations = [...this.organisations, ...fetchedOrganisations]
+      this.loading = false
     },
     onNameInput(name) {
-      this.$emit("update:name", name);
-      this.$emit("clear", "name");
+      this.$emit('update:name', name)
+      this.$emit('clear', 'name')
 
       if (this.auth.isGlobalAdmin || this.isNew) {
-        this.$emit("update:slug", this.slugify(name));
-        this.$emit("clear", "slug");
+        this.$emit('update:slug', this.slugify(name))
+        this.$emit('clear', 'slug')
       }
-    }
+    },
   },
   created() {
-    this.fetchOrganisations();
-  }
-};
+    this.fetchOrganisations()
+  },
+}
 </script>

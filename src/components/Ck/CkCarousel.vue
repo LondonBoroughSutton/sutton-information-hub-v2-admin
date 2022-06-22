@@ -27,27 +27,27 @@
 
 <script>
 export default {
-  name: "CkCarousel",
+  name: 'CkCarousel',
 
   props: {
     imageUrls: {
       type: Array,
-      required: true
-    }
+      required: true,
+    },
   },
 
   data() {
     return {
-      currentPage: 0
-    };
+      currentPage: 0,
+    }
   },
 
   computed: {
     count() {
-      return this.imageUrls.length;
-    }
-  }
-};
+      return this.imageUrls.length
+    },
+  },
+}
 </script>
 
 <style lang="scss">
