@@ -175,14 +175,16 @@ export default {
     async onMoveUp(page) {
       page.order--
       await http.put(`/pages/${page.id}`, {
-        ...page,
+        id: page.id,
+        order: page.order,
       })
       this.fetchPages()
     },
     async onMoveDown(page) {
       page.order++
       await http.put(`/pages/${page.id}`, {
-        ...page,
+        id: page.id,
+        order: page.order,
       })
       this.fetchPages()
     },
