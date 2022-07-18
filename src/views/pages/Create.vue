@@ -6,9 +6,12 @@
     <gov-main-wrapper>
       <page-form
         :errors="form.$errors"
+        :is-new="true"
         :page_type.sync="form.page_type"
         :parent_id.sync="form.parent_id"
         :title.sync="form.title"
+        :slug.sync="form.slug"
+        :excerpt.sync="form.excerpt"
         :content.sync="form.content"
         :image_file_id.sync="form.image_file_id"
         :collections.sync="form.collections"
@@ -50,6 +53,8 @@ export default {
       form: new Form({
         parent_id: null,
         title: '',
+        slug: '',
+        excerpt: '',
         content: '',
         page_type: this.type,
         image_file_id: null,
@@ -63,27 +68,47 @@ export default {
             order: 1,
             label: 'Introduction',
             hint: '',
-            copy: [''],
+            content: [
+              {
+                type: 'copy',
+                value: '',
+              },
+            ],
           },
           about: {
             order: 2,
             label: 'About',
             hint: '',
-            copy: ['', ''],
+            content: [
+              {
+                type: 'copy',
+                value: '',
+              },
+            ],
           },
           info_pages: {
             order: 3,
             label: 'Information Pages',
             hint: '',
             title: '',
-            copy: [''],
+            content: [
+              {
+                type: 'copy',
+                value: '',
+              },
+            ],
           },
           collections: {
             order: 4,
             label: 'Collections',
             hint: '',
             title: '',
-            copy: [''],
+            content: [
+              {
+                type: 'copy',
+                value: '',
+              },
+            ],
           },
         },
         information: {
@@ -92,7 +117,12 @@ export default {
             label: 'Page content',
             hint:
               'This is the largest content of the page. Use formatting to improve readability and impact.',
-            copy: [''],
+            content: [
+              {
+                type: 'copy',
+                value: '',
+              },
+            ],
           },
         },
       },

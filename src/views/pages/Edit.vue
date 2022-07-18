@@ -11,9 +11,12 @@
         <page-form
           :page="page"
           :errors="form.$errors"
+          :is-new="false"
           :parent_id.sync="form.parent_id"
           :page_type.sync="form.page_type"
           :title.sync="form.title"
+          :slug.sync="form.slug"
+          :excerpt.sync="form.excerpt"
           :content.sync="form.content"
           :image_file_id.sync="form.image_file_id"
           :collections.sync="form.collections"
@@ -78,6 +81,8 @@ export default {
       this.page = response.data.data
       this.form = new Form({
         title: this.page.title,
+        slug: this.page.slug,
+        excerpt: this.page.excerpt,
         content: this.page.content,
         page_type: this.page.page_type,
         parent_id: this.page.parent ? this.page.parent.id : null,
@@ -93,6 +98,12 @@ export default {
         // Remove any unchanged values.
         if (data.title === this.page.title) {
           delete data.title
+        }
+        if (data.slug === this.page.slug) {
+          delete data.slug
+        }
+        if (data.excerpt === this.page.excerpt) {
+          delete data.excerpt
         }
         if (data.content === this.page.content) {
           delete data.content

@@ -23,6 +23,31 @@
       :error="errors.get('title')"
     />
 
+    <ck-text-input
+      :value="slug"
+      @input="onInput('slug', $event)"
+      id="slug"
+      label="Unique slug"
+      type="text"
+      :error="errors.get('slug')"
+      v-if="auth.isGlobalAdmin"
+    >
+      <gov-hint slot="hint" for="slug">
+        This will be used to access the page.<br />
+        e.g. example.com/pages/{{ slug }}
+      </gov-hint>
+    </ck-text-input>
+
+    <ck-text-input
+      v-if="page_type === 'information'"
+      :value="excerpt || ''"
+      @input="onInput('excerpt', $event)"
+      id="excerpt"
+      label="Excerpt"
+      type="text"
+      :error="errors.get('excerpt')"
+    />
+
     <ck-page-content
       :content="content"
       id="content"
@@ -79,12 +104,25 @@ export default {
       type: Object,
       required: true,
     },
+    isNew: {
+      required: false,
+      type: Boolean,
+      default: false,
+    },
     parent_id: {
       required: true,
     },
     title: {
       type: String,
       required: true,
+    },
+    slug: {
+      type: String,
+      required: true,
+    },
+    excerpt: {
+      type: String,
+      default: '',
     },
     content: {
       type: Object,
@@ -175,6 +213,11 @@ export default {
     onInput(field, value) {
       this.$emit(`update:${field}`, value)
       this.$emit('clear', field)
+
+      if (this.auth.isGlobalAdmin && field === 'title' && this.isNew) {
+        this.$emit('update:slug', this.slugify(value))
+        this.$emit('clear', 'slug')
+      }
     },
     async fetchPages() {
       this.loading = true
