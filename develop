@@ -7,11 +7,23 @@ export CFN_TEMPLATE=${CFN_TEMPLATE:-cloudformation}
 if [[ $# -gt 0  ]]; then
     case "$1" in
 
+        # Run the Cloudformation generate command inside a new container
         cfn|cloudformation )
             docker-compose run --rm troposphere > aws/${CFN_TEMPLATE}.json
             cat aws/${CFN_TEMPLATE}.json
             ;;
 
+        # Run a node command inside a new container
+        npm )
+            shift 1
+            docker-compose run --rm ${TTY} \
+                -w /var/www/html \
+                -e WWWUID=${WWWUID} \
+                admin \
+                npm "$@"
+            ;;
+
+        # Run a docker-compose command
         * ) docker-compose "$@"; ;;
 
     esac
