@@ -1,11 +1,20 @@
-version: "3"
+version: '3'
 
 services:
   troposphere:
-    image: connected-places/backend/troposphere
+    image: suttoninformationhub-v2/backend/troposphere
     build:
       context: ./docker/troposphere
       dockerfile: Dockerfile
     volumes:
       - ./aws:/tmp
-    command: "python ${CFN_TEMPLATE}.py"
+    command: 'python ${CFN_TEMPLATE}.py'
+
+  admin:
+    image: suttoninformationhub-v2/admin/node
+    build:
+      context: ./docker/node
+      dockerfile: Dockerfile
+    volumes:
+      - .:/var/www/html
+    command: npm run serve

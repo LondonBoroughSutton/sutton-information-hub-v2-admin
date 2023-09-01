@@ -11,7 +11,7 @@ import uuid
 # Template details.
 # ==================================================
 template = Template(
-    'Create the infrastructure needed to run the Connected Places Backend')
+    'Create the infrastructure needed to run the Sutton Information Hub Backend')
 template.set_version('2010-09-09')
 
 # ==================================================

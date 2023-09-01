@@ -7,7 +7,7 @@
           class="govuk-header__link govuk-header__link--homepage"
         >
           <span class="govuk-header__logotype">
-            <img src="@/assets/logo.svg" class="govuk-header__logotype-crown" />
+            <img src="@/assets/logo.png" class="govuk-header__logotype-crown" />
           </span>
         </router-link>
       </div>
@@ -82,22 +82,22 @@ export default {
   props: {
     serviceName: {
       type: String,
-      required: true,
+      required: true
     },
     navigation: {
       type: Array,
       required: false,
       default() {
         return [];
-      },
-    },
+      }
+    }
   },
   components: {
-    CkEnvironmentWarning,
+    CkEnvironmentWarning
   },
   data() {
     return {
-      navExpanded: false,
+      navExpanded: false
     };
   },
   methods: {
@@ -106,8 +106,8 @@ export default {
     },
     onToggleMenu() {
       this.navExpanded = !this.navExpanded;
-    },
-  },
+    }
+  }
 };
 </script>
 
