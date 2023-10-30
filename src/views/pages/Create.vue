@@ -3,6 +3,7 @@
     <vue-headful :title="`${appName} - Add Page`" />
 
     <gov-back-link :to="{ name: 'pages-index' }">Back to pages</gov-back-link>
+
     <gov-main-wrapper>
       <page-form
         :errors="form.$errors"
@@ -26,6 +27,7 @@
       >Creating...</gov-button
     >
     <gov-button v-else @click="onSubmit" type="submit">Create</gov-button>
+
     <ck-submit-error v-if="form.$errors.any()" />
   </gov-width-container>
 </template>
@@ -131,8 +133,19 @@ export default {
 
   methods: {
     async onSubmit() {
-      await this.form.post("/pages");
-      this.$router.push({ name: "pages-index" });
+      const response = await this.form.post("/pages");
+
+      const pageId = response.data.id;
+      if (this.auth.isSuperAdmin && pageId) {
+        this.$router.push({
+          name: "pages-show",
+          params: { page: pageId },
+        });
+      } else if (!this.form.$errors.any()) {
+        this.$router.push({
+          name: "pages-updated",
+        });
+      }
     },
     onUpdateTitle(title) {
       this.form.title = title;
