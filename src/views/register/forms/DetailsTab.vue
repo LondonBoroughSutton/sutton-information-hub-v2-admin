@@ -41,7 +41,9 @@
           @input="$emit('input', { field: 'url', value: $event })"
           id="url"
           :label="`What is the web address of your ${service.type}?`"
-          :hint="`This must start with 'http://' or 'https://'. You can use your organisation's website address if the ${service.type} doesn't have its own.`"
+          :hint="
+            `This must start with 'http://' or 'https://'. You can use your organisation's website address if the ${service.type} doesn't have its own.`
+          "
           type="url"
           :error="errors.get('service.url')"
         />

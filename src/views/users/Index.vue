@@ -122,7 +122,7 @@
               {
                 heading: 'Highest permission level',
                 sort: 'highest_role',
-                render: (user) => auth.displayHighestRole(user.roles),
+                render: user => auth.displayHighestRole(user.roles)
               },
               { heading: 'Phone number', render: user => user.phone }
             ]"

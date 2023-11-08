@@ -61,56 +61,57 @@ export default {
         {
           text: "Services",
           to: { name: "services-index" },
-          hide: !Auth.canView("services"),
+          hide: !Auth.canView("services")
         },
         {
           text: "Locations",
           to: { name: "locations-index" },
-          hide: !Auth.canView("locations"),
+          hide: !Auth.canView("locations")
         },
         {
           text: "Referrals",
           to: { name: "referrals-index" },
-          hide: !Auth.canView("referrals"),
+          hide: !Auth.canView("referrals")
         },
         {
           text: "Organisations",
           to: { name: "organisations-index" },
-          hide: !Auth.canView("organisations"),
+          hide: !Auth.canView("organisations")
         },
         {
           text: "Events",
           to: { name: "events-index" },
-          hide: !Auth.canView("events"),
+          hide: !Auth.canView("events")
         },
         {
           text: "Pages",
           to: { name: "pages-index" },
-          hide: !Auth.canView("pages"),
+          hide: !Auth.canView("pages")
         },
         {
           text: "Users",
           to: { name: "users-index" },
-          hide: !Auth.canView("users"),
+          hide: !Auth.canView("users")
         },
         {
           text: "Reports",
           to: { name: "reports-index" },
-          hide: !Auth.canView("reports"),
+          hide: !Auth.canView("reports")
         },
         {
           text: "Admin",
           to: { name: "admin-index" },
-          hide: !Auth.canView("admin"),
+          hide: !Auth.canView("admin")
         },
         {
           text: "Update requests",
           to: { name: "update-requests-index" },
-          hide: !Auth.canView("update requests"),
+          hide: !Auth.canView("update requests")
         },
         {
           text: "Help",
-          to: { name: "help-index" }
+          to: { name: "help-index" },
+          hide: !this.appHelpSectionActive
         }
       ];
     },

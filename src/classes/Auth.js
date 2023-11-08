@@ -193,7 +193,7 @@ class Auth {
       { text: "Content admin", value: "Content Admin" },
       { text: "Organisation admin", value: "Organisation Admin" },
       { text: "Service admin", value: "Service Admin" },
-      { text: "Service worker", value: "Service Worker" },
+      { text: "Service worker", value: "Service Worker" }
     ];
   }
 
@@ -437,11 +437,10 @@ class Auth {
    * @returns {string}
    */
   displayHighestRole(userRoles) {
-    const roleNames = this.roles.map((role) => role.value);
+    const roleNames = this.roles.map(role => role.value);
 
     const highestRole = roleNames.find(
-      (roleName) =>
-        userRoles.find((role) => role.role === roleName) !== undefined
+      roleName => userRoles.find(role => role.role === roleName) !== undefined
     );
 
     return highestRole || "None";

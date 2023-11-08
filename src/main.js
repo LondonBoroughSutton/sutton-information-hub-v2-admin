@@ -183,6 +183,11 @@ Vue.mixin({
       return process.env.hasOwnProperty("VUE_APP_SERVICE_TAGS")
         ? process.env.VUE_APP_SERVICE_TAGS === "true"
         : false;
+    },
+    appHelpSectionActive() {
+      return process.env.hasOwnProperty("VUE_APP_HELP_SECTION")
+        ? process.env.VUE_APP_HELP_SECTION === "true"
+        : false;
     }
   },
   methods: {

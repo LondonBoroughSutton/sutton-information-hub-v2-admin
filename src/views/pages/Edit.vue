@@ -63,7 +63,7 @@ export default {
     },
     canDelete() {
       return this.auth.canDelete("page") && this.page.children.length === 0;
-    },
+    }
   },
   methods: {
     async fetchPage() {
@@ -134,7 +134,7 @@ export default {
       const updateRequestId = response.id;
       let next = {
         name: "pages-updated",
-        params: { page: this.page.id },
+        params: { page: this.page.id }
       };
 
       if (this.auth.isSuperAdmin) {
@@ -151,7 +151,7 @@ export default {
         }
       }
       this.$router.push(next);
-    },
+    }
   },
   created() {
     this.fetchPage();

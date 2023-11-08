@@ -372,7 +372,7 @@ export default {
     },
     has_accessible_toilet: {
       required: false,
-      type: Boolean,
+      type: Boolean
     },
     id: {
       required: false,

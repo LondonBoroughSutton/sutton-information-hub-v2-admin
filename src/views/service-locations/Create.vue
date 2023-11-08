@@ -90,7 +90,7 @@ export default {
         accessibility_info: "",
         has_wheelchair_access: false,
         has_induction_loop: false,
-        has_accessible_toilet: false,
+        has_accessible_toilet: false
       }),
       service: null,
       loading: false,

@@ -61,7 +61,7 @@ export default {
         },
         {
           heading: "Accessibility Statement",
-          to: { name: "admin-index-cms-frontend-accessibility-statement" },
+          to: { name: "admin-index-cms-frontend-accessibility-statement" }
         },
         {
           heading: "About",

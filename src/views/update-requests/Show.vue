@@ -35,8 +35,8 @@
           <service-details
             v-else-if="
               updateRequest.updateable_type === 'services' ||
-              updateRequest.updateable_type ===
-                'new_service_created_by_org_admin'
+                updateRequest.updateable_type ===
+                  'new_service_created_by_org_admin'
             "
             :update-request-id="updateRequest.id"
             :requested-at="updateRequest.created_at"
@@ -60,8 +60,8 @@
           <organisation-event-details
             v-else-if="
               updateRequest.updateable_type === 'organisation_events' ||
-              updateRequest.updateable_type ===
-                'new_organisation_event_created_by_org_admin'
+                updateRequest.updateable_type ===
+                  'new_organisation_event_created_by_org_admin'
             "
             :update-request-id="updateRequest.id"
             :requested-at="updateRequest.created_at"
@@ -71,7 +71,7 @@
           <page-details
             v-else-if="
               updateRequest.updateable_type === 'pages' ||
-              updateRequest.updateable_type === 'new_page'
+                updateRequest.updateable_type === 'new_page'
             "
             :update-request-id="updateRequest.id"
             :requested-at="updateRequest.created_at"
@@ -140,7 +140,7 @@ export default {
     OrganisationSignUpFormDetails,
     PageDetails,
     ServiceDetails,
-    ServiceLocationDetails,
+    ServiceLocationDetails
   },
   data() {
     return {
@@ -208,7 +208,7 @@ export default {
               break;
             case "pages":
               this.$router.push({
-                name: "pages-index",
+                name: "pages-index"
               });
               break;
             case "organisations":

@@ -139,18 +139,18 @@ export default {
       if (this.auth.isSuperAdmin && pageId) {
         this.$router.push({
           name: "pages-show",
-          params: { page: pageId },
+          params: { page: pageId }
         });
       } else if (!this.form.$errors.any()) {
         this.$router.push({
-          name: "pages-updated",
+          name: "pages-updated"
         });
       }
     },
     onUpdateTitle(title) {
       this.form.title = title;
       this.form.slug = this.slugify(title);
-    },
+    }
   },
 
   created() {

@@ -343,7 +343,7 @@ let router = new Router({
           path: ":page/updated",
           name: "pages-updated",
           component: () => import("@/views/pages/Updated"),
-          meta: { auth: true },
+          meta: { auth: true }
         },
         {
           path: "",
@@ -469,7 +469,7 @@ let router = new Router({
               component: () =>
                 import(
                   "@/views/admin/index/cms/frontend/AccessibilityStatement"
-                ),
+                )
             },
             {
               path: "frontend/about",

@@ -120,7 +120,7 @@ export default {
     },
     userRoleOptions() {
       const highestRole = this.auth.displayHighestRole(this.auth.user.roles);
-      return this.roleOptions.filter((option) => {
+      return this.roleOptions.filter(option => {
         if (highestRole === "Super Admin") {
           return true;
         } else if (highestRole === "Global Admin") {
@@ -134,13 +134,13 @@ export default {
             "Super Admin",
             "Global Admin",
             "Content Admin",
-            "Organisation Admin",
+            "Organisation Admin"
           ].includes(option.value);
         } else {
           return false;
         }
       });
-    },
+    }
   },
   watch: {
     roles: {

@@ -68,7 +68,7 @@
               <gov-link
                 :to="{
                   name: 'pages-show',
-                  params: { page: page.id },
+                  params: { page: page.id }
                 }"
               >
                 View </gov-link
@@ -95,7 +95,7 @@
             <gov-link
               :to="{
                 name: 'pages-show',
-                params: { page: editProps.node.id },
+                params: { page: editProps.node.id }
               }"
             >
               View
@@ -139,10 +139,10 @@ export default {
       pageTypes: [
         { value: "", text: "All" },
         { value: "information", text: "Information page" },
-        { value: "landing", text: "Landing page" },
+        { value: "landing", text: "Landing page" }
       ],
       updated: false,
-      orderChangedMessage: null,
+      orderChangedMessage: null
     };
   },
   computed: {
@@ -168,9 +168,9 @@ export default {
     },
     updatedPage() {
       return this.updated
-        ? this.pages.find((page) => page.id === this.updated)
+        ? this.pages.find(page => page.id === this.updated)
         : null;
-    },
+    }
   },
   methods: {
     async fetchPages() {
@@ -250,7 +250,7 @@ export default {
     },
     orderUpdateRequestMessage(orderWas, page) {
       return `An update request has been created to change the order of page ${page.title} from ${orderWas} to ${page.order}`;
-    },
+    }
   },
   created() {
     this.updated = this.$route.query.updated || false;

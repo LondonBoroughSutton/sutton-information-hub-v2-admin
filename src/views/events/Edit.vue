@@ -129,7 +129,7 @@ export default {
     },
     updateButtonText() {
       return this.auth.isSuperAdmin ? "Update" : "Request update";
-    },
+    }
   },
 
   methods: {
