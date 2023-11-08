@@ -78,8 +78,8 @@ export default {
   computed: {
     canEdit() {
       return this.edit.length > 0 && this.nodeType.length > 0;
-    },
-  },
+    }
+  }
 };
 </script>
 
